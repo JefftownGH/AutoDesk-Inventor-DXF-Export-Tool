@@ -1,0 +1,18 @@
+[
+  {
+    "materialName": "Default",
+    "materialDescription": "The standard material profile",
+    "costPerKilogram": 1.00,
+    "maxSheetLength": 3000,
+    "maxSheetWidth": 1500,
+    "kFactor": 0.5
+  },
+  {
+    "materialName": "s275",
+    "materialDescription": "s275",
+    "costPerKilogram": 10,
+    "maxSheetLength": 1500,
+    "maxSheetWidth": 3000,
+    "kFactor": 0.41999999999999998
+  }
+]
