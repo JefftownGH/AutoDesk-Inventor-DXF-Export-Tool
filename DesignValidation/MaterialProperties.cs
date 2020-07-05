@@ -27,18 +27,7 @@ namespace DesignValidation
 
             if (!FileHandling.CheckIfFileExists(filePath))
             {
-                //if a json file cannot be found in the resources directory, a standard template is created then saved to create a json file
-                MaterialProperty defaultMaterial = new MaterialProperty();
-
-                //move to defaultMaterial method!!! to add the default material profile = cleans up this code
-                defaultMaterial.materialName = "Default";
-                defaultMaterial.materialDescription = "The standard material profile";
-                defaultMaterial.costPerKilogram = 1.00M;
-                defaultMaterial.maxSheetLength = 3000;
-                defaultMaterial.maxSheetWidth = 1500;
-                defaultMaterial.kFactor = 0.5;
-
-                collectionMaterialProperties.materialProperties.Add(defaultMaterial);
+                collectionMaterialProperties.AddDefaultMaterialProperty();
 
                 FileHandling.SaveStringToFile(collectionMaterialProperties.SerializeJson(), filePath,true);
             }

@@ -19,6 +19,20 @@ namespace MaterialPropertiesLibrary
             materialProperties = new List<MaterialProperty>();
         }
 
+        public void AddDefaultMaterialProperty()
+        {
+            MaterialProperty defaultMaterial = new MaterialProperty();
+
+            defaultMaterial.materialName = "Default";
+            defaultMaterial.materialDescription = "Default material profile";
+            defaultMaterial.costPerKilogram = 1.00M;
+            defaultMaterial.maxSheetLength = 3000;
+            defaultMaterial.maxSheetWidth = 1500;
+            defaultMaterial.kFactor = 0.5;
+
+            materialProperties.Add(defaultMaterial);
+        }
+
         public string GenerateJsonFilePath()
         {
             string runningPath = AppDomain.CurrentDomain.BaseDirectory;
