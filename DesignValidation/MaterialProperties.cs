@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialPropertiesLibrary;
+using ProgramUtilities;
+
 
 namespace DesignValidation
 {
@@ -20,12 +22,14 @@ namespace DesignValidation
             InitializeComponent();
             ImportJsonFile();
         }
-
+        //prototype code..badly in need of a refactor and moving logic into classes...
+        
+        //all this could be move to collectionMaterialProperties class
         private void ImportJsonFile()
         {
             string filePath = collectionMaterialProperties.GenerateJsonFilePath();
 
-            if (!FileHandling.CheckIfFileExists(filePath))
+            if (!FileHandling.CheckIfFilesExists(filePath))
             {
                 collectionMaterialProperties.AddDefaultMaterialProperty();
 
@@ -43,14 +47,24 @@ namespace DesignValidation
         {
             MaterialsCollection.Items.Clear();
             MaterialsCollection.DisplayMember = "materialName";
-            
+
+            collectionMaterialProperties.materialProperties.Sort((x, y) => string.Compare(x.materialName, y.materialName));
+
             foreach(MaterialProperty materialProperty in collectionMaterialProperties.materialProperties)
-            {
                 MaterialsCollection.Items.Add(materialProperty);
-            }
         }
 
-        private MaterialProperty SelectedItemMaterialsCollection()
+        private string SelectedItemMaterialsCollectionString()
+        {
+            MaterialProperty selectedItem = (MaterialProperty)MaterialsCollection.SelectedItem;
+
+            if (selectedItem == null)
+                MessageBox.Show("Please Select one material property");
+
+            return selectedItem.materialName;
+        }
+
+        private MaterialProperty SelectedItemMaterialsCollectionObject()
         {
             MaterialProperty selectedItem = (MaterialProperty)MaterialsCollection.SelectedItem;
 
@@ -60,14 +74,21 @@ namespace DesignValidation
             return selectedItem;
         }
 
-        private void RemoveMaterialProperty(MaterialProperty materialProperty)
+        private void RemoveMaterialProperty(string materialPropertyName)
         {
-            collectionMaterialProperties.materialProperties.Remove(materialProperty);
+            if (materialPropertyName == "Default")
+            {
+                MessageBox.Show("Cannot delete the Default material property");
+                return;
+            }
+            collectionMaterialProperties.materialProperties.RemoveAll(x => x.materialName == materialPropertyName);
 
             FileHandling.SaveStringToFile(collectionMaterialProperties.SerializeJson(), collectionMaterialProperties.GenerateJsonFilePath(), true);
 
             UpdateMaterialsCollection();
         }
+
+        #region FormButtons
 
         private void AddMaterialButton_Click(object sender, EventArgs e)
         {
@@ -79,10 +100,24 @@ namespace DesignValidation
 
         private void RemoveMaterialButton_Click(object sender, EventArgs e)
         {
-            MaterialProperty materialPropertyToRemove  = SelectedItemMaterialsCollection();
+            string materialPropertyToRemove  = SelectedItemMaterialsCollectionString();
 
             RemoveMaterialProperty(materialPropertyToRemove);
         }
+
+        private void EditMaterialButton_Click(object sender, EventArgs e)
+        {
+            MaterialProperty materialPropertyToEdit = SelectedItemMaterialsCollectionObject();
+
+            MaterialNameTextBox.Text = materialPropertyToEdit.materialName;
+            MaterialDescriptionTextBox.Text = materialPropertyToEdit.materialDescription;
+            MaterialCostTextBox.Text = materialPropertyToEdit.costPerKilogram.ToString();
+            MaxSheetLengthTextBox.Text = materialPropertyToEdit.maxSheetLength.ToString();
+            MaxSheetWidthTextBox.Text = materialPropertyToEdit.maxSheetWidth.ToString();
+            KFactorTextBox.Text = materialPropertyToEdit.kFactor.ToString();
+        }
+
+        #endregion
 
         private bool InputValidation()
         {
@@ -140,6 +175,7 @@ namespace DesignValidation
             else if (kFactor <= 0 || kFactor >= 1)
             {
                 MessageBox.Show("Input value error for K factor");
+                return false;
             }
 
             return true;
@@ -147,12 +183,32 @@ namespace DesignValidation
 
         private void CreateNewMaterialProperty()
         {
+            //if the same name is already being used, checks to see if you should overwrite the material properties or not
+            string inputMaterialPropertyName = MaterialNameTextBox.Text;
+
+            //improve to fix glitch with trying to modify the default material profile
+            if (CheckIfMaterialNameIsInUse(inputMaterialPropertyName))
+            {
+                DialogResult materialNameDialogueResult = MessageBox.Show("This material property already exists, do you want to overwrite it?",
+                    "Add Material Property", MessageBoxButtons.YesNo);
+
+                switch (materialNameDialogueResult)
+                {
+                    case DialogResult.No:
+                        return;
+
+                    case DialogResult.Yes:
+                        RemoveMaterialProperty(inputMaterialPropertyName);
+                        break;
+                }
+            }
+
             try
             {
                 MaterialProperty materialProperty = new MaterialProperty();
 
-                materialProperty.materialName = MaterialNameTextBox.Text;
-                materialProperty.materialDescription = MaterialNameTextBox.Text;
+                materialProperty.materialName = inputMaterialPropertyName;
+                materialProperty.materialDescription = MaterialDescriptionTextBox.Text;
                 materialProperty.costPerKilogram = Convert.ToDecimal(MaterialCostTextBox.Text);
                 materialProperty.maxSheetLength = Convert.ToDouble(MaxSheetLengthTextBox.Text);
                 materialProperty.maxSheetWidth = Convert.ToDouble(MaxSheetWidthTextBox.Text);
@@ -199,6 +255,12 @@ namespace DesignValidation
             };
 
             clearInputValues(Controls);
+        }
+
+        private bool CheckIfMaterialNameIsInUse(string materialNameToCheck)
+        {
+            bool nameAlreadyInUse = collectionMaterialProperties.materialProperties.Any(name => name.materialName == materialNameToCheck);
+            return nameAlreadyInUse;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Inventor;
+using MaterialPropertiesLibrary;
 
 namespace DesignValidationLibrary
 {
@@ -14,7 +15,7 @@ namespace DesignValidationLibrary
 
         public void ImportMaterialProperties()
         {
-            //this method is intended to work as follows: it imports the data from the json file/material properties object, then runs it through the "UnitConversionEngine" static class so the document units are the same. Then assigns these values to the sheetmetalPart class properties
+            //this method is intended to work as follows: it imports the data from the json file/material properties object, then runs it through the "UnitConversionEngine" static class so the document units are the same. Then assigns these values to the sheetmetalPart class properties       
         }
         public void FlatPatternArea()
         {

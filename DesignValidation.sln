@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignValidationLibrary", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialPropertiesLibrary", "MaterialPropertiesLibrary\MaterialPropertiesLibrary.csproj", "{30D4CED5-23C6-45FC-BD4F-92B1B7282B75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramUtilities", "ProgramUtilities\ProgramUtilities.csproj", "{5BBB7913-804B-4317-AB70-D2775B07F8D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{30D4CED5-23C6-45FC-BD4F-92B1B7282B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D4CED5-23C6-45FC-BD4F-92B1B7282B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D4CED5-23C6-45FC-BD4F-92B1B7282B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BBB7913-804B-4317-AB70-D2775B07F8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BBB7913-804B-4317-AB70-D2775B07F8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BBB7913-804B-4317-AB70-D2775B07F8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BBB7913-804B-4317-AB70-D2775B07F8D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

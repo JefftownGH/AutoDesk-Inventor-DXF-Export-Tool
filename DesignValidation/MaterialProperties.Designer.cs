@@ -41,21 +41,21 @@
             this.MaxSheetLengthLabel = new System.Windows.Forms.Label();
             this.MaxSheetWidthLabel = new System.Windows.Forms.Label();
             this.BendParametersGroupBox = new System.Windows.Forms.GroupBox();
+            this.BendAllowanceGroupBox = new System.Windows.Forms.GroupBox();
+            this.KFactorTextBox = new System.Windows.Forms.TextBox();
+            this.KFactorLabel = new System.Windows.Forms.Label();
             this.AddMaterialButton = new System.Windows.Forms.Button();
             this.EditMaterialButton = new System.Windows.Forms.Button();
             this.RemoveMaterialButton = new System.Windows.Forms.Button();
             this.MaterialCostGroupBox = new System.Windows.Forms.GroupBox();
             this.MaterialCostTextBox = new System.Windows.Forms.TextBox();
             this.MaterialCostLabel = new System.Windows.Forms.Label();
-            this.KFactorLabel = new System.Windows.Forms.Label();
-            this.KFactorTextBox = new System.Windows.Forms.TextBox();
-            this.BendAllowanceGroupBox = new System.Windows.Forms.GroupBox();
             this.GroupBoxMaterialProfiles.SuspendLayout();
             this.MaterialGroupBox.SuspendLayout();
             this.FlatPatternGeometryGroupBox.SuspendLayout();
             this.BendParametersGroupBox.SuspendLayout();
-            this.MaterialCostGroupBox.SuspendLayout();
             this.BendAllowanceGroupBox.SuspendLayout();
+            this.MaterialCostGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // GroupBoxMaterialProfiles
@@ -176,6 +176,33 @@
             this.BendParametersGroupBox.TabStop = false;
             this.BendParametersGroupBox.Text = "Bend Parameters";
             // 
+            // BendAllowanceGroupBox
+            // 
+            this.BendAllowanceGroupBox.Controls.Add(this.KFactorTextBox);
+            this.BendAllowanceGroupBox.Controls.Add(this.KFactorLabel);
+            this.BendAllowanceGroupBox.Location = new System.Drawing.Point(22, 28);
+            this.BendAllowanceGroupBox.Name = "BendAllowanceGroupBox";
+            this.BendAllowanceGroupBox.Size = new System.Drawing.Size(415, 57);
+            this.BendAllowanceGroupBox.TabIndex = 7;
+            this.BendAllowanceGroupBox.TabStop = false;
+            this.BendAllowanceGroupBox.Text = "Bend Allowance";
+            // 
+            // KFactorTextBox
+            // 
+            this.KFactorTextBox.Location = new System.Drawing.Point(134, 24);
+            this.KFactorTextBox.Name = "KFactorTextBox";
+            this.KFactorTextBox.Size = new System.Drawing.Size(129, 20);
+            this.KFactorTextBox.TabIndex = 4;
+            // 
+            // KFactorLabel
+            // 
+            this.KFactorLabel.AutoSize = true;
+            this.KFactorLabel.Location = new System.Drawing.Point(16, 27);
+            this.KFactorLabel.Name = "KFactorLabel";
+            this.KFactorLabel.Size = new System.Drawing.Size(47, 13);
+            this.KFactorLabel.TabIndex = 6;
+            this.KFactorLabel.Text = "K Factor";
+            // 
             // AddMaterialButton
             // 
             this.AddMaterialButton.Location = new System.Drawing.Point(231, 424);
@@ -188,12 +215,13 @@
             // 
             // EditMaterialButton
             // 
-            this.EditMaterialButton.Location = new System.Drawing.Point(387, 424);
+            this.EditMaterialButton.Location = new System.Drawing.Point(399, 424);
             this.EditMaterialButton.Name = "EditMaterialButton";
             this.EditMaterialButton.Size = new System.Drawing.Size(126, 41);
             this.EditMaterialButton.TabIndex = 7;
             this.EditMaterialButton.Text = "Edit Material";
             this.EditMaterialButton.UseVisualStyleBackColor = true;
+            this.EditMaterialButton.Click += new System.EventHandler(this.EditMaterialButton_Click);
             // 
             // RemoveMaterialButton
             // 
@@ -232,33 +260,6 @@
             this.MaterialCostLabel.TabIndex = 6;
             this.MaterialCostLabel.Text = "Material Cost (£/Kg)";
             // 
-            // KFactorLabel
-            // 
-            this.KFactorLabel.AutoSize = true;
-            this.KFactorLabel.Location = new System.Drawing.Point(16, 27);
-            this.KFactorLabel.Name = "KFactorLabel";
-            this.KFactorLabel.Size = new System.Drawing.Size(47, 13);
-            this.KFactorLabel.TabIndex = 6;
-            this.KFactorLabel.Text = "K Factor";
-            // 
-            // KFactorTextBox
-            // 
-            this.KFactorTextBox.Location = new System.Drawing.Point(134, 24);
-            this.KFactorTextBox.Name = "KFactorTextBox";
-            this.KFactorTextBox.Size = new System.Drawing.Size(129, 20);
-            this.KFactorTextBox.TabIndex = 4;
-            // 
-            // BendAllowanceGroupBox
-            // 
-            this.BendAllowanceGroupBox.Controls.Add(this.KFactorTextBox);
-            this.BendAllowanceGroupBox.Controls.Add(this.KFactorLabel);
-            this.BendAllowanceGroupBox.Location = new System.Drawing.Point(22, 28);
-            this.BendAllowanceGroupBox.Name = "BendAllowanceGroupBox";
-            this.BendAllowanceGroupBox.Size = new System.Drawing.Size(415, 57);
-            this.BendAllowanceGroupBox.TabIndex = 7;
-            this.BendAllowanceGroupBox.TabStop = false;
-            this.BendAllowanceGroupBox.Text = "Bend Allowance";
-            // 
             // MaterialProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,10 +282,10 @@
             this.FlatPatternGeometryGroupBox.ResumeLayout(false);
             this.FlatPatternGeometryGroupBox.PerformLayout();
             this.BendParametersGroupBox.ResumeLayout(false);
-            this.MaterialCostGroupBox.ResumeLayout(false);
-            this.MaterialCostGroupBox.PerformLayout();
             this.BendAllowanceGroupBox.ResumeLayout(false);
             this.BendAllowanceGroupBox.PerformLayout();
+            this.MaterialCostGroupBox.ResumeLayout(false);
+            this.MaterialCostGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }

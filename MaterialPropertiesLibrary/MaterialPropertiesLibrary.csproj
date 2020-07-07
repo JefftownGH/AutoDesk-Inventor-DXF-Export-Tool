@@ -77,11 +77,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DesignValidationLibrary\DesignValidationLibrary.csproj">
-      <Project>{28520fcd-ee3f-4664-965b-6c1e8d8d5eb1}</Project>
-      <Name>DesignValidationLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

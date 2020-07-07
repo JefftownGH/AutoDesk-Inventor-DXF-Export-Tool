@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Inventor;
 
-namespace DesignValidation
+namespace Utilities
 {
     public static class UnitConversionEngine
     {
-        public static Tuple<double,bool> ConvertLengthUnits(UnitsTypeEnum inputUnits,UnitsTypeEnum outputUnits,double inputValue)
+        public static Tuple<double, bool> ConvertLengthUnits(UnitsTypeEnum inputUnits, UnitsTypeEnum outputUnits, double inputValue)
         {
             #region Notes
 

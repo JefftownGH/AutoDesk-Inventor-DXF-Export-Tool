@@ -88,7 +88,6 @@
     <Compile Include="DesignValidationForm.Designer.cs">
       <DependentUpon>DesignValidationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileHandling.cs" />
     <Compile Include="MaterialProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +96,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitConversionEngine.cs" />
     <EmbeddedResource Include="DesignValidationForm.resx">
       <DependentUpon>DesignValidationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +134,10 @@
     <ProjectReference Include="..\MaterialPropertiesLibrary\MaterialPropertiesLibrary.csproj">
       <Project>{30d4ced5-23c6-45fc-bd4f-92b1b7282b75}</Project>
       <Name>MaterialPropertiesLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProgramUtilities\ProgramUtilities.csproj">
+      <Project>{5bbb7913-804b-4317-ab70-d2775b07f8d1}</Project>
+      <Name>ProgramUtilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
