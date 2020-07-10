@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Inventor;
-using MaterialPropertiesLibrary;
+﻿using Inventor;
 
 namespace DesignValidationLibrary
 {

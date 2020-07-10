@@ -14,5 +14,21 @@
     "maxSheetLength": 3000,
     "maxSheetWidth": 1500,
     "kFactor": 0.41999999999999998
+  },
+  {
+    "materialName": "s335",
+    "materialDescription": "Standard cold rolled steel",
+    "costPerKilogram": 2.7,
+    "maxSheetLength": 1500,
+    "maxSheetWidth": 3000,
+    "kFactor": 0.41999999999999998
+  },
+  {
+    "materialName": "s335_Oversize",
+    "materialDescription": "Standard cold rolled steel",
+    "costPerKilogram": 2.7,
+    "maxSheetLength": 1500,
+    "maxSheetWidth": 3000,
+    "kFactor": 0.41999999999999998
   }
 ]

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Inventor;
-using System.Linq;
+﻿using Inventor;
 using ProgramUtilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DesignValidationLibrary
 {
@@ -13,7 +11,7 @@ namespace DesignValidationLibrary
         public int noOccurrences { get; set; }
         public List<Assembly> AssemblyList { get; set; } = new List<Assembly>();
         public List<int> IDlist { get; set; } = new List<int>();
-   
+
         public void TraverseAssembly(AssemblyDocument currentAsmDocument, int parentID)
         {
             int currentID = GetAssemblyID();
@@ -24,7 +22,7 @@ namespace DesignValidationLibrary
             ComponentOccurrences occurrences = currentAsmDocument.ComponentDefinition.Occurrences;
             noOccurrences += occurrences.Count;
 
-            foreach(ComponentOccurrence occurrence in occurrences)
+            foreach (ComponentOccurrence occurrence in occurrences)
             {
                 if (DocumentInfo.IsPartDocument(occurrence.DefinitionDocumentType))
                 {
@@ -60,7 +58,7 @@ namespace DesignValidationLibrary
 
         private static SheetmetalPart NewSheetMetalPart(PartDocument partDocument)
         {
-            return new SheetmetalPart() {Name = partDocument.DisplayName, partDocument = partDocument };
+            return new SheetmetalPart() { Name = partDocument.DisplayName, partDocument = partDocument };
         }
 
         private static Part NewPart(PartDocument partDocument)

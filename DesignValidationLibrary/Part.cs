@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Inventor;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Inventor;
-using System.Diagnostics;
 
 
 
@@ -51,7 +49,7 @@ namespace DesignValidationLibrary
         }
         private void MaterialCheck()
         {
-            if(partDocument.ActiveMaterial.Name == "Nothing")
+            if (partDocument.ActiveMaterial.Name == "Nothing")
             {
                 errorList.Add(String.Format("Material Set to {0}", partDocument.ActiveMaterial.Name));
             }
@@ -60,7 +58,7 @@ namespace DesignValidationLibrary
         {
             foreach (PlanarSketch oSketch in partDocument.ComponentDefinition.Sketches)
             {
-                if(oSketch.ConstraintStatus.ToString() != "kFullyConstrainedConstraintStatus")
+                if (oSketch.ConstraintStatus.ToString() != "kFullyConstrainedConstraintStatus")
                 {
                     errorList.Add(string.Format("{0} Is not fully constrained", oSketch.Name));
                 }
@@ -70,11 +68,11 @@ namespace DesignValidationLibrary
         {
             int noSuppressedFeatures = 0;
 
-            foreach(PartFeature oPartFeature in partDocument.ComponentDefinition.Features)
+            foreach (PartFeature oPartFeature in partDocument.ComponentDefinition.Features)
             {
                 string healthStatus = oPartFeature.HealthStatus.ToString();
 
-                switch(healthStatus)
+                switch (healthStatus)
                 {
                     case "kSuppressedHealth":
                         noSuppressedFeatures += 1;

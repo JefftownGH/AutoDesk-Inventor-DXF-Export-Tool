@@ -11,8 +11,6 @@ namespace DesignValidation
     {
         private Application thisApplication { get; set; } = null;
 
-        //method pertinent to the inventor connection will be added here instead of in the main form.
-
         public Application CreateInventorConnection()
         {
             try
