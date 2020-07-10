@@ -1,23 +1,7 @@
 [
   {
     "materialName": "Default",
-    "materialDescription": "Default material profile",
-    "costPerKilogram": 1.00,
-    "maxSheetLength": 3000,
-    "maxSheetWidth": 1500,
-    "kFactor": 0.5
-  },
-  {
-    "materialName": "Default",
     "materialDescription": "Default Material Profile",
-    "costPerKilogram": 5,
-    "maxSheetLength": 3000,
-    "maxSheetWidth": 1500,
-    "kFactor": 0.41999999999999998
-  },
-  {
-    "materialName": "Default",
-    "materialDescription": "peter is cool ",
     "costPerKilogram": 1.00,
     "maxSheetLength": 3000,
     "maxSheetWidth": 1500,
@@ -26,22 +10,6 @@
   {
     "materialName": "s275",
     "materialDescription": "Cold Rolled Steel",
-    "costPerKilogram": 10,
-    "maxSheetLength": 1500,
-    "maxSheetWidth": 3000,
-    "kFactor": 0.41999999999999998
-  },
-  {
-    "materialName": "s335",
-    "materialDescription": "Hot Rolled Steels",
-    "costPerKilogram": 14,
-    "maxSheetLength": 3000,
-    "maxSheetWidth": 1500,
-    "kFactor": 0.41999999999999998
-  },
-  {
-    "materialName": "testMaterial",
-    "materialDescription": "testMaterial",
     "costPerKilogram": 5,
     "maxSheetLength": 3000,
     "maxSheetWidth": 1500,

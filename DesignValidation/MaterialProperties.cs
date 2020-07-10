@@ -15,40 +15,20 @@ namespace DesignValidation
 {
     public partial class MaterialProperties : Form
     {
-        CollectionMaterialProperties collectionMaterialProperties = new CollectionMaterialProperties();
+        CollectionMaterialProperties collectionMaterialProperties = CollectionMaterialProperties.CreateCollectionMaterialProperties();
 
         public MaterialProperties()
         {
             InitializeComponent();
-            ImportJsonFile();
-        }
-        //prototype code..badly in need of a refactor and moving logic into classes...
-        
-        //all this could be move to collectionMaterialProperties class
-        private void ImportJsonFile()
-        {
-            string filePath = collectionMaterialProperties.GenerateJsonFilePath();
-
-            if (!FileHandling.CheckIfFilesExists(filePath))
-            {
-                collectionMaterialProperties.AddDefaultMaterialProperty();
-
-                FileHandling.SaveStringToFile(collectionMaterialProperties.SerializeJson(), filePath,true);
-            }
-            else
-            {
-                collectionMaterialProperties.DeserialiseJson(filePath);
-            }
-
+            collectionMaterialProperties.ImportJsonFile();
             UpdateMaterialsCollection();
         }
-
+        
         private void UpdateMaterialsCollection()
         {
             MaterialsCollection.Items.Clear();
             MaterialsCollection.DisplayMember = "materialName";
-
-            collectionMaterialProperties.materialProperties.Sort((x, y) => string.Compare(x.materialName, y.materialName));
+            collectionMaterialProperties.AlphabeticallySortMaterialProperties();
 
             foreach(MaterialProperty materialProperty in collectionMaterialProperties.materialProperties)
                 MaterialsCollection.Items.Add(materialProperty);
@@ -74,35 +54,23 @@ namespace DesignValidation
             return selectedItem;
         }
 
-        private void RemoveMaterialProperty(string materialPropertyName)
-        {
-            if (materialPropertyName == "Default")
-            {
-                MessageBox.Show("Cannot delete the Default material property");
-                return;
-            }
-            collectionMaterialProperties.materialProperties.RemoveAll(x => x.materialName == materialPropertyName);
-
-            FileHandling.SaveStringToFile(collectionMaterialProperties.SerializeJson(), collectionMaterialProperties.GenerateJsonFilePath(), true);
-
-            UpdateMaterialsCollection();
-        }
-
         #region FormButtons
-
         private void AddMaterialButton_Click(object sender, EventArgs e)
         {
             if (!InputValidation()) return;
 
             else
-                CreateNewMaterialProperty();
+            {
+                AddNewMaterialPropertyToCollection();
+                UpdateMaterialsCollection();
+                ClearTextBoxes();
+            }
         }
 
         private void RemoveMaterialButton_Click(object sender, EventArgs e)
         {
-            string materialPropertyToRemove  = SelectedItemMaterialsCollectionString();
-
-            RemoveMaterialProperty(materialPropertyToRemove);
+            collectionMaterialProperties.RemoveMaterialProperty(SelectedItemMaterialsCollectionString());
+            UpdateMaterialsCollection();
         }
 
         private void EditMaterialButton_Click(object sender, EventArgs e)
@@ -116,7 +84,6 @@ namespace DesignValidation
             MaxSheetWidthTextBox.Text = materialPropertyToEdit.maxSheetWidth.ToString();
             KFactorTextBox.Text = materialPropertyToEdit.kFactor.ToString();
         }
-
         #endregion
 
         private bool InputValidation()
@@ -181,68 +148,20 @@ namespace DesignValidation
             return true;
         }
 
-        private void CreateNewMaterialProperty()
+        public void AddNewMaterialPropertyToCollection()
         {
-            //if the same name is already being used, checks to see if you should overwrite the material properties or not
-            string inputMaterialPropertyName = MaterialNameTextBox.Text;
+            string materialName = MaterialNameTextBox.Text;
+            string materialDescription = MaterialDescriptionTextBox.Text;
+            decimal costPerKilogram = Convert.ToDecimal(MaterialCostTextBox.Text);
+            double maxSheetLength = Convert.ToDouble(MaxSheetLengthTextBox.Text);
+            double maxSheetWidth = Convert.ToDouble(MaxSheetWidthTextBox.Text);
+            double kFactor = Convert.ToDouble(KFactorTextBox.Text);
 
-            //improve to fix glitch with trying to modify the default material profile
-            if (CheckIfMaterialNameIsInUse(inputMaterialPropertyName))
-            {
-                DialogResult materialNameDialogueResult = MessageBox.Show("This material property already exists, do you want to overwrite it?",
-                    "Add Material Property", MessageBoxButtons.YesNo);
-
-                switch (materialNameDialogueResult)
-                {
-                    case DialogResult.No:
-                        return;
-
-                    case DialogResult.Yes:
-                        RemoveMaterialProperty(inputMaterialPropertyName);
-                        break;
-                }
-            }
-
-            try
-            {
-                MaterialProperty materialProperty = new MaterialProperty();
-
-                materialProperty.materialName = inputMaterialPropertyName;
-                materialProperty.materialDescription = MaterialDescriptionTextBox.Text;
-                materialProperty.costPerKilogram = Convert.ToDecimal(MaterialCostTextBox.Text);
-                materialProperty.maxSheetLength = Convert.ToDouble(MaxSheetLengthTextBox.Text);
-                materialProperty.maxSheetWidth = Convert.ToDouble(MaxSheetWidthTextBox.Text);
-                materialProperty.kFactor = Convert.ToDouble(KFactorTextBox.Text);
-
-                collectionMaterialProperties.materialProperties.Add(materialProperty);
-
-                #region Notes
-
-                //Serialise the collectionMaterialProperties.materialProperties List<MaterialProperty> to json
-                //collectionMaterialProperties.SerializeJson();
-
-                //retrive the filepath were the json is saved
-                //collectionMaterialProperties.GenerateJsonFilePath();
-
-                //Then the json string is saved to file :=)
-
-                #endregion
-
-                FileHandling.SaveStringToFile(collectionMaterialProperties.SerializeJson(), collectionMaterialProperties.GenerateJsonFilePath(), true);
-
-                UpdateMaterialsCollection();
-                ClearTextBoxes();
-            }
-            catch
-            {
-                MessageBox.Show("An error was encountered adding the material to the library");
-            }            
+            collectionMaterialProperties.AddNewMaterialProperty(materialName, materialDescription, costPerKilogram, maxSheetLength, maxSheetWidth, kFactor);
         }
 
         private void ClearTextBoxes()
         {
-            //clears the input values of all the textboxes in the form
-
             Action<Control.ControlCollection> clearInputValues = null;
 
             clearInputValues = (controls) =>
@@ -253,14 +172,7 @@ namespace DesignValidation
                     else
                         clearInputValues(control.Controls);
             };
-
             clearInputValues(Controls);
-        }
-
-        private bool CheckIfMaterialNameIsInUse(string materialNameToCheck)
-        {
-            bool nameAlreadyInUse = collectionMaterialProperties.materialProperties.Any(name => name.materialName == materialNameToCheck);
-            return nameAlreadyInUse;
         }
     }
 }

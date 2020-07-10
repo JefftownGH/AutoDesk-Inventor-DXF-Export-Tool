@@ -11,12 +11,18 @@ using Inventor;
 using System.Diagnostics;
 using DesignValidationLibrary;
 using MaterialPropertiesLibrary;
+using ProgramUtilities;
 
 namespace DesignValidation
 {
     public partial class DesignValidationForm : Form
     {
+        //Creating an instance of the InventorConnection class
+        public InventorConnection inventorConnection = new InventorConnection();
+
+        //declaring a variable for the InventorConnection
         private Inventor.Application ThisApplication = null;
+
         private TopLevel topLevel = new TopLevel();
         private BindingSource errorList = new BindingSource();
         private List<Node> data = new List<Node>();
@@ -38,6 +44,7 @@ namespace DesignValidation
                 this.Children = new List<Node>();
             }
         }
+
         public DesignValidationForm()
         {
             InitializeComponent();
@@ -45,6 +52,7 @@ namespace DesignValidation
             AddTree();
             FillTree();
         }
+
         private void FillTree()
         {
             //Stops multiple columns being added to the table
@@ -72,20 +80,19 @@ namespace DesignValidation
 
             this.treeListView.Roots = data;
         }
+
         private void BuildComponentList(List<Assembly> assembly)
         {
             foreach (Assembly asm in assembly)
             {
                 Node asmNode = new Node(asm.Name, "-", "-", "-");
-
                 data.Add(asmNode);
 
                 foreach (Part part in asm.ComponentList)
-                {
                     asmNode.Children.Add(new Node(part.Name, "-", "-", "-"));
-                }
             }
         }
+
         private void AddTree()
         {
             treeListView = new BrightIdeasSoftware.TreeListView();
@@ -99,41 +106,41 @@ namespace DesignValidation
 
             this.Controls.Add(treeListView);
         }
+
         private void InventorConnection()
         {
-            try
-            {
-                ThisApplication = (Inventor.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Inventor.Application");
-            }
-            catch
-            {
-                MessageBox.Show("Start an Inventor Session");
-            }
-        }
-        private void DocumentInfo()
-        {
-            Document oDoc = ThisApplication.ActiveDocument;
+            ThisApplication = inventorConnection.CreateInventorConnection();
 
-            if (oDoc.DocumentType == DocumentTypeEnum.kAssemblyDocumentObject)
+            if (ThisApplication == null)
+                MessageBox.Show("Unable to establish a connection with Inventor");
+        }
+
+        private void DetermineDocumentType()
+        {
+            if (DocumentInfo.IsAssemblyDocument(ThisApplication.ActiveDocument.DocumentType))
             {
                 AssemblyDocument AsmDoc = (AssemblyDocument)ThisApplication.ActiveDocument;
-
-                TraverseAssembly(AsmDoc, 0);
+                topLevel.TraverseAssembly(AsmDoc, 0);
             }
-            else
+
+            else if (DocumentInfo.IsPartDocument(ThisApplication.ActiveDocument.DocumentType))
             {
-                Debug.WriteLine("Not an Assembly Document");
+                MessageBox.Show("This is a part document, currently only assembly documents are supported");
             }
         }
         private void Import_Click(object sender, EventArgs e)
         {
-            DocumentInfo();
+            //refactor all of this code!!!
+
+            DetermineDocumentType();
             UpdateProgressBar(true);
             DesignCheck();
             UpdateProgressBar(true);
             BuildComponentList(topLevel.AssemblyList);
             FillTree();
+            
         }
+
         private void InspectComponent_Click(object sender, EventArgs e)
         {
             foreach(Node treeListViewNode in treeListView.SelectedObjects)
@@ -157,18 +164,16 @@ namespace DesignValidation
                 }
             }
         }
+
         private void TraverseAssembly(AssemblyDocument AsmDoc, int ParentID)
         {
+            //this method is now redundant and has been moved to the TopLevel class
             int ID;
-
             if (topLevel.IDlist.Any())
-            {
                 ID = topLevel.IDlist.Last() + 1;
-            }
+
             else
-            {
                 ID = 1; 
-            }
 
             topLevel.IDlist.Add(ID);
 
@@ -187,7 +192,6 @@ namespace DesignValidation
                 if (oOcc.DefinitionDocumentType == DocumentTypeEnum.kPartDocumentObject)
                 {
                     //Checks if standard part or sheetmetal part, the sheetmetal class is a child of the part base class
-
                     PartDocument PartDoc = oOcc.Definition.Document;
 
                     string sheetmetalCLSID = "{9C464203-9BAE-11D3-8BAD-0060B0CE6BB4}";
@@ -216,14 +220,14 @@ namespace DesignValidation
                 }
             }
         }
+
         private void InspectPartView(Part part)
         {
             errorList.ResetBindings(false);
-
             errorList.DataSource = part.errorList;
-
             ComponentErrors.DataSource = errorList;
         }
+
         public void DesignCheck()
         {
             UpdateProgressBar(false);
@@ -247,6 +251,7 @@ namespace DesignValidation
                 }
             }
         }
+
         public void UpdateProgressBar(bool processComplete)
         {
             ProgressBar.Visible = true;
@@ -261,10 +266,12 @@ namespace DesignValidation
                 ProgressBar.Visible = false;
             }
         }
+
         private void AddMaterial_Click(object sender, EventArgs e)
         {
             MaterialProperties materialProperties = new MaterialProperties();
             materialProperties.Show();
         }
+
     }
 }

@@ -309,10 +309,10 @@
         private System.Windows.Forms.Button EditMaterialButton;
         private System.Windows.Forms.Button RemoveMaterialButton;
         private System.Windows.Forms.GroupBox MaterialCostGroupBox;
-        private System.Windows.Forms.TextBox MaterialCostTextBox;
         private System.Windows.Forms.Label MaterialCostLabel;
         private System.Windows.Forms.GroupBox BendAllowanceGroupBox;
         private System.Windows.Forms.TextBox KFactorTextBox;
         private System.Windows.Forms.Label KFactorLabel;
+        public System.Windows.Forms.TextBox MaterialCostTextBox;
     }
 }

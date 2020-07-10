@@ -11,9 +11,9 @@ namespace ProgramUtilities
             else return false;
         }
 
-        public static bool SaveStringToFile(string inputString, string filePath, bool deleExistingFile)
+        public static bool SaveStringToFile(string inputString, string filePath, bool deleteExistingFile)
         {
-            if (deleExistingFile)
+            if (deleteExistingFile)
                 if (CheckIfFilesExists(filePath))
                     File.Delete(filePath);
             try
