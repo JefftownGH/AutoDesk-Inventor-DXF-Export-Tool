@@ -33,10 +33,15 @@ namespace DesignValidation
             FillTree();
         }
 
+        private void AddTree()
+        {
+            treeListView = TreeListView.CreateTreeListView();
+            Controls.Add(treeListView);
+        }
+
         private void FillTree()
         {
             treeListView.Clear();
-
             treeListView.CanExpandGetter = x => (x as TreeViewNode).Children.Count > 0;
             treeListView.ChildrenGetter = x => (x as TreeViewNode).Children;
 
@@ -60,36 +65,9 @@ namespace DesignValidation
             treeListView.Roots = treeViewNodeData;
         }
 
-        private void BuildComponentList(List<Assembly> assembly)
-        {
-            foreach (Assembly asm in assembly)
-            {
-                TreeViewNode asmNode = new TreeViewNode(asm.Name, "-", "-", "-");
-                treeViewNodeData.Add(asmNode);
-
-                foreach (Part part in asm.ComponentList)
-                    asmNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
-            }
-        }
-
-        private void AddTree()
-        {
-            treeListView = new BrightIdeasSoftware.TreeListView();
-
-            treeListView.Location = new System.Drawing.Point(20, 100);
-            treeListView.Size = new System.Drawing.Size(650, 325);
-            treeListView.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom);
-            
-            treeListView.UseAlternatingBackColors = true;
-            treeListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(204, 229, 255);
-
-            this.Controls.Add(treeListView);
-        }
-
         private void InventorConnection()
         {
             ThisApplication = inventorConnection.CreateInventorConnection();
-
             if (ThisApplication == null)
                 MessageBox.Show("Unable to establish a connection with Inventor");
         }
@@ -105,13 +83,11 @@ namespace DesignValidation
 
         private void Import_Click(object sender, EventArgs e)
         {
-            //refactor all of this code!!!
-
             DetermineDocumentType();
             UpdateProgressBar(true);
             DesignCheck();
             UpdateProgressBar(true);
-            BuildComponentList(topLevel.AssemblyList);
+            treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
             FillTree();
         }
 
@@ -124,16 +100,12 @@ namespace DesignValidation
                 foreach (Assembly assembly in topLevel.AssemblyList)
                 {
                     if(selectedNode == assembly.Name)
-                    {
                         MessageBox.Show("Please select a component");
-                    }
 
                     foreach (Part part in assembly.ComponentList)
                     {
                         if(selectedNode == part.Name)
-                        {
                             InspectPartView(part);
-                        }
                     }
                 }
             }
@@ -149,22 +121,18 @@ namespace DesignValidation
         public void DesignCheck()
         {
             UpdateProgressBar(false);
-
             foreach(Assembly asm in topLevel.AssemblyList)
             {
                 foreach(Part part in asm.ComponentList)
                 {
                     part.PartCheck();
-
                     UpdateProgressBar(false);
                 }
-
                 IEnumerable<Part> sheetmetalPartList = asm.ComponentList.Where(p => p.GetType() == typeof(SheetmetalPart));
 
                 foreach (SheetmetalPart sheetmetalPart in sheetmetalPartList)
                 {
                     sheetmetalPart.FlatPatternArea();
-
                     UpdateProgressBar(false);
                 }
             }
@@ -190,6 +158,5 @@ namespace DesignValidation
             MaterialProperties materialProperties = new MaterialProperties();
             materialProperties.Show();
         }
-
     }
 }
