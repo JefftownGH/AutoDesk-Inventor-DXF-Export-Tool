@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignMaterialProperties.cs" />
     <Compile Include="DesignValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>

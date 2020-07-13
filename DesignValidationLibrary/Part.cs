@@ -1,27 +1,23 @@
 ﻿using Inventor;
 using System;
 using System.Collections.Generic;
+using MaterialPropertiesLibrary;
 
 
 
 namespace DesignValidationLibrary
 {
-    public class Part
+    public class Part 
     {
         public string Name { get; set; }
         public string material { get; set; }
         public PartDocument partDocument { get; set; }
-        public List<string> errorList { get; set; }
-
-        public Part()
-        {
-            errorList = new List<string>();
-        }
+        public List<string> errorList { get; private set; } = new List<string>();
+        private CollectionMaterialProperties collectionMaterialProperties { get; set; }
 
         public void RetrieveDocumentUnits()
         {
             //this method retrieves the document units for each part and assigns them to the DocumentUnits string property
-
             //this is used later for design evaluation and cost analysis
 
             switch (partDocument.UnitsOfMeasure.LengthUnits)
@@ -49,10 +45,7 @@ namespace DesignValidationLibrary
         }
         private void MaterialCheck()
         {
-            if (partDocument.ActiveMaterial.Name == "Nothing")
-            {
-                errorList.Add(String.Format("Material Set to {0}", partDocument.ActiveMaterial.Name));
-            }
+            errorList.Add(partDocument.ActiveMaterial.DisplayName);
         }
         private void SketchCheck()
         {

@@ -1,4 +1,7 @@
 ﻿using Inventor;
+using System.Collections.Generic;
+using MaterialPropertiesLibrary;
+using System.Linq;
 
 namespace DesignValidationLibrary
 {
@@ -6,13 +9,18 @@ namespace DesignValidationLibrary
     {
         public double sheetMetalLength { get; set; }
         public double sheetMetalWidth { get; set; }
+        public double maxSheetMetalLength { get; set; }
+        public double maxSheetMetalWidth { get; set; }
         public double kFactor { get; set; }
         private SheetMetalComponentDefinition SheetMetalCompDef { get; set; }
 
-        public void ImportMaterialProperties()
+        public void AssignMaterialProperties(List<MaterialProperty> materialProperties)
         {
-            //this method is intended to work as follows: it imports the data from the json file/material properties object, then runs it through the "UnitConversionEngine" static class so the document units are the same. Then assigns these values to the sheetmetalPart class properties       
+            material = partDocument.ActiveMaterial.DisplayName;
+            IEnumerable<MaterialProperty> Result = materialProperties.Where(x => x.materialName == material);
+              
         }
+
         public void FlatPatternArea()
         {
             //Code is for testing purposes.. not intended for use

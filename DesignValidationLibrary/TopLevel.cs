@@ -5,16 +5,19 @@ using System.Linq;
 
 namespace DesignValidationLibrary
 {
-    public class TopLevel
+    public class TopLevel 
     {
         public string Name { get; set; }
         public int noOccurrences { get; set; }
-        public List<Assembly> AssemblyList { get; set; } = new List<Assembly>();
-        public List<int> IDlist { get; set; } = new List<int>();
+        public List<Assembly> AssemblyList { get; } = new List<Assembly>();
+        public List<int> IDlist { get; } = new List<int>();
 
         public void TraverseAssembly(AssemblyDocument currentAsmDocument, int parentID)
         {
             int currentID = GetAssemblyID();
+
+            if (currentAsmDocument == null)
+                return;
 
             Assembly assembly = NewAssembly(currentAsmDocument, parentID, currentID);
             AssemblyList.Add(assembly);
@@ -50,6 +53,8 @@ namespace DesignValidationLibrary
 
             else return 1;
         }
+
+        //these satic methods should sit outside of the class in their own static class
 
         private static Assembly NewAssembly(AssemblyDocument assemblyDocument, int parentID, int currentID)
         {
