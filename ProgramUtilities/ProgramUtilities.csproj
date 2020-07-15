@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentInfo.cs" />
+    <Compile Include="InventorConnection.cs" />
     <Compile Include="UnitConversionEngine.cs" />
     <Compile Include="FileHandling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

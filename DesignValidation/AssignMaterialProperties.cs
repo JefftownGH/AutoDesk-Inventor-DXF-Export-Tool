@@ -18,7 +18,7 @@ namespace DesignValidation
             return collectionMaterialProperties.materialProperties;
         }
 
-        public static void AssignMaterialPropertiesToParts(TopLevel topLevel)
+        public static void AssignMaterialPropertiesToSheetmetalParts(TopLevel topLevel)
         {
             List<MaterialProperty> materialProperties = RetrieveMaterialProperties();
 

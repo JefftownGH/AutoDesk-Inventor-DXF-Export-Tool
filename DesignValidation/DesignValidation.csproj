@@ -89,7 +89,6 @@
     <Compile Include="DesignValidationForm.Designer.cs">
       <DependentUpon>DesignValidationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventorConnection.cs" />
     <Compile Include="MaterialProperties.cs">
       <SubType>Form</SubType>
     </Compile>
