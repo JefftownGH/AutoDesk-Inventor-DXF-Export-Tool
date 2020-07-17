@@ -7,7 +7,7 @@ using Inventor;
 
 namespace ProgramUtilities
 {
-    public class DocumentInfo
+    public static class DocumentInfo
     {
         readonly static string sheetMetalCLSID = "{9C464203-9BAE-11D3-8BAD-0060B0CE6BB4}";
 

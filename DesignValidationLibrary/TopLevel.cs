@@ -32,10 +32,10 @@ namespace DesignValidationLibrary
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
 
                     if (DocumentInfo.IsSheetMetalPart(partDocument.SubType))
-                        assembly.ComponentList.Add(NewSheetMetalPart(partDocument));
+                        assembly.sheetmetalPartList.Add(NewSheetMetalPart(partDocument));
 
                     else
-                        assembly.ComponentList.Add(NewPart(partDocument));
+                        assembly.partList.Add(NewPart(partDocument));
                 }
 
                 if (DocumentInfo.IsAssemblyDocument(occurrence.DefinitionDocumentType))
@@ -54,21 +54,19 @@ namespace DesignValidationLibrary
             else return 1;
         }
 
-        //these satic methods should sit outside of the class in their own static class
-
         private static Assembly NewAssembly(AssemblyDocument assemblyDocument, int parentID, int currentID)
         {
-            return new Assembly() { Name = assemblyDocument.DisplayName, assemblyDocument = assemblyDocument, ParentID = parentID, ID = currentID };
+            return new Assembly(assemblyDocument, parentID,currentID);
         }
 
         private static SheetmetalPart NewSheetMetalPart(PartDocument partDocument)
         {
-            return new SheetmetalPart() { Name = partDocument.DisplayName, partDocument = partDocument };
+            return new SheetmetalPart(partDocument);
         }
 
         private static Part NewPart(PartDocument partDocument)
         {
-            return new Part() { Name = partDocument.DisplayName, partDocument = partDocument };
+            return new Part(partDocument);
         }
     }
 }

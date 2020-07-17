@@ -22,5 +22,13 @@
     "maxSheetLength": 1500,
     "maxSheetWidth": 3000,
     "kFactor": 0.41999999999999998
+  },
+  {
+    "materialName": "s335_Oversized",
+    "materialDescription": "OverSized s335 sheet",
+    "costPerKilogram": 12.10,
+    "maxSheetLength": 3000,
+    "maxSheetWidth": 1500,
+    "kFactor": 0.41999999999999998
   }
 ]

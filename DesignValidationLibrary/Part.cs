@@ -2,84 +2,24 @@
 using System;
 using System.Collections.Generic;
 using MaterialPropertiesLibrary;
-
-
+using System.Diagnostics.Contracts;
 
 namespace DesignValidationLibrary
 {
     public class Part 
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public string material { get; set; }
-        public PartDocument partDocument { get; set; }
-        public List<string> errorList { get; private set; } = new List<string>();
-        private CollectionMaterialProperties collectionMaterialProperties { get; set; }
+        public PartDocument partDocument { get; private set; }
+        public List<string> errorList { get;} = new List<string>();
 
-        public void RetrieveDocumentUnits()
+        public Part(PartDocument partDocument)
         {
-            //this method retrieves the document units for each part and assigns them to the DocumentUnits string property
-            //this is used later for design evaluation and cost analysis
+            Contract.Requires(partDocument != null, "something went wrong... assemblyDocument is null");
 
-            switch (partDocument.UnitsOfMeasure.LengthUnits)
-            {
-                case UnitsTypeEnum.kMillimeterLengthUnits:
-                    {
-                        break;
-                    }
+            this.partDocument = partDocument;
 
-                case UnitsTypeEnum.kCentimeterLengthUnits:
-                    {
-                        break;
-                    }
-            }
-        }
-
-        public void PartCheck()
-        {
-            //add logic here for determining which checkboxes have been selected, most likely going to be passed as bools
-
-            RetrieveDocumentUnits();
-            MaterialCheck();
-            SketchCheck();
-            FeatureCheck();
-        }
-        private void MaterialCheck()
-        {
-            errorList.Add(partDocument.ActiveMaterial.DisplayName);
-        }
-        private void SketchCheck()
-        {
-            foreach (PlanarSketch oSketch in partDocument.ComponentDefinition.Sketches)
-            {
-                if (oSketch.ConstraintStatus.ToString() != "kFullyConstrainedConstraintStatus")
-                {
-                    errorList.Add(string.Format("{0} Is not fully constrained", oSketch.Name));
-                }
-            }
-        }
-        private void FeatureCheck()
-        {
-            int noSuppressedFeatures = 0;
-
-            foreach (PartFeature oPartFeature in partDocument.ComponentDefinition.Features)
-            {
-                string healthStatus = oPartFeature.HealthStatus.ToString();
-
-                switch (healthStatus)
-                {
-                    case "kSuppressedHealth":
-                        noSuppressedFeatures += 1;
-                        break;
-
-                    case "kUnknownHealth":
-                        errorList.Add(String.Format("{0} is unhealthy", oPartFeature.Name));
-                        break;
-                }
-            }
-            if (noSuppressedFeatures > 0)
-            {
-                errorList.Add(String.Format("{0} Suppressed Features", noSuppressedFeatures));
-            }
+            Name = partDocument.DisplayName;
         }
     }
 }

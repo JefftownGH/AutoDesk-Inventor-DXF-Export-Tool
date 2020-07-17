@@ -63,6 +63,8 @@ namespace DesignValidation
             treeListView.Columns.Add(col3);
 
             treeListView.Roots = treeViewNodeData;
+
+            
         }
 
         private void InventorConnection()
@@ -102,10 +104,16 @@ namespace DesignValidation
                     if(selectedNode == assembly.Name)
                         MessageBox.Show("Please select a component");
 
-                    foreach (Part part in assembly.ComponentList)
+                    foreach (Part part in assembly.partList)
                     {
                         if(selectedNode == part.Name)
                             InspectPartView(part);
+                    }
+
+                    foreach (SheetmetalPart sheetmetalPart in assembly.sheetmetalPartList)
+                    {
+                        if (selectedNode == sheetmetalPart.Name)
+                            InspectPartView(sheetmetalPart);
                     }
                 }
             }
@@ -123,20 +131,18 @@ namespace DesignValidation
             UpdateProgressBar(false);
             foreach(Assembly asm in topLevel.AssemblyList)
             {
-                foreach(Part part in asm.ComponentList)
+                foreach (SheetmetalPart sheetmetalPart in asm.sheetmetalPartList)
                 {
-                    part.PartCheck();
-                    UpdateProgressBar(false);
-                }
-                IEnumerable<Part> sheetmetalPartList = asm.ComponentList.Where(p => p.GetType() == typeof(SheetmetalPart));
-
-                foreach (SheetmetalPart sheetmetalPart in sheetmetalPartList)
-                {
-                    sheetmetalPart.FlatPatternArea();
+                    sheetmetalPart.GetFlatPatternProperties();
                     UpdateProgressBar(false);
                 }
             }
         }
+
+        //public void SelectionChange(object sender, treeListView.SelectionChanged arg)
+        //{
+
+        //}
 
         public void UpdateProgressBar(bool processComplete)
         {

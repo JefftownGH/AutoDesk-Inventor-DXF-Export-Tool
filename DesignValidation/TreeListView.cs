@@ -33,9 +33,14 @@ namespace DesignValidation
                 TreeViewNode subAssemblyNode = new TreeViewNode(subAssembly.Name, "-", "-", "-");
                 treeViewNodeData.Add(subAssemblyNode);
 
-                foreach (Part part in subAssembly.ComponentList)
+                foreach (Part part in subAssembly.partList)
                     subAssemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
+
+                foreach (SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
+                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
+
             }
+
             return treeViewNodeData;
         }
     }
