@@ -12,23 +12,25 @@ using System.Diagnostics;
 using DesignValidationLibrary;
 using MaterialPropertiesLibrary;
 using ProgramUtilities;
+using ApplicationLogic;
 
 namespace DesignValidation
 {
     public partial class DesignValidationForm : Form
     {
-        public InventorConnection inventorConnection = new InventorConnection();
-        private Inventor.Application ThisApplication = null;
-
         private TopLevel topLevel = new TopLevel();
+
         private BindingSource errorList = new BindingSource();
+
         private List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
+
         private BrightIdeasSoftware.TreeListView treeListView;
+
+        public InventorImportProcess inventorImportProcess = new InventorImportProcess();
 
         public DesignValidationForm()
         {
             InitializeComponent();
-            InventorConnection();
             AddTree();
             FillTree();
         }
@@ -62,37 +64,21 @@ namespace DesignValidation
             treeListView.Columns.Add(col2);
             treeListView.Columns.Add(col3);
 
-            treeListView.Roots = treeViewNodeData;
-
-            
-        }
-
-        private void InventorConnection()
-        {
-            ThisApplication = inventorConnection.CreateInventorConnection();
-            if (ThisApplication == null)
-                MessageBox.Show("Unable to establish a connection with Inventor");
-        }
-
-        private void DetermineDocumentType()
-        {
-            if (DocumentInfo.IsAssemblyDocument(ThisApplication.ActiveDocument.DocumentType))
-                topLevel.TraverseAssembly((AssemblyDocument)ThisApplication.ActiveDocument, 0);
-
-            else if (DocumentInfo.IsPartDocument(ThisApplication.ActiveDocument.DocumentType))
-                MessageBox.Show("This is a part document, currently only assembly documents are supported");
+            treeListView.Roots = treeViewNodeData; 
         }
 
         private void Import_Click(object sender, EventArgs e)
         {
-            DetermineDocumentType();
-            UpdateProgressBar(true);
-            DesignCheck();
-            UpdateProgressBar(true);
+            inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType);
+
+            topLevel = inventorImportProcess.GetToplevel();
+
             treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
+
             FillTree();
         }
 
+        //this need to be re-writen so that it no longer takes a button click to inspect list box items in the ListBox
         private void InspectComponent_Click(object sender, EventArgs e)
         {
             foreach(TreeViewNode treeListViewNode in treeListView.SelectedObjects)
@@ -126,25 +112,7 @@ namespace DesignValidation
             ComponentErrors.DataSource = errorList;
         }
 
-        public void DesignCheck()
-        {
-            UpdateProgressBar(false);
-            foreach(Assembly asm in topLevel.AssemblyList)
-            {
-                foreach (SheetmetalPart sheetmetalPart in asm.sheetmetalPartList)
-                {
-                    sheetmetalPart.GetFlatPatternProperties();
-                    UpdateProgressBar(false);
-                }
-            }
-        }
-
-        //public void SelectionChange(object sender, treeListView.SelectionChanged arg)
-        //{
-
-        //}
-
-        public void UpdateProgressBar(bool processComplete)
+        public void UpdateProgressBar(bool processComplete, int noOfProcessSteps)
         {
             ProgressBar.Visible = true;
             ProgressBar.Minimum = 0;
@@ -163,6 +131,18 @@ namespace DesignValidation
         {
             MaterialProperties materialProperties = new MaterialProperties();
             materialProperties.Show();
+        }
+
+        public void InventorConnectionStatus(bool successfulConnectionEstablished)
+        {
+            if (!successfulConnectionEstablished)
+                MessageBox.Show("Unable to esablish a connection with Autodesk Inventor, please ensure the program is running");
+        }
+
+        public void ValidDocumentType(bool validDocumentType)
+        {
+            if (!validDocumentType)
+                MessageBox.Show("Unable to process the current active document, please make sure an Inventor model is open");
         }
     }
 }

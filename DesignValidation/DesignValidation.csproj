@@ -82,7 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssignMaterialProperties.cs" />
     <Compile Include="DesignValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +129,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
+      <Project>{efb93707-5eb0-49c3-821d-95df482d3030}</Project>
+      <Name>ApplicationLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DesignValidationLibrary\DesignValidationLibrary.csproj">
       <Project>{28520fcd-ee3f-4664-965b-6c1e8d8d5eb1}</Project>
       <Name>DesignValidationLibrary</Name>

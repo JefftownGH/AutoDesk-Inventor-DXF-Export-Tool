@@ -20,9 +20,11 @@ namespace DesignValidationLibrary
             this.ParentID = ParentID;
             this.ID = ID;
 
+            //check if code contract is required
             Contract.Requires(assemblyDocument != null,"something went wrong... assemblyDocument is null");
 
             this.assemblyDocument = assemblyDocument;
+
             Name = assemblyDocument.DisplayName;
         }
     }

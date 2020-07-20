@@ -11,8 +11,6 @@ namespace DesignValidationLibrary
         public double sheetMetalLength { get; private set; }
         public double sheetMetalWidth { get; private set; }
         public double totalCuttingLength { get; private set; }
-        public double kFactor { get; private set; }
-
         public int numberOfBends { get; private set; }
         public bool hasFlatPattern { get; private set; }
 

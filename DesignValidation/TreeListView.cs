@@ -37,10 +37,9 @@ namespace DesignValidation
                     subAssemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
 
                 foreach (SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
-                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
-
+                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, 
+                        sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
             }
-
             return treeViewNodeData;
         }
     }

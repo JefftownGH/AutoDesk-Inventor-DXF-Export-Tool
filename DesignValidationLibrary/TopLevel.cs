@@ -12,6 +12,7 @@ namespace DesignValidationLibrary
         public List<Assembly> AssemblyList { get; } = new List<Assembly>();
         public List<int> IDlist { get; } = new List<int>();
 
+        //Builds the Assembly, Part and Sheetmetal part objects
         public void TraverseAssembly(AssemblyDocument currentAsmDocument, int parentID)
         {
             int currentID = GetAssemblyID();
@@ -20,9 +21,11 @@ namespace DesignValidationLibrary
                 return;
 
             Assembly assembly = NewAssembly(currentAsmDocument, parentID, currentID);
+
             AssemblyList.Add(assembly);
 
             ComponentOccurrences occurrences = currentAsmDocument.ComponentDefinition.Occurrences;
+
             noOccurrences += occurrences.Count;
 
             foreach (ComponentOccurrence occurrence in occurrences)
@@ -32,6 +35,7 @@ namespace DesignValidationLibrary
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
 
                     if (DocumentInfo.IsSheetMetalPart(partDocument.SubType))
+
                         assembly.sheetmetalPartList.Add(NewSheetMetalPart(partDocument));
 
                     else
@@ -41,6 +45,7 @@ namespace DesignValidationLibrary
                 if (DocumentInfo.IsAssemblyDocument(occurrence.DefinitionDocumentType))
                 {
                     AssemblyDocument subAssemblyDocument = (AssemblyDocument)occurrence.Definition.Document;
+
                     TraverseAssembly(subAssemblyDocument, assembly.ID);
                 }
             }
@@ -54,6 +59,7 @@ namespace DesignValidationLibrary
             else return 1;
         }
 
+        //this will be chagned out with dependency injection once code is running correctly
         private static Assembly NewAssembly(AssemblyDocument assemblyDocument, int parentID, int currentID)
         {
             return new Assembly(assemblyDocument, parentID,currentID);
