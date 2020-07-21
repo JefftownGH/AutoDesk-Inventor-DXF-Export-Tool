@@ -32,8 +32,11 @@ namespace DesignValidation
         {
             InitializeComponent();
             AddTree();
-            FillTree();
+
+            SubScribeToEvent(topLevel);
         }
+
+        private void SubScribeToEvent(TopLevel topLevel) => topLevel.UpdateProgress += OnProgressBarIncrement;
 
         private void AddTree()
         {
@@ -67,9 +70,11 @@ namespace DesignValidation
             treeListView.Roots = treeViewNodeData; 
         }
 
-        private void Import_Click(object sender, EventArgs e)
+        public void Import_Click(object sender, EventArgs e)
         {
-            inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType);
+            //maybe need to link the event to inventorImportProcess in stead as while the import process is happening the TopLevel declared at this level is null...
+
+            inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
 
             topLevel = inventorImportProcess.GetToplevel();
 
@@ -112,7 +117,13 @@ namespace DesignValidation
             ComponentErrors.DataSource = errorList;
         }
 
-        public void UpdateProgressBar(bool processComplete, int noOfProcessSteps)
+        //recieves an event from the topLevel class
+        public void OnProgressBarIncrement(object source, EventArgs e)
+        {
+            UpdateProgressBar(false);
+        }
+
+        public void UpdateProgressBar(bool processComplete)
         {
             ProgressBar.Visible = true;
             ProgressBar.Minimum = 0;
@@ -123,7 +134,7 @@ namespace DesignValidation
             if(processComplete)
             {
                 ProgressBar.Value = 0;
-                ProgressBar.Visible = false;
+                //ProgressBar.Visible = false;
             }
         }
 

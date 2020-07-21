@@ -2,6 +2,7 @@
 using ProgramUtilities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace DesignValidationLibrary
 {
@@ -12,6 +13,9 @@ namespace DesignValidationLibrary
         public List<Assembly> AssemblyList { get; } = new List<Assembly>();
         public List<int> IDlist { get; } = new List<int>();
 
+        public delegate void ProgressBarEventHandler(object source, EventArgs args);
+        public event ProgressBarEventHandler UpdateProgress;
+         
         //Builds the Assembly, Part and Sheetmetal part objects
         public void TraverseAssembly(AssemblyDocument currentAsmDocument, int parentID)
         {
@@ -30,6 +34,8 @@ namespace DesignValidationLibrary
 
             foreach (ComponentOccurrence occurrence in occurrences)
             {
+                IncrementProgressBar();
+
                 if (DocumentInfo.IsPartDocument(occurrence.DefinitionDocumentType))
                 {
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
@@ -57,6 +63,12 @@ namespace DesignValidationLibrary
                 return IDlist.Last() + 1;
 
             else return 1;
+        }
+
+        protected virtual void IncrementProgressBar()
+        {
+            if (UpdateProgress != null)
+                UpdateProgress(this, EventArgs.Empty);
         }
 
         //this will be chagned out with dependency injection once code is running correctly

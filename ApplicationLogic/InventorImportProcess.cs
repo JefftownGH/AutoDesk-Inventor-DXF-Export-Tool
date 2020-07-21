@@ -18,14 +18,10 @@ namespace ApplicationLogic
         /// Delegates to allow the UI layer to display outputs/Info while maintaining loose coupling with the application logic
 
         public delegate void InventorConnectionStatus(bool successfulConnectionEstablished);
-
         public delegate void ValidDocumentType(bool validDocumentType);
+        public delegate void UpdateProgressBar(bool processComplete);
 
-        public delegate void UpdateProgressBar(bool processComplete, int noProcessSteps);
-
-        //1. get the Inventor connection/this application isntance
-
-        public bool ImportANewInventorModel(InventorConnectionStatus inventorConnectionStatus, ValidDocumentType validDocumentType)
+        public bool ImportANewInventorModel(InventorConnectionStatus inventorConnectionStatus, ValidDocumentType validDocumentType, UpdateProgressBar updateProgressBar)
         {
             thisApplication = inventorConnection.CreateInventorConnection();
 
@@ -42,15 +38,18 @@ namespace ApplicationLogic
 
             //Checking to see if the active document is valid..
 
-            if (!DetermineDocumentType(validDocumentType))
+            if (!DetermineDocumentType(validDocumentType, updateProgressBar))
                 return false;
 
-            CreateFlatPatterns();
+            //topLevel.TraverseAssembly((AssemblyDocument)thisApplication.ActiveDocument, 0);
+
+            //doubles assembly instances here
+            CreateFlatPatterns(updateProgressBar);
 
             return false;
         }
 
-        public bool DetermineDocumentType(ValidDocumentType validDocumentType)
+        public bool DetermineDocumentType(ValidDocumentType validDocumentType, UpdateProgressBar updateProgressBar)
         {
             DocumentTypeEnum currentDocumentType;
 
@@ -83,11 +82,14 @@ namespace ApplicationLogic
             catch
             {
                 validDocumentType(false);
+
+                updateProgressBar(true);
+
                 return false;
             }
         }
 
-        public void CreateFlatPatterns()
+        public void CreateFlatPatterns(UpdateProgressBar updateProgressBar)
         {
             foreach(Assembly asm in topLevel.AssemblyList)
             {
@@ -96,6 +98,8 @@ namespace ApplicationLogic
                     sheetmetalPart.GetFlatPatternProperties();
                 }
             }
+
+            updateProgressBar(true);
         }
 
         public TopLevel GetToplevel()

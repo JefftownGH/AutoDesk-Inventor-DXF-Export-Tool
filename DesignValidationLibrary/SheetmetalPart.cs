@@ -31,6 +31,7 @@ namespace DesignValidationLibrary
         {
             totalCuttingLength = flatPattern.TotalLengthFlatPatternLoops();
 
+            //only here temporarily - for debugging purposes
             errorList.Add(totalCuttingLength.ToString());
 
             if (totalCuttingLength == 0)

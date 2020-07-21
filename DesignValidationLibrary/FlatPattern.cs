@@ -62,14 +62,14 @@ namespace DesignValidationLibrary
             return totalCuttingLength;
         }
 
-        public bool SaveToFile(string filePath)
-        {
-            if (!HasFlatPattern())
-                return false;
+        //public bool SaveToFile(string filePath)
+        //{
+        //    if (!HasFlatPattern())
+        //        return false;
 
-            //do something to save to file.....
+        //    //do something to save to file.....
 
-            return true;
-        }
+        //    return true;
+        //}
     }
 }
