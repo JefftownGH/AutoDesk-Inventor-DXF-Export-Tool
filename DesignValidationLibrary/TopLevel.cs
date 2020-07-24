@@ -14,13 +14,15 @@ namespace DesignValidationLibrary
         public List<int> IDlist { get; } = new List<int>();
 
         public delegate void ProgressBarEventHandler(object source, EventArgs args);
+
         public event ProgressBarEventHandler UpdateProgress;
          
-        //Builds the Assembly, Part and Sheetmetal part objects
+        //Builds the Assembly, Part and Sheetmetal part objects using recursion
         public void TraverseAssembly(AssemblyDocument currentAsmDocument, int parentID)
         {
             int currentID = GetAssemblyID();
 
+            //to stop instantiating a new instance of Assembly with a null AssemblyDocument - should never happen anyway
             if (currentAsmDocument == null)
                 return;
 
@@ -34,6 +36,7 @@ namespace DesignValidationLibrary
 
             foreach (ComponentOccurrence occurrence in occurrences)
             {
+                //the UI layer is listening for this Event to increment the progress bar
                 IncrementProgressBar();
 
                 if (DocumentInfo.IsPartDocument(occurrence.DefinitionDocumentType))
@@ -71,7 +74,8 @@ namespace DesignValidationLibrary
                 UpdateProgress(this, EventArgs.Empty);
         }
 
-        //this will be chagned out with dependency injection once code is running correctly
+        //this will be chagned out with dependency injection once code is running correctly/concrete implementations are only temporary
+
         private static Assembly NewAssembly(AssemblyDocument assemblyDocument, int parentID, int currentID)
         {
             return new Assembly(assemblyDocument, parentID,currentID);

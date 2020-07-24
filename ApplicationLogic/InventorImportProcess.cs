@@ -102,6 +102,7 @@ namespace ApplicationLogic
             updateProgressBar(true);
         }
 
+        //used to return an instance of top level so that methods can be "hooked" into the ProgressBarEventHandler
         public TopLevel GetToplevel()
         {
             return topLevel;

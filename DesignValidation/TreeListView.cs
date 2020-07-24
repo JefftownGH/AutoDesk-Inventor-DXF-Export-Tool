@@ -21,6 +21,8 @@ namespace DesignValidation
             treeListView.UseAlternatingBackColors = true;
             treeListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(204, 229, 255);
 
+            treeListView.CheckBoxes = true;
+ 
             return treeListView;
         }
 

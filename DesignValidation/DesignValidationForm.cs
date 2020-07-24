@@ -13,6 +13,7 @@ using DesignValidationLibrary;
 using MaterialPropertiesLibrary;
 using ProgramUtilities;
 using ApplicationLogic;
+using BrightIdeasSoftware;
 
 namespace DesignValidation
 {
@@ -32,8 +33,6 @@ namespace DesignValidation
         {
             InitializeComponent();
             AddTree();
-
-            SubScribeToEvent(topLevel);
         }
 
         private void SubScribeToEvent(TopLevel topLevel) => topLevel.UpdateProgress += OnProgressBarIncrement;
@@ -47,37 +46,49 @@ namespace DesignValidation
         private void FillTree()
         {
             treeListView.Clear();
+
             treeListView.CanExpandGetter = x => (x as TreeViewNode).Children.Count > 0;
+
             treeListView.ChildrenGetter = x => (x as TreeViewNode).Children;
 
-            var nameCol = new BrightIdeasSoftware.OLVColumn("Name", "Name");
+            var nameCol = new OLVColumn("Part Name", "Part Name");
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
+            nameCol.Width = 150;
 
-            var col1 = new BrightIdeasSoftware.OLVColumn("Column1", "Column1");
+            var col1 = new OLVColumn("Flat Pattern", "Flat Pattern");
             col1.AspectGetter = x => (x as TreeViewNode).Column1;
+            col1.Width = 100;
 
-            var col2 = new BrightIdeasSoftware.OLVColumn("Column2", "Column2");
+            var col2 = new OLVColumn("Bend No.", "Bend No.");
             col2.AspectGetter = x => (x as TreeViewNode).Column2;
+            col2.Width = 100;
 
-            var col3 = new BrightIdeasSoftware.OLVColumn("Column3", "Column3");
+            var col3 = new OLVColumn("Info", "Column3");
             col3.AspectGetter = x => (x as TreeViewNode).Column3;
+            col3.Width = 100;
 
             treeListView.Columns.Add(nameCol);
             treeListView.Columns.Add(col1);
             treeListView.Columns.Add(col2);
             treeListView.Columns.Add(col3);
 
+            //Generator.GenerateColumns(treeListView, typeof(TreeViewNode), true);
+
             treeListView.Roots = treeViewNodeData; 
         }
 
         public void Import_Click(object sender, EventArgs e)
         {
-            //maybe need to link the event to inventorImportProcess in stead as while the import process is happening the TopLevel declared at this level is null...
-
-            inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
-
+            //retrieves a null instance of the TopLevel class
             topLevel = inventorImportProcess.GetToplevel();
 
+            //subscribes to the event in the TopLevel class to update the progress bar
+            SubScribeToEvent(topLevel);
+
+            //begins the import process
+            inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
+
+            //creates the TreeListView once the import process is completed
             treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
 
             FillTree();
@@ -120,6 +131,7 @@ namespace DesignValidation
         //recieves an event from the topLevel class
         public void OnProgressBarIncrement(object source, EventArgs e)
         {
+            //method that increments the progress bar
             UpdateProgressBar(false);
         }
 
@@ -134,10 +146,12 @@ namespace DesignValidation
             if(processComplete)
             {
                 ProgressBar.Value = 0;
-                //ProgressBar.Visible = false;
+                ProgressBar.Visible = false;
             }
         }
 
+        //the add material functionality is not going to be included for the initial release
+        //the Json functionality will be reused to allow for program properties to be saved
         private void AddMaterial_Click(object sender, EventArgs e)
         {
             MaterialProperties materialProperties = new MaterialProperties();
