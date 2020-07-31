@@ -23,6 +23,8 @@ namespace ApplicationLogic
 
         public bool ImportANewInventorModel(InventorConnectionStatus inventorConnectionStatus, ValidDocumentType validDocumentType, UpdateProgressBar updateProgressBar)
         {
+            //does this need a bool return type or should it be null?
+
             thisApplication = inventorConnection.CreateInventorConnection();
 
             //Attempting to create an InventorConnection..
@@ -41,9 +43,6 @@ namespace ApplicationLogic
             if (!DetermineDocumentType(validDocumentType, updateProgressBar))
                 return false;
 
-            //topLevel.TraverseAssembly((AssemblyDocument)thisApplication.ActiveDocument, 0);
-
-            //doubles assembly instances here
             CreateFlatPatterns(updateProgressBar);
 
             return false;

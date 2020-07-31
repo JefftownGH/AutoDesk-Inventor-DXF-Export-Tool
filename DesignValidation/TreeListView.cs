@@ -1,11 +1,7 @@
-﻿using System;
+﻿using DesignValidationLibrary;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Inventor;
-using DesignValidationLibrary;
 
 namespace DesignValidation
 {
@@ -19,30 +15,99 @@ namespace DesignValidation
             treeListView.Size = new System.Drawing.Size(650, 325);
             treeListView.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom);
             treeListView.UseAlternatingBackColors = true;
-            treeListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(204, 229, 255);
-
+            treeListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(242, 242, 242);
             treeListView.CheckBoxes = true;
- 
+            //need to create an image list and assign this to "SmallImageList"
+
             return treeListView;
         }
 
-        public static List<TreeViewNode> BuildTreeViewNodeData(List<Assembly> assembly)
+        public static List<TreeViewNode> BuildTreeViewNodeDataFlat(List<Assembly> assembly)
         {
             List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
 
             foreach (Assembly subAssembly in assembly)
             {
                 TreeViewNode subAssemblyNode = new TreeViewNode(subAssembly.Name, "-", "-", "-");
+
                 treeViewNodeData.Add(subAssemblyNode);
 
                 foreach (Part part in subAssembly.partList)
                     subAssemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
 
                 foreach (SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
-                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, 
+                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name,
                         sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
             }
+
             return treeViewNodeData;
+        }
+
+        public static List<TreeViewNode> BuildTreeViewNodeDataNested(List<Assembly> assemblyList)
+        {
+            #region Explanation
+
+            //we start off with a list of assemblies that have 1. an ID, 2. a ParentID
+            //We Initially loop through each Assembly, if it has a parent ID of 0 we create a new instance of TreeViewNode and add it to the List<TreeViewNode> treeViewNodeData
+            //If it has a parent ID > 0, we call the ListSearch method that will return the parent object 
+            //a new instance of TreeViewNode is created and added to the List<TreeViewNode> Children of the parent Object 
+            //In this way we can build a heirarchical structure of objects from the "flat" List<Assembly> assemblyList
+
+            #endregion
+
+            List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
+
+            foreach (Assembly assembly in assemblyList)
+            {
+                if (assembly.ParentID > 0)
+                {
+                    TreeViewNode parentAssembly = null;
+
+                    ListSearch(treeViewNodeData, ref parentAssembly, assembly.ParentID);
+
+                    if (parentAssembly == null)
+                        continue;
+
+                    parentAssembly.Children.Add(AddNewTreeViewNode(assembly));
+                }
+                else
+                    treeViewNodeData.Add(AddNewTreeViewNode(assembly));
+            }
+            return treeViewNodeData;
+        }
+
+        public static void ListSearch(List<TreeViewNode> treeViewNodeData, ref TreeViewNode parentNode, int targetID)
+        {
+            foreach (TreeViewNode subTreeViewNode in treeViewNodeData.Where(x => x.assemblyNode == true))
+            {
+                #region Explanation
+
+                //iterates through each of the Children of subTreeViewNode
+                //recursive function call to loop through each of its children
+                //TreeViewNode parentNode is passed by ref to avoid having a return type and dealing with strange behaviour as recursive function
+                //unwinds through stackframes
+
+                #endregion
+
+                if (subTreeViewNode.ID == targetID)
+                    parentNode = subTreeViewNode;
+
+                ListSearch(subTreeViewNode.Children, ref parentNode, targetID);
+            }
+        }
+
+        public static TreeViewNode AddNewTreeViewNode(Assembly assembly)
+        {
+            TreeViewNode assemblyNode = new TreeViewNode(assembly.Name, "-", "-", "-", assembly.ID, assembly.ParentID);
+
+            foreach (Part part in assembly.partList)
+                assemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
+
+            foreach (SheetmetalPart sheetMetalPart in assembly.sheetmetalPartList)
+                assemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name,
+                    sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
+
+            return assemblyNode;
         }
     }
 }

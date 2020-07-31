@@ -53,7 +53,7 @@ namespace DesignValidation
 
             var nameCol = new OLVColumn("Part Name", "Part Name");
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
-            nameCol.Width = 150;
+            nameCol.Width = 200;
 
             var col1 = new OLVColumn("Flat Pattern", "Flat Pattern");
             col1.AspectGetter = x => (x as TreeViewNode).Column1;
@@ -89,7 +89,10 @@ namespace DesignValidation
             inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
 
             //creates the TreeListView once the import process is completed
-            treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
+            //treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
+
+            //this is only for testing purposes
+            treeViewNodeData = TreeListView.BuildTreeViewNodeDataNested(topLevel.AssemblyList);
 
             FillTree();
         }

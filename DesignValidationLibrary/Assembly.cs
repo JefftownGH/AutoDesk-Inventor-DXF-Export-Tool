@@ -8,11 +8,10 @@ namespace DesignValidationLibrary
     public class Assembly 
     {
         public string Name { get; set; }
-        public int ParentID { get; set; }
+        public int ParentID { get; set; } 
         public int ID { get; set; }
         public List<Part> partList { get;} = new List<Part>();
         public List<SheetmetalPart> sheetmetalPartList { get; } = new List<SheetmetalPart>();
-        public List<Part> ComponentList { get;} = new List<Part>();
         public AssemblyDocument assemblyDocument { get; set; }
 
         public Assembly(AssemblyDocument assemblyDocument, int ParentID, int ID)

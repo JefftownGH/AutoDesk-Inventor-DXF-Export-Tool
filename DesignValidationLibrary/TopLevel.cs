@@ -63,9 +63,12 @@ namespace DesignValidationLibrary
         private int GetAssemblyID()
         {
             if (IDlist.Any())
-                return IDlist.Last() + 1;
+                IDlist.Add(IDlist.Last() + 1);
 
-            else return 1;
+            else
+                IDlist.Add(1);
+   
+                return IDlist.Last();
         }
 
         protected virtual void IncrementProgressBar()
