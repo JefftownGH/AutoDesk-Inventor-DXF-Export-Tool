@@ -88,6 +88,12 @@
     <Compile Include="DesignValidationForm.Designer.cs">
       <DependentUpon>DesignValidationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DXFExportSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DXFExportSettings.Designer.cs">
+      <DependentUpon>DXFExportSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="MaterialProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     <Compile Include="TreeViewNode.cs" />
     <EmbeddedResource Include="DesignValidationForm.resx">
       <DependentUpon>DesignValidationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DXFExportSettings.resx">
+      <DependentUpon>DXFExportSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MaterialProperties.resx">
       <DependentUpon>MaterialProperties.cs</DependentUpon>
@@ -136,6 +145,10 @@
     <ProjectReference Include="..\DesignValidationLibrary\DesignValidationLibrary.csproj">
       <Project>{28520fcd-ee3f-4664-965b-6c1e8d8d5eb1}</Project>
       <Name>DesignValidationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExportLibrary\ExportLibrary.csproj">
+      <Project>{9b90d357-f539-4fe2-a7a7-c2779bf36d61}</Project>
+      <Name>ExportLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\MaterialPropertiesLibrary\MaterialPropertiesLibrary.csproj">
       <Project>{30d4ced5-23c6-45fc-bd4f-92b1b7282b75}</Project>

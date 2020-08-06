@@ -44,7 +44,6 @@ namespace DesignValidationLibrary
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
 
                     if (DocumentInfo.IsSheetMetalPart(partDocument.SubType))
-
                         assembly.sheetmetalPartList.Add(NewSheetMetalPart(partDocument));
 
                     else

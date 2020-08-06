@@ -91,10 +91,20 @@ namespace DesignValidation
             //creates the TreeListView once the import process is completed
             //treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
 
+            //add logic here to determine the structure of TreeViewNodeData ie, either flat or nested
+
             //this is only for testing purposes
             treeViewNodeData = TreeListView.BuildTreeViewNodeDataNested(topLevel.AssemblyList);
 
             FillTree();
+
+            List<SheetmetalPart> tempSheetmetalPartList = new List<SheetmetalPart>();
+
+            foreach (Assembly assembly in topLevel.AssemblyList)
+                foreach (SheetmetalPart sheetmetalpart in assembly.sheetmetalPartList)
+                    tempSheetmetalPartList.Add(sheetmetalpart);
+
+            inventorImportProcess.TestDXFExport(tempSheetmetalPartList);
         }
 
         //this need to be re-writen so that it no longer takes a button click to inspect list box items in the ListBox
@@ -127,7 +137,9 @@ namespace DesignValidation
         private void InspectPartView(Part part)
         {
             errorList.ResetBindings(false);
+
             errorList.DataSource = part.errorList;
+
             ComponentErrors.DataSource = errorList;
         }
 
@@ -155,6 +167,7 @@ namespace DesignValidation
 
         //the add material functionality is not going to be included for the initial release
         //the Json functionality will be reused to allow for program properties to be saved
+
         private void AddMaterial_Click(object sender, EventArgs e)
         {
             MaterialProperties materialProperties = new MaterialProperties();
@@ -171,6 +184,13 @@ namespace DesignValidation
         {
             if (!validDocumentType)
                 MessageBox.Show("Unable to process the current active document, please make sure an Inventor model is open");
+        }
+
+        private void EditDXFExport_Click(object sender, EventArgs e)
+        {
+            DXFExportSettings dXFExportSettings = new DXFExportSettings();
+
+            dXFExportSettings.Show();
         }
     }
 }

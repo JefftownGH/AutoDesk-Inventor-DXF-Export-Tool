@@ -7,6 +7,8 @@ namespace DesignValidationLibrary
 {
     public class Assembly 
     {
+        //assembly is a "wrapper" for the list of sheetmetal parts and parts
+
         public string Name { get; set; }
         public int ParentID { get; set; } 
         public int ID { get; set; }
@@ -17,9 +19,10 @@ namespace DesignValidationLibrary
         public Assembly(AssemblyDocument assemblyDocument, int ParentID, int ID)
         {
             this.ParentID = ParentID;
+
             this.ID = ID;
 
-            //check if code contract is required
+            //check if code contract is required, more for testing purposes at the moment
             Contract.Requires(assemblyDocument != null,"something went wrong... assemblyDocument is null");
 
             this.assemblyDocument = assemblyDocument;

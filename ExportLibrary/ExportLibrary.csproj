@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EFB93707-5EB0-49C3-821D-95DF482D3030}</ProjectGuid>
+    <ProjectGuid>{9B90D357-F539-4FE2-A7A7-C2779BF36D61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationLogic</RootNamespace>
-    <AssemblyName>ApplicationLogic</AssemblyName>
+    <RootNamespace>ExportLibrary</RootNamespace>
+    <AssemblyName>ExportLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -46,21 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InventorImportProcess.cs" />
+    <Compile Include="DXFLayerItem.cs" />
+    <Compile Include="ExportDXF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DesignValidationLibrary\DesignValidationLibrary.csproj">
       <Project>{28520fcd-ee3f-4664-965b-6c1e8d8d5eb1}</Project>
       <Name>DesignValidationLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExportLibrary\ExportLibrary.csproj">
-      <Project>{9b90d357-f539-4fe2-a7a7-c2779bf36d61}</Project>
-      <Name>ExportLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProgramUtilities\ProgramUtilities.csproj">
-      <Project>{5bbb7913-804b-4317-ab70-d2775b07f8d1}</Project>
-      <Name>ProgramUtilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

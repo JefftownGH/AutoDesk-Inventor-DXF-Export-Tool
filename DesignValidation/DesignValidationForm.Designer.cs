@@ -35,7 +35,7 @@
             this.Import = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.Setup = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.EditDXFExport = new System.Windows.Forms.Button();
             this.AddMaterial = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -114,7 +114,7 @@
             // 
             // Setup
             // 
-            this.Setup.Controls.Add(this.button5);
+            this.Setup.Controls.Add(this.EditDXFExport);
             this.Setup.Controls.Add(this.AddMaterial);
             this.Setup.Controls.Add(this.button3);
             this.Setup.Controls.Add(this.button4);
@@ -125,14 +125,15 @@
             this.Setup.TabStop = false;
             this.Setup.Text = "Setup";
             // 
-            // button5
+            // EditDXFExport
             // 
-            this.button5.Location = new System.Drawing.Point(324, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 30);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Edit DXF Export";
-            this.button5.UseVisualStyleBackColor = true;
+            this.EditDXFExport.Location = new System.Drawing.Point(324, 19);
+            this.EditDXFExport.Name = "EditDXFExport";
+            this.EditDXFExport.Size = new System.Drawing.Size(100, 30);
+            this.EditDXFExport.TabIndex = 15;
+            this.EditDXFExport.Text = "Edit DXF Export";
+            this.EditDXFExport.UseVisualStyleBackColor = true;
+            this.EditDXFExport.Click += new System.EventHandler(this.EditDXFExport_Click);
             // 
             // AddMaterial
             // 
@@ -230,7 +231,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ProgressBar ProgressBar;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button EditDXFExport;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox ComponentErrors;

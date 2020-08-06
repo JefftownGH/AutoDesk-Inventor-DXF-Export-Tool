@@ -11,9 +11,14 @@ namespace DesignValidationLibrary
 {
     public class FlatPattern
     {
-        Face flatPattern { get; set; } 
-        SheetMetalComponentDefinition sheetMetalCompDef { get; set; }
-        public InventorConnection inventorConnection { get; set; }
+        //An instance of the flatpattern class is spun up when a new instance for the sheetmetal class
+
+        //this is used in total cut length calculation ie counting edge loops which requires a Face object
+        private Face flatPattern { get; set; } 
+
+        private SheetMetalComponentDefinition sheetMetalCompDef { get; set; }
+
+        private InventorConnection inventorConnection { get; set; }
 
         public FlatPattern(SheetMetalComponentDefinition sheetMetalCompDef)
         {
@@ -45,6 +50,7 @@ namespace DesignValidationLibrary
             }
             catch
             {
+                //should be bubbling up the error to a higher level 
                 return false;
             }
         }

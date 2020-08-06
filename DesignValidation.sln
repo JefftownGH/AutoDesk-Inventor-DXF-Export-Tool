@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramUtilities", "Program
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationLogic", "ApplicationLogic\ApplicationLogic.csproj", "{EFB93707-5EB0-49C3-821D-95DF482D3030}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportLibrary", "ExportLibrary\ExportLibrary.csproj", "{9B90D357-F539-4FE2-A7A7-C2779BF36D61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EFB93707-5EB0-49C3-821D-95DF482D3030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFB93707-5EB0-49C3-821D-95DF482D3030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFB93707-5EB0-49C3-821D-95DF482D3030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B90D357-F539-4FE2-A7A7-C2779BF36D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B90D357-F539-4FE2-A7A7-C2779BF36D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B90D357-F539-4FE2-A7A7-C2779BF36D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B90D357-F539-4FE2-A7A7-C2779BF36D61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

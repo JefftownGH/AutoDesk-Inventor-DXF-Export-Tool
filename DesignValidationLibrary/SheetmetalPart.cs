@@ -8,12 +8,9 @@ namespace DesignValidationLibrary
 {
     public class SheetmetalPart : Part
     {
-        public double sheetMetalLength { get; private set; }
-        public double sheetMetalWidth { get; private set; }
         public double totalCuttingLength { get; private set; }
         public int numberOfBends { get; private set; }
         public bool hasFlatPattern { get; private set; }
-
         public FlatPattern flatPattern { get; private set; }
         private SheetMetalComponentDefinition sheetMetalCompDef { get; set; }
         private MaterialProperty materialProperty { get; set; }
@@ -36,7 +33,7 @@ namespace DesignValidationLibrary
 
             if (totalCuttingLength == 0)
             {
-                errorList.Add("Could not generate flat patteern for component");
+                errorList.Add("Could not generate flat pattern for component");
 
                 hasFlatPattern = false;
             }

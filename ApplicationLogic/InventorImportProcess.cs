@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 using DesignValidationLibrary;
 using ProgramUtilities;
 using Inventor;
+using ExportLibrary;
 
 namespace ApplicationLogic
 {
     public class InventorImportProcess
     {
         public InventorConnection inventorConnection { get; set; } = new InventorConnection();
+
         public Inventor.Application thisApplication { get; set; } = null;
+
         public TopLevel topLevel { get; set; } = new TopLevel();
 
         /// Delegates to allow the UI layer to display outputs/Info while maintaining loose coupling with the application logic
 
         public delegate void InventorConnectionStatus(bool successfulConnectionEstablished);
+
         public delegate void ValidDocumentType(bool validDocumentType);
+
         public delegate void UpdateProgressBar(bool processComplete);
 
         public bool ImportANewInventorModel(InventorConnectionStatus inventorConnectionStatus, ValidDocumentType validDocumentType, UpdateProgressBar updateProgressBar)
@@ -105,6 +110,11 @@ namespace ApplicationLogic
         public TopLevel GetToplevel()
         {
             return topLevel;
+        }
+
+        public void TestDXFExport(List<SheetmetalPart> sheetmetalPartList)
+        {
+            ExportDXF.ExportSheetMetalPartsToDXF(sheetmetalPartList);
         }
     }
 }

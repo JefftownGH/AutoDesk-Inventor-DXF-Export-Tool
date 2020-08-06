@@ -63,16 +63,24 @@ namespace DesignValidation
                 {
                     TreeViewNode parentAssembly = null;
 
+                    //retrieves the parent TreeViewNode object so a "Child" object can be added to List<TreeViewNode> Children
+
                     ListSearch(treeViewNodeData, ref parentAssembly, assembly.ParentID);
+
+                    //parentAssembly will be null if a ParentID cannot be found
 
                     if (parentAssembly == null)
                         continue;
 
+                    //Creates a new TreeViewNode object and adds it to parentAssembly.Children
+
                     parentAssembly.Children.Add(AddNewTreeViewNode(assembly));
                 }
+
                 else
                     treeViewNodeData.Add(AddNewTreeViewNode(assembly));
             }
+
             return treeViewNodeData;
         }
 
