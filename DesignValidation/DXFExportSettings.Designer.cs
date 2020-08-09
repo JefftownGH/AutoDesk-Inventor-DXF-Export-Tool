@@ -28,32 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DXFLayersGroupBox = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dataGridDXFLayers = new System.Windows.Forms.DataGridView();
+            this.LayerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SolidLineColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DashedLineColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.NoLineColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.DXFLayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DashedLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SolidLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SavePropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.SaveInLabel = new System.Windows.Forms.Label();
+            this.FilePathTextBox = new System.Windows.Forms.TextBox();
+            this.DirectoryBrowseButton = new System.Windows.Forms.Button();
             this.DXFLayersGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDXFLayers)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.SavePropertiesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // DXFLayersGroupBox
             // 
-            this.DXFLayersGroupBox.Controls.Add(this.dataGridView1);
+            this.DXFLayersGroupBox.Controls.Add(this.dataGridDXFLayers);
             this.DXFLayersGroupBox.Location = new System.Drawing.Point(12, 41);
             this.DXFLayersGroupBox.Name = "DXFLayersGroupBox";
             this.DXFLayersGroupBox.Size = new System.Drawing.Size(490, 184);
             this.DXFLayersGroupBox.TabIndex = 0;
             this.DXFLayersGroupBox.TabStop = false;
             this.DXFLayersGroupBox.Text = "DXF Layers";
+            // 
+            // dataGridDXFLayers
+            // 
+            this.dataGridDXFLayers.AllowUserToAddRows = false;
+            this.dataGridDXFLayers.AllowUserToDeleteRows = false;
+            this.dataGridDXFLayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridDXFLayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LayerNameColumn,
+            this.SolidLineColumn,
+            this.DashedLineColumn,
+            this.NoLineColumn});
+            this.dataGridDXFLayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridDXFLayers.Location = new System.Drawing.Point(21, 19);
+            this.dataGridDXFLayers.Name = "dataGridDXFLayers";
+            this.dataGridDXFLayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridDXFLayers.Size = new System.Drawing.Size(450, 143);
+            this.dataGridDXFLayers.TabIndex = 2;
+            this.dataGridDXFLayers.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDXFLayers_CellValueChanged);
+            // 
+            // LayerNameColumn
+            // 
+            this.LayerNameColumn.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Red;
+            this.LayerNameColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.LayerNameColumn.FillWeight = 150F;
+            this.LayerNameColumn.HeaderText = "Layer Name";
+            this.LayerNameColumn.Name = "LayerNameColumn";
+            this.LayerNameColumn.ReadOnly = true;
+            this.LayerNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.LayerNameColumn.ToolTipText = "The DXF layer";
+            this.LayerNameColumn.Width = 175;
+            // 
+            // SolidLineColumn
+            // 
+            this.SolidLineColumn.DataPropertyName = "SolidLine";
+            this.SolidLineColumn.HeaderText = "Solid Line";
+            this.SolidLineColumn.Name = "SolidLineColumn";
+            this.SolidLineColumn.Width = 75;
+            // 
+            // DashedLineColumn
+            // 
+            this.DashedLineColumn.DataPropertyName = "DashedLine";
+            this.DashedLineColumn.HeaderText = "Dashed Line";
+            this.DashedLineColumn.Name = "DashedLineColumn";
+            this.DashedLineColumn.Width = 75;
+            // 
+            // NoLineColumn
+            // 
+            this.NoLineColumn.DataPropertyName = "NoLine";
+            this.NoLineColumn.HeaderText = "No Line";
+            this.NoLineColumn.Name = "NoLineColumn";
+            this.NoLineColumn.Width = 75;
             // 
             // groupBox1
             // 
@@ -102,55 +162,61 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "DXF Type";
             // 
-            // dataGridView1
+            // SavePropertiesGroupBox
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DXFLayer,
-            this.NoLine,
-            this.DashedLine,
-            this.SolidLine});
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 22);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(444, 143);
-            this.dataGridView1.TabIndex = 2;
+            this.SavePropertiesGroupBox.Controls.Add(this.DirectoryBrowseButton);
+            this.SavePropertiesGroupBox.Controls.Add(this.FilePathTextBox);
+            this.SavePropertiesGroupBox.Controls.Add(this.SaveInLabel);
+            this.SavePropertiesGroupBox.Location = new System.Drawing.Point(13, 243);
+            this.SavePropertiesGroupBox.Name = "SavePropertiesGroupBox";
+            this.SavePropertiesGroupBox.Size = new System.Drawing.Size(488, 280);
+            this.SavePropertiesGroupBox.TabIndex = 2;
+            this.SavePropertiesGroupBox.TabStop = false;
+            this.SavePropertiesGroupBox.Text = "Save Properties";
             // 
-            // DXFLayer
+            // SaveInLabel
             // 
-            this.DXFLayer.HeaderText = "DXF Layer";
-            this.DXFLayer.Name = "DXFLayer";
+            this.SaveInLabel.AutoSize = true;
+            this.SaveInLabel.Location = new System.Drawing.Point(17, 25);
+            this.SaveInLabel.Name = "SaveInLabel";
+            this.SaveInLabel.Size = new System.Drawing.Size(47, 13);
+            this.SaveInLabel.TabIndex = 0;
+            this.SaveInLabel.Text = "Save In:";
             // 
-            // NoLine
+            // FilePathTextBox
             // 
-            this.NoLine.DataPropertyName = "bool";
-            this.NoLine.HeaderText = "No Line";
-            this.NoLine.Name = "NoLine";
+            this.FilePathTextBox.Location = new System.Drawing.Point(70, 22);
+            this.FilePathTextBox.Name = "FilePathTextBox";
+            this.FilePathTextBox.Size = new System.Drawing.Size(304, 20);
+            this.FilePathTextBox.TabIndex = 1;
             // 
-            // DashedLine
+            // DirectoryBrowseButton
             // 
-            this.DashedLine.HeaderText = "DashedLine";
-            this.DashedLine.Name = "DashedLine";
-            // 
-            // SolidLine
-            // 
-            this.SolidLine.HeaderText = "SolidLine";
-            this.SolidLine.Name = "SolidLine";
+            this.DirectoryBrowseButton.Location = new System.Drawing.Point(382, 20);
+            this.DirectoryBrowseButton.Name = "DirectoryBrowseButton";
+            this.DirectoryBrowseButton.Size = new System.Drawing.Size(76, 23);
+            this.DirectoryBrowseButton.TabIndex = 2;
+            this.DirectoryBrowseButton.Text = "Browse...";
+            this.DirectoryBrowseButton.UseVisualStyleBackColor = true;
+            this.DirectoryBrowseButton.Click += new System.EventHandler(this.DirectoryBrowseButton_Click);
             // 
             // DXFExportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.SavePropertiesGroupBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DXFLayersGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DXFExportSettings";
             this.Text = "DXFExportLayerList";
             this.DXFLayersGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDXFLayers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.SavePropertiesGroupBox.ResumeLayout(false);
+            this.SavePropertiesGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -158,16 +224,19 @@
         #endregion
 
         private System.Windows.Forms.GroupBox DXFLayersGroupBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DXFLayer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NoLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DashedLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SolidLine;
+        private System.Windows.Forms.DataGridView dataGridDXFLayers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LayerNameColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SolidLineColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn DashedLineColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn NoLineColumn;
+        private System.Windows.Forms.GroupBox SavePropertiesGroupBox;
+        private System.Windows.Forms.TextBox FilePathTextBox;
+        private System.Windows.Forms.Label SaveInLabel;
+        private System.Windows.Forms.Button DirectoryBrowseButton;
     }
 }

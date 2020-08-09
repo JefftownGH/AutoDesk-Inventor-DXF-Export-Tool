@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ExportLibrary
 {
-
     public enum LayerNames
     {
         TangentLayer,
@@ -15,75 +14,92 @@ namespace ExportLibrary
         InteriorProfilesLayer,
         BendUpLayer,
         BendDownLayer,
-        ToolCenterUpLayer,
-        ToolCenterDownLayer,
         FeatureProfilesUpLayer,
         FeatureProfilesDownLayer,
     }
 
     public class DXFLayerItem
     {
-        public string layerName { get; set; }
+        private string layerName;
+        private bool noLine;
+        private bool dashedLine;
+        private bool solidLine;
 
-        private bool _noLine;
-        public bool noLine
+        public string Name
         {
-            //testing some logic
             get
             {
-                if (dashedLine == true || solidLine == true)
-                    return _noLine = false;
-
-                else
-                    return _noLine = true;
+                return layerName;
             }
             set
             {
-                _noLine = value;
+                layerName = value;
             }
         }
 
-        private bool _dashedLine;
-        public bool dashedLine
+        public bool NoLine 
         {
-            //testing some logic
             get
             {
-                if (noLine == true || solidLine == true)
-                    return _dashedLine = false;
+                if (noLine)
+                {
+                    DashedLine = false;
+                    SolidLine = false;
+                }
 
-                else
-                    return _dashedLine = true;
+                return noLine;
             }
             set
             {
-                _dashedLine = value;
+                noLine = value;
             }
         }
 
-        private bool _solidLine;
-        public bool solidLine
+        public bool DashedLine
         {
             get
             {
-                if (noLine == true || dashedLine == true)
-                    return _solidLine = false;
+                if (dashedLine)
+                {
+                    SolidLine = false;
+                    NoLine = false;
+                }
 
-                else
-                    return _solidLine = true;
+                return dashedLine;
             }
             set
             {
-                _solidLine = value;
+                dashedLine = value;
+            }
+        }
+
+        public bool SolidLine
+        {
+            get
+            {
+                if (solidLine)
+                {
+                    DashedLine = false;
+                    NoLine = false;
+                }
+
+                if (DashedLine == false && NoLine == false && solidLine == false)
+                    solidLine = true;
+
+                return solidLine;
+            }
+            set
+            {
+                solidLine = value;
             }
         }
 
         public DXFLayerItem(string layerName)
         {
-            solidLine = true;
             this.layerName = layerName;
+            noLine = false;
+            dashedLine = false;
+            solidLine = true;
         }
-
-        
     }
 }
