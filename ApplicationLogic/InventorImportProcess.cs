@@ -111,10 +111,5 @@ namespace ApplicationLogic
         {
             return topLevel;
         }
-
-        public void TestDXFExport(List<SheetmetalPart> sheetmetalPartList)
-        {
-            ExportDXF.ExportSheetMetalPartsToDXF(sheetmetalPartList);
-        }
     }
 }

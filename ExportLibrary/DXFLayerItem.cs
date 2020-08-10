@@ -16,6 +16,11 @@ namespace ExportLibrary
         BendDownLayer,
         FeatureProfilesUpLayer,
         FeatureProfilesDownLayer,
+        AltRepFrontLayer,
+        AltRepBackLayer,
+        UnconsumedSketchesLayer,
+        TangentRollLinesLayer,
+        RollLinesLayer
     }
 
     public class DXFLayerItem

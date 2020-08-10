@@ -103,8 +103,6 @@ namespace DesignValidation
             foreach (Assembly assembly in topLevel.AssemblyList)
                 foreach (SheetmetalPart sheetmetalpart in assembly.sheetmetalPartList)
                     tempSheetmetalPartList.Add(sheetmetalpart);
-
-            inventorImportProcess.TestDXFExport(tempSheetmetalPartList);
         }
 
         //this need to be re-writen so that it no longer takes a button click to inspect list box items in the ListBox

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExportLibrary;
+using ProgramUtilities;
 
 namespace DesignValidation
 {
@@ -17,6 +18,8 @@ namespace DesignValidation
 
         List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
 
+        string saveLocationFilePath = "";
+        
         public DXFExportSettings()
         {
             InitializeComponent();
@@ -37,26 +40,27 @@ namespace DesignValidation
             bindingSourceDXFLayer.DataSource = dXFLayerItems;
 
             dataGridDXFLayers.DataSource = bindingSourceDXFLayer;
-
-            //there will be an export to dxf method passing List<DXFLayerItem> dXFLayerItems
         }
 
-        //this method is currently just for testing to make sure the databinding is working 
-        private void dataGridDXFLayers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        public bool FilePathCheck()
         {
-            try
+            //check that a save directory has been provided
+
+            if (string.IsNullOrEmpty(saveLocationFilePath))
             {
-                //var selectedRow = (DXFLayerItem)dataGridDXFLayers.SelectedRows[0].DataBoundItem;
-
-                //var testObject = dXFLayerItems.FirstOrDefault(x => x.Name == "TangentLayer");
-
-                //MessageBox.Show(testObject.NoLine.ToString());
-
+                MessageBox.Show("Please select a save directory", "DXF export error");
+                return false;
             }
-            catch (Exception ex)
+
+            //check that the save directory exists
+
+            if (!FileHandling.CheckIfDirectoryExists(saveLocationFilePath))
             {
-                //MessageBox.Show("There was an unexpected error: " + ex.Message + "_" + ex.Source);
+                MessageBox.Show("Cannot find the directory, DXF export has been aborted", "DXF export error");
+                return false;
             }
+
+            return true;
         }
 
         private void DirectoryBrowseButton_Click(object sender, EventArgs e)
@@ -67,8 +71,23 @@ namespace DesignValidation
             folderBrowserDialogue.ShowNewFolderButton = false;
 
             if (folderBrowserDialogue.ShowDialog() == DialogResult.OK)
+            {
                 FilePathTextBox.Text = folderBrowserDialogue.SelectedPath;
 
+                saveLocationFilePath = FilePathTextBox.Text;
+            }
+        }
+
+        private void ExportDXFButton_Click(object sender, EventArgs e)
+        {
+            if (!FilePathCheck())
+                return;
+
+            //pass the List<DXFlayerItem> dXFLayerItems to the ExportLibrary
+
+            //may need to instantiate a new isntance of the ExportDXF class.
+
+            //this instance then has the custom "string" for the DXF export assigned to it.
         }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DXFLayersGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridDXFLayers = new System.Windows.Forms.DataGridView();
             this.LayerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,9 +41,10 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SavePropertiesGroupBox = new System.Windows.Forms.GroupBox();
-            this.SaveInLabel = new System.Windows.Forms.Label();
-            this.FilePathTextBox = new System.Windows.Forms.TextBox();
             this.DirectoryBrowseButton = new System.Windows.Forms.Button();
+            this.FilePathTextBox = new System.Windows.Forms.TextBox();
+            this.SaveInLabel = new System.Windows.Forms.Label();
+            this.ExportDXFButton = new System.Windows.Forms.Button();
             this.DXFLayersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDXFLayers)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -76,16 +77,15 @@
             this.dataGridDXFLayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridDXFLayers.Size = new System.Drawing.Size(450, 143);
             this.dataGridDXFLayers.TabIndex = 2;
-            this.dataGridDXFLayers.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDXFLayers_CellValueChanged);
             // 
             // LayerNameColumn
             // 
             this.LayerNameColumn.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Red;
-            this.LayerNameColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Red;
+            this.LayerNameColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.LayerNameColumn.FillWeight = 150F;
             this.LayerNameColumn.HeaderText = "Layer Name";
             this.LayerNameColumn.Name = "LayerNameColumn";
@@ -174,22 +174,6 @@
             this.SavePropertiesGroupBox.TabStop = false;
             this.SavePropertiesGroupBox.Text = "Save Properties";
             // 
-            // SaveInLabel
-            // 
-            this.SaveInLabel.AutoSize = true;
-            this.SaveInLabel.Location = new System.Drawing.Point(17, 25);
-            this.SaveInLabel.Name = "SaveInLabel";
-            this.SaveInLabel.Size = new System.Drawing.Size(47, 13);
-            this.SaveInLabel.TabIndex = 0;
-            this.SaveInLabel.Text = "Save In:";
-            // 
-            // FilePathTextBox
-            // 
-            this.FilePathTextBox.Location = new System.Drawing.Point(70, 22);
-            this.FilePathTextBox.Name = "FilePathTextBox";
-            this.FilePathTextBox.Size = new System.Drawing.Size(304, 20);
-            this.FilePathTextBox.TabIndex = 1;
-            // 
             // DirectoryBrowseButton
             // 
             this.DirectoryBrowseButton.Location = new System.Drawing.Point(382, 20);
@@ -200,11 +184,38 @@
             this.DirectoryBrowseButton.UseVisualStyleBackColor = true;
             this.DirectoryBrowseButton.Click += new System.EventHandler(this.DirectoryBrowseButton_Click);
             // 
+            // FilePathTextBox
+            // 
+            this.FilePathTextBox.Location = new System.Drawing.Point(70, 22);
+            this.FilePathTextBox.Name = "FilePathTextBox";
+            this.FilePathTextBox.Size = new System.Drawing.Size(304, 20);
+            this.FilePathTextBox.TabIndex = 1;
+            // 
+            // SaveInLabel
+            // 
+            this.SaveInLabel.AutoSize = true;
+            this.SaveInLabel.Location = new System.Drawing.Point(17, 25);
+            this.SaveInLabel.Name = "SaveInLabel";
+            this.SaveInLabel.Size = new System.Drawing.Size(47, 13);
+            this.SaveInLabel.TabIndex = 0;
+            this.SaveInLabel.Text = "Save In:";
+            // 
+            // ExportDXFButton
+            // 
+            this.ExportDXFButton.Location = new System.Drawing.Point(672, 493);
+            this.ExportDXFButton.Name = "ExportDXFButton";
+            this.ExportDXFButton.Size = new System.Drawing.Size(100, 30);
+            this.ExportDXFButton.TabIndex = 3;
+            this.ExportDXFButton.Text = "Export DXF";
+            this.ExportDXFButton.UseVisualStyleBackColor = true;
+            this.ExportDXFButton.Click += new System.EventHandler(this.ExportDXFButton_Click);
+            // 
             // DXFExportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.ExportDXFButton);
             this.Controls.Add(this.SavePropertiesGroupBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DXFLayersGroupBox);
@@ -238,5 +249,6 @@
         private System.Windows.Forms.TextBox FilePathTextBox;
         private System.Windows.Forms.Label SaveInLabel;
         private System.Windows.Forms.Button DirectoryBrowseButton;
+        private System.Windows.Forms.Button ExportDXFButton;
     }
 }

@@ -7,7 +7,17 @@ namespace ProgramUtilities
     {
         public static bool CheckIfFilesExists(string filePath)
         {
-            if (File.Exists(filePath)) return true;
+            if (File.Exists(filePath)) 
+                return true;
+
+            else return false;
+        }
+
+        public static bool CheckIfDirectoryExists(string filePath)
+        {
+            if (Directory.Exists(filePath)) 
+                return true;
+
             else return false;
         }
 
