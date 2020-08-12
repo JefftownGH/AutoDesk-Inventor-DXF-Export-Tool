@@ -18,7 +18,9 @@ namespace ProgramUtilities
             try
             {
                 thisApplication = (Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Inventor.Application");
+
                 measureTools = thisApplication.MeasureTools;
+
                 return thisApplication;
             }
             catch
@@ -35,6 +37,7 @@ namespace ProgramUtilities
         public MeasureTools GetMeasureTools()
         {
             CreateInventorConnection();
+
             return measureTools;
         }
     }

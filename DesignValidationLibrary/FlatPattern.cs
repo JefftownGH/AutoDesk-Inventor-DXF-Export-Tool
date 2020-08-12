@@ -50,7 +50,6 @@ namespace DesignValidationLibrary
             }
             catch
             {
-                //should be bubbling up the error to a higher level 
                 return false;
             }
         }

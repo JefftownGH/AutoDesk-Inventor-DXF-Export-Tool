@@ -50,14 +50,17 @@ namespace ExportLibrary
             return exportString;
         }
 
-        public void GenerateExportString(List<DXFLayerItem> dXFLayerItems)
+        public string GenerateExportString(List<DXFLayerItem> dXFLayerItems)
         {
+            //Test code - very messy refactor ASAP
+
             List<string> dXFLayerItemsDashedLine = new List<string>();
 
             List<string> dXFLayerItemsNoLine = new List<string>();
 
             StringBuilder invisibleLayersString = new StringBuilder();
 
+            StringBuilder dashedLayersString = new StringBuilder();
 
             foreach (DXFLayerItem dXFLayerItem in dXFLayerItems)
             {
@@ -69,12 +72,11 @@ namespace ExportLibrary
             }
 
             //Temporary Code//
-            string autoCadVersion = "AcadVersion=R12";
 
             //build the string for the InvisibleLayers
 
             //checks to make the List contains values, ie. is not null
-            if(dXFLayerItemsNoLine != null)
+            if(dXFLayerItemsNoLine.Any())
             {
                 invisibleLayersString.Append("InvisibleLayers=");
 
@@ -90,6 +92,28 @@ namespace ExportLibrary
                     }
                 }
             }
+
+            if(dXFLayerItemsDashedLine.Any())
+            {
+                string bendDownLayer = "LayerLineType=37644";
+
+                string lastEntry = dXFLayerItemsDashedLine.Last();
+
+                foreach(string dXFLayerItemDashedLine in dXFLayerItemsDashedLine)
+                {
+                    dashedLayersString.Append("&");
+                    dashedLayersString.Append(dXFLayerItemDashedLine);
+                    dashedLayersString.Append(bendDownLayer);
+                }
+            }
+
+            //append the two stringbuilder objects
+
+            invisibleLayersString.Append(dashedLayersString);
+
+            string exportString = "FLAT PATTERN DXF?AcadVersion = R12" + invisibleLayersString.ToString();
+
+            return exportString;
         }
     }
 }

@@ -83,6 +83,10 @@ namespace DesignValidation
             if (!FilePathCheck())
                 return;
 
+            ExportDXF exportDXF = new ExportDXF();
+
+            MessageBox.Show(exportDXF.GenerateExportString(dXFLayerItems));
+
             //pass the List<DXFlayerItem> dXFLayerItems to the ExportLibrary
 
             //may need to instantiate a new isntance of the ExportDXF class.
