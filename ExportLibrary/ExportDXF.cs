@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Inventor;
 using DesignValidationLibrary;
+using ExportLibrary.Properties;
+using System.IO;
+using ProgramUtilities;
+
+using Path = System.IO.Path;
+using File = System.IO.File;
 
 namespace ExportLibrary
 {
@@ -12,15 +20,68 @@ namespace ExportLibrary
     {
         private string exportString { get; set; }
 
+        private static string jsonRelativeFilePath { get; set; } = "Resources\\DXFLayerItems.json";
+
+        public string jsonFilePath { get; private set; }
+
+        public List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
+
+        //"Constructor method"
+        public static ExportDXF CreateExportDXFObject()
+        {
+            string runningPath = AppDomain.CurrentDomain.BaseDirectory;
+
+            return new ExportDXF { jsonFilePath = string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\"))) };
+        }
+
+        //load/create the DXFLayerObjects then return them back to the calling class
+        public void ImportJsonFile()
+        {
+            if (!FileHandling.CheckIfFilesExists(jsonFilePath))
+            {
+                CreateDXFLayerItemsList();
+
+                SerialiseJson(dXFLayerItems);
+            }
+            else
+                DeserialiseJson();
+        }
+
+        //starting off point if their is no JSON file, create the DXF layer items
+        public void CreateDXFLayerItemsList()
+        {
+            IEnumerable<LayerNames> layerNames = Enum.GetValues(typeof(LayerNames)).Cast<LayerNames>();
+
+            foreach(Enum layerName in layerNames)
+            {
+                dXFLayerItems.Add(new DXFLayerItem(layerName.ToString()));
+            }
+        }
+
+        public void DeserialiseJson()
+        {
+            string jsonString = File.ReadAllText(jsonFilePath);
+
+            dXFLayerItems = JsonSerializer.Deserialize<List<DXFLayerItem>>(jsonString);
+        }
+
+        //receives a List<DXFLayerItem> and returns a JSON string
+        public void SerialiseJson(List<DXFLayerItem> listDXFLayerItems)
+        {
+            JsonSerializerOptions jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+
+            FileHandling.SaveStringToFile(JsonSerializer.Serialize(listDXFLayerItems, jsonOptions), jsonFilePath, true);
+        }
+
         public void ExportSheetMetalPartsToDXF(List<SheetmetalPart> sheetmetalPartList)
         {
+            GenerateExportString();
+
             //a method is used to send a List of PartDocument Inventor Objects to the method
 
             foreach(SheetmetalPart sheetmetalPart in sheetmetalPartList)
             {
                 //Check to make sure it has a flat pattern
-
-                string exportString = GenerateExportStringTest();
 
                 Random random = new Random();
 
@@ -38,29 +99,27 @@ namespace ExportLibrary
                 }
                 catch
                 {
+                    Debug.Write("opps something went wrong");
                     continue;
                 }
             }
         }
 
-        public string GenerateExportStringTest()
-        {
-            string exportString = "FLAT PATTERN DXF?AcadVersion=R12&BendDownLayer=BendDown&TangentLayer=Tangent&InvisibleLayers=Tangent&BendDownLayerLineType=37644";
-
-            return exportString;
-        }
-
-        public string GenerateExportString(List<DXFLayerItem> dXFLayerItems)
+        public string GenerateExportString()
         {
             //Test code - very messy refactor ASAP
+            //this will probably be sperated out in a number of methods or a separate static class
 
             List<string> dXFLayerItemsDashedLine = new List<string>();
 
             List<string> dXFLayerItemsNoLine = new List<string>();
 
-            StringBuilder invisibleLayersString = new StringBuilder();
+            StringBuilder exportStringBuilder = new StringBuilder();
 
-            StringBuilder dashedLayersString = new StringBuilder();
+            exportStringBuilder.Append("FLAT PATTERN DXF?");
+            exportStringBuilder.Append(Settings.Default["AutoCadVersion"].ToString());
+
+            //build the two lists required
 
             foreach (DXFLayerItem dXFLayerItem in dXFLayerItems)
             {
@@ -71,49 +130,59 @@ namespace ExportLibrary
                     dXFLayerItemsNoLine.Add(dXFLayerItem.Name);
             }
 
-            //Temporary Code//
+            if (dXFLayerItemsNoLine.Any() || dXFLayerItemsDashedLine.Any())
+                exportStringBuilder.Append("&");
 
-            //build the string for the InvisibleLayers
+            //assign names to the no line objects
 
-            //checks to make the List contains values, ie. is not null
-            if(dXFLayerItemsNoLine.Any())
+
+            if (dXFLayerItemsNoLine.Any())
             {
-                invisibleLayersString.Append("InvisibleLayers=");
+                string lastEntry = dXFLayerItemsNoLine.Last();
+
+                foreach (string dXFLayerItemNoLine in dXFLayerItemsNoLine)
+                {
+                    exportStringBuilder.Append(dXFLayerItemNoLine + "=" + dXFLayerItemNoLine);
+
+                    if (!dXFLayerItemNoLine.Equals(lastEntry) || dXFLayerItemsNoLine.Count == 1)
+                    {
+                        exportStringBuilder.Append("&");
+                    }
+                }
+            }
+
+            if (dXFLayerItemsNoLine.Any())
+            {
+                exportStringBuilder.Append("InvisibleLayers=");
 
                 string lastEntry = dXFLayerItemsNoLine.Last();
 
                 foreach (string dXFLayerItemNoLine in dXFLayerItemsNoLine)
                 {
-                    invisibleLayersString.Append(dXFLayerItemNoLine);
+                    exportStringBuilder.Append(dXFLayerItemNoLine);
 
                     if (!dXFLayerItemNoLine.Equals(lastEntry))
                     {
-                        invisibleLayersString.Append(";");
+                        exportStringBuilder.Append(";");
                     }
                 }
             }
 
             if(dXFLayerItemsDashedLine.Any())
             {
-                string bendDownLayer = "LayerLineType=37644";
-
-                string lastEntry = dXFLayerItemsDashedLine.Last();
+                string lineStyle = "LayerLineType=37644";
 
                 foreach(string dXFLayerItemDashedLine in dXFLayerItemsDashedLine)
                 {
-                    dashedLayersString.Append("&");
-                    dashedLayersString.Append(dXFLayerItemDashedLine);
-                    dashedLayersString.Append(bendDownLayer);
+                    exportStringBuilder.Append("&");
+                    exportStringBuilder.Append(dXFLayerItemDashedLine);
+                    exportStringBuilder.Append(lineStyle);
                 }
             }
 
-            //append the two stringbuilder objects
+            exportString = exportStringBuilder.ToString();
 
-            invisibleLayersString.Append(dashedLayersString);
-
-            string exportString = "FLAT PATTERN DXF?AcadVersion = R12" + invisibleLayersString.ToString();
-
-            return exportString;
+            return exportStringBuilder.ToString();
         }
     }
 }

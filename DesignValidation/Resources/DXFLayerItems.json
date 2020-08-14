@@ -1,0 +1,80 @@
+[
+  {
+    "Name": "TangentLayer",
+    "NoLine": true,
+    "DashedLine": false,
+    "SolidLine": false
+  },
+  {
+    "Name": "OuterProfileLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "ArcCentresLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "InteriorProfilesLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "BendUpLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "BendDownLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "FeatureProfilesUpLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "FeatureProfilesDownLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "AltRepFrontLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "AltRepBackLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "UnconsumedSketchesLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "TangentRollLinesLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  },
+  {
+    "Name": "RollLinesLayer",
+    "NoLine": false,
+    "DashedLine": false,
+    "SolidLine": true
+  }
+]

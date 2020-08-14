@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DXFLayersGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridDXFLayers = new System.Windows.Forms.DataGridView();
             this.LayerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +45,7 @@
             this.FilePathTextBox = new System.Windows.Forms.TextBox();
             this.SaveInLabel = new System.Windows.Forms.Label();
             this.ExportDXFButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.DXFLayersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDXFLayers)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,11 +82,11 @@
             // LayerNameColumn
             // 
             this.LayerNameColumn.DataPropertyName = "Name";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Red;
-            this.LayerNameColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Red;
+            this.LayerNameColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.LayerNameColumn.FillWeight = 150F;
             this.LayerNameColumn.HeaderText = "Layer Name";
             this.LayerNameColumn.Name = "LayerNameColumn";
@@ -210,11 +211,22 @@
             this.ExportDXFButton.UseVisualStyleBackColor = true;
             this.ExportDXFButton.Click += new System.EventHandler(this.ExportDXFButton_Click);
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(548, 493);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(100, 30);
+            this.SaveButton.TabIndex = 4;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // DXFExportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ExportDXFButton);
             this.Controls.Add(this.SavePropertiesGroupBox);
             this.Controls.Add(this.groupBox1);
@@ -250,5 +262,6 @@
         private System.Windows.Forms.Label SaveInLabel;
         private System.Windows.Forms.Button DirectoryBrowseButton;
         private System.Windows.Forms.Button ExportDXFButton;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

@@ -16,28 +16,22 @@ namespace DesignValidation
     {
         BindingSource bindingSourceDXFLayer = new BindingSource();
 
-        List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
-
+        ExportDXF exportDXF = ExportDXF.CreateExportDXFObject();
+        
         string saveLocationFilePath = "";
         
         public DXFExportSettings()
         {
             InitializeComponent();
+
             CreateDXFLayerObjects();
         }
 
         public void CreateDXFLayerObjects()
         {
-            IEnumerable<LayerNames> layerNames = Enum.GetValues(typeof(LayerNames)).Cast<LayerNames>();
+            exportDXF.ImportJsonFile();
 
-            foreach(Enum layerName in layerNames)
-            {
-                dXFLayerItems.Add(new DXFLayerItem(layerName.ToString()));
-            }
-
-            //List is created first and then added to the BindingSource to make the objects easier to use
-
-            bindingSourceDXFLayer.DataSource = dXFLayerItems;
+            bindingSourceDXFLayer.DataSource = exportDXF.dXFLayerItems;
 
             dataGridDXFLayers.DataSource = bindingSourceDXFLayer;
         }
@@ -83,15 +77,22 @@ namespace DesignValidation
             if (!FilePathCheck())
                 return;
 
-            ExportDXF exportDXF = new ExportDXF();
-
-            MessageBox.Show(exportDXF.GenerateExportString(dXFLayerItems));
+            MessageBox.Show(exportDXF.GenerateExportString());
 
             //pass the List<DXFlayerItem> dXFLayerItems to the ExportLibrary
 
             //may need to instantiate a new isntance of the ExportDXF class.
 
             //this instance then has the custom "string" for the DXF export assigned to it.
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            //Reserealise the new new List<DXFLayerItem>();
+
+            exportDXF.SerialiseJson(exportDXF.dXFLayerItems);
+
+            MessageBox.Show("Changes have been saved", "Save Settings");
         }
     }
 }

@@ -14,6 +14,7 @@ using MaterialPropertiesLibrary;
 using ProgramUtilities;
 using ApplicationLogic;
 using BrightIdeasSoftware;
+using ExportLibrary;
 
 namespace DesignValidation
 {
@@ -189,6 +190,27 @@ namespace DesignValidation
             DXFExportSettings dXFExportSettings = new DXFExportSettings();
 
             dXFExportSettings.Show();
+        }
+
+        private void ExportDXFButton_Click(object sender, EventArgs e)
+        {
+            //temporary logic until method for using checkbox to build the sheetmetal part list
+
+            List<SheetmetalPart> sheetMetalPartList = new List<SheetmetalPart>();
+
+            foreach(Assembly subAssembly in topLevel.AssemblyList)
+            {
+                foreach(SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
+                {
+                    sheetMetalPartList.Add(sheetMetalPart);
+                }
+            }
+
+            ExportDXF exportDXF = ExportDXF.CreateExportDXFObject();
+
+            exportDXF.ImportJsonFile();
+
+            exportDXF.ExportSheetMetalPartsToDXF(sheetMetalPartList);
         }
     }
 }

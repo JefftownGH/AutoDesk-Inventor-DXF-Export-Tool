@@ -99,6 +99,11 @@ namespace ExportLibrary
             }
         }
 
+        public DXFLayerItem()
+        {
+            //parameterless constructor to allow for Json deserialization
+        }
+
         public DXFLayerItem(string layerName)
         {
             this.layerName = layerName;
@@ -106,5 +111,6 @@ namespace ExportLibrary
             dashedLine = false;
             solidLine = true;
         }
+
     }
 }

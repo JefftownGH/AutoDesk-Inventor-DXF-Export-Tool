@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ActionsGroupBox = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.ExportDXFButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.InspectComponent = new System.Windows.Forms.Button();
             this.Import = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             // 
             // ActionsGroupBox
             // 
-            this.ActionsGroupBox.Controls.Add(this.button6);
+            this.ActionsGroupBox.Controls.Add(this.ExportDXFButton);
             this.ActionsGroupBox.Controls.Add(this.button1);
             this.ActionsGroupBox.Controls.Add(this.InspectComponent);
             this.ActionsGroupBox.Controls.Add(this.Import);
@@ -63,14 +63,15 @@
             this.ActionsGroupBox.TabStop = false;
             this.ActionsGroupBox.Text = "Actions";
             // 
-            // button6
+            // ExportDXFButton
             // 
-            this.button6.Location = new System.Drawing.Point(324, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 30);
-            this.button6.TabIndex = 15;
-            this.button6.Text = "Export DXF";
-            this.button6.UseVisualStyleBackColor = true;
+            this.ExportDXFButton.Location = new System.Drawing.Point(324, 19);
+            this.ExportDXFButton.Name = "ExportDXFButton";
+            this.ExportDXFButton.Size = new System.Drawing.Size(100, 30);
+            this.ExportDXFButton.TabIndex = 15;
+            this.ExportDXFButton.Text = "Export DXF";
+            this.ExportDXFButton.UseVisualStyleBackColor = true;
+            this.ExportDXFButton.Click += new System.EventHandler(this.ExportDXFButton_Click);
             // 
             // button1
             // 
@@ -235,7 +236,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox ComponentErrors;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button ExportDXFButton;
     }
 }
 
