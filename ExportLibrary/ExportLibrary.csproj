@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="DXFLayerItem.cs" />
     <Compile Include="ExportDXF.cs" />
+    <Compile Include="ExportStringGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

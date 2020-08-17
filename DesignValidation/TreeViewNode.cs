@@ -7,26 +7,35 @@ using System.Windows.Forms;
 using Inventor;
 using DesignValidationLibrary;
 using BrightIdeasSoftware;
+using System.ComponentModel;
 
 namespace DesignValidation
 {
-    public class TreeViewNode
+    public class TreeViewNode 
     {
         public string Name { get; set; }
-
         public string Column1 { get; set; }
-
         public string Column2 { get; set; }
-
         public string Column3 { get; set; }
 
         public int ID { get; set; }
-
         public int parentID { get; set; }
 
         public bool assemblyNode { get; set; }
 
         public List<TreeViewNode> Children { get; set; }
+
+        private bool ticked = false;
+
+        public bool Ticked
+        {
+            get { return ticked; }
+
+            set
+            {
+                ticked = value;
+            }
+        }
 
         public TreeViewNode(string name,string col1, string col2, string col3, int ID, int parentID)
         {

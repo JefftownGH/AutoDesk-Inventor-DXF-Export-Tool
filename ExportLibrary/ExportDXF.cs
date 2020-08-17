@@ -19,11 +19,8 @@ namespace ExportLibrary
     public class ExportDXF
     {
         private string exportString { get; set; }
-
         private static string jsonRelativeFilePath { get; set; } = "Resources\\DXFLayerItems.json";
-
         public string jsonFilePath { get; private set; }
-
         public List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
 
         //"Constructor method"
@@ -135,7 +132,6 @@ namespace ExportLibrary
 
             //assign names to the no line objects
 
-
             if (dXFLayerItemsNoLine.Any())
             {
                 string lastEntry = dXFLayerItemsNoLine.Last();
@@ -144,7 +140,7 @@ namespace ExportLibrary
                 {
                     exportStringBuilder.Append(dXFLayerItemNoLine + "=" + dXFLayerItemNoLine);
 
-                    if (!dXFLayerItemNoLine.Equals(lastEntry) || dXFLayerItemsNoLine.Count == 1)
+                    if (!dXFLayerItemNoLine.Equals(lastEntry))
                     {
                         exportStringBuilder.Append("&");
                     }
@@ -153,7 +149,7 @@ namespace ExportLibrary
 
             if (dXFLayerItemsNoLine.Any())
             {
-                exportStringBuilder.Append("InvisibleLayers=");
+                exportStringBuilder.Append("&InvisibleLayers=");
 
                 string lastEntry = dXFLayerItemsNoLine.Last();
 

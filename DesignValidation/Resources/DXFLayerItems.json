@@ -8,8 +8,8 @@
   {
     "Name": "OuterProfileLayer",
     "NoLine": false,
-    "DashedLine": false,
-    "SolidLine": true
+    "DashedLine": true,
+    "SolidLine": false
   },
   {
     "Name": "ArcCentresLayer",
@@ -19,27 +19,27 @@
   },
   {
     "Name": "InteriorProfilesLayer",
-    "NoLine": false,
+    "NoLine": true,
     "DashedLine": false,
-    "SolidLine": true
+    "SolidLine": false
   },
   {
     "Name": "BendUpLayer",
-    "NoLine": false,
+    "NoLine": true,
     "DashedLine": false,
-    "SolidLine": true
+    "SolidLine": false
   },
   {
     "Name": "BendDownLayer",
-    "NoLine": false,
+    "NoLine": true,
     "DashedLine": false,
-    "SolidLine": true
+    "SolidLine": false
   },
   {
     "Name": "FeatureProfilesUpLayer",
-    "NoLine": false,
+    "NoLine": true,
     "DashedLine": false,
-    "SolidLine": true
+    "SolidLine": false
   },
   {
     "Name": "FeatureProfilesDownLayer",
@@ -49,9 +49,9 @@
   },
   {
     "Name": "AltRepFrontLayer",
-    "NoLine": false,
+    "NoLine": true,
     "DashedLine": false,
-    "SolidLine": true
+    "SolidLine": false
   },
   {
     "Name": "AltRepBackLayer",

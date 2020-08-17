@@ -18,7 +18,8 @@ using ExportLibrary;
 
 namespace DesignValidation
 {
-    public partial class DesignValidationForm : Form
+    
+    public partial class DesignValidationForm : Form 
     {
         private TopLevel topLevel = new TopLevel();
 
@@ -26,31 +27,63 @@ namespace DesignValidation
 
         private List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
 
+        private List<TreeViewNode> sheetMetalListData = new List<TreeViewNode>();
+
         private BrightIdeasSoftware.TreeListView treeListView;
+
+        private BrightIdeasSoftware.TreeListView sheetMetalListView;
 
         public InventorImportProcess inventorImportProcess = new InventorImportProcess();
 
         public DesignValidationForm()
         {
             InitializeComponent();
-            AddTree();
+            AddTreeListView();
+            AddSheetMetalListView();
         }
 
         private void SubScribeToEvent(TopLevel topLevel) => topLevel.UpdateProgress += OnProgressBarIncrement;
 
-        private void AddTree()
+        private void AddTreeListView()
         {
             treeListView = TreeListView.CreateTreeListView();
+            treeListView.ItemChecked += UpdateTreeListViewCheckboxes;
             Controls.Add(treeListView);
+        }
+
+        private void AddSheetMetalListView()
+        {
+            sheetMetalListView = SheetMetalListView.CreateTreeListView();
+            //sheetMetalListView.ItemChecked
+            Controls.Add(sheetMetalListView);
         }
 
         private void FillTree()
         {
             treeListView.Clear();
-
             treeListView.CanExpandGetter = x => (x as TreeViewNode).Children.Count > 0;
-
             treeListView.ChildrenGetter = x => (x as TreeViewNode).Children;
+
+            var nameCol = new OLVColumn("Part Name", "Part Name");
+            nameCol.AspectGetter = x => (x as TreeViewNode).Name;
+            nameCol.Width = 200;
+
+            var col1 = new OLVColumn("Flat Pattern", "Flat Pattern");
+            col1.AspectGetter = x => (x as TreeViewNode).Column1;
+            col1.Width = 100;
+
+            treeListView.Columns.Add(nameCol);
+            treeListView.Columns.Add(col1);
+            treeListView.ExpandAll();
+
+            treeListView.Roots = treeViewNodeData; 
+        }
+
+        private void FillSheetMetalList()
+        {
+            sheetMetalListView.Clear();
+            sheetMetalListView.CanExpandGetter = x => (x as TreeViewNode).Children.Count > 0;
+            sheetMetalListView.ChildrenGetter = x => (x as TreeViewNode).Children;
 
             var nameCol = new OLVColumn("Part Name", "Part Name");
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
@@ -68,14 +101,12 @@ namespace DesignValidation
             col3.AspectGetter = x => (x as TreeViewNode).Column3;
             col3.Width = 100;
 
-            treeListView.Columns.Add(nameCol);
-            treeListView.Columns.Add(col1);
-            treeListView.Columns.Add(col2);
-            treeListView.Columns.Add(col3);
+            sheetMetalListView.Columns.Add(nameCol);
+            sheetMetalListView.Columns.Add(col1);
+            sheetMetalListView.Columns.Add(col2);
+            sheetMetalListView.Columns.Add(col3);
 
-            //Generator.GenerateColumns(treeListView, typeof(TreeViewNode), true);
-
-            treeListView.Roots = treeViewNodeData; 
+            sheetMetalListView.Roots = sheetMetalListData;
         }
 
         public void Import_Click(object sender, EventArgs e)
@@ -89,21 +120,13 @@ namespace DesignValidation
             //begins the import process
             inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
 
-            //creates the TreeListView once the import process is completed
-            //treeViewNodeData =TreeListView.BuildTreeViewNodeData(topLevel.AssemblyList);
-
-            //add logic here to determine the structure of TreeViewNodeData ie, either flat or nested
-
-            //this is only for testing purposes
             treeViewNodeData = TreeListView.BuildTreeViewNodeDataNested(topLevel.AssemblyList);
+
+            sheetMetalListData = SheetMetalListView.BuildSheetMetalNodeData(topLevel.AssemblyList);
 
             FillTree();
 
-            List<SheetmetalPart> tempSheetmetalPartList = new List<SheetmetalPart>();
-
-            foreach (Assembly assembly in topLevel.AssemblyList)
-                foreach (SheetmetalPart sheetmetalpart in assembly.sheetmetalPartList)
-                    tempSheetmetalPartList.Add(sheetmetalpart);
+            FillSheetMetalList();
         }
 
         //this need to be re-writen so that it no longer takes a button click to inspect list box items in the ListBox
@@ -140,6 +163,8 @@ namespace DesignValidation
             errorList.DataSource = part.errorList;
 
             ComponentErrors.DataSource = errorList;
+
+            //PictureBoxTestMethod(part);
         }
 
         //recieves an event from the topLevel class
@@ -163,9 +188,6 @@ namespace DesignValidation
                 ProgressBar.Visible = false;
             }
         }
-
-        //the add material functionality is not going to be included for the initial release
-        //the Json functionality will be reused to allow for program properties to be saved
 
         private void AddMaterial_Click(object sender, EventArgs e)
         {
@@ -211,6 +233,21 @@ namespace DesignValidation
             exportDXF.ImportJsonFile();
 
             exportDXF.ExportSheetMetalPartsToDXF(sheetMetalPartList);
+        }
+
+        public void UpdateTreeListViewCheckboxes(object sender, ItemCheckedEventArgs e)
+        {
+            MessageBox.Show(e.Item.Checked.ToString() + "  " + e.Item.Name.ToString());
+        }
+
+        //problem with the api
+        public void PictureBoxTestMethod(Part part)
+        {
+            stdole.IPictureDisp thumbNail = part.partDocument.Thumbnail;
+
+            Image image = IconTools.GetImage(thumbNail);
+
+            //PictureBoxTest.Image = image;
         }
     }
 }

@@ -12,11 +12,14 @@ namespace DesignValidation
             BrightIdeasSoftware.TreeListView treeListView = new BrightIdeasSoftware.TreeListView();
 
             treeListView.Location = new System.Drawing.Point(20, 100);
-            treeListView.Size = new System.Drawing.Size(650, 325);
-            treeListView.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom);
+            treeListView.Size = new System.Drawing.Size(300, 325);
+            treeListView.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
             treeListView.UseAlternatingBackColors = true;
             treeListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-            treeListView.CheckBoxes = true;
+            treeListView.CheckBoxes = false;
+            treeListView.CheckedAspectName = "Ticked";
+            treeListView.ExpandAll();
+
             //need to create an image list and assign this to "SmallImageList"
 
             return treeListView;
