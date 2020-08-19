@@ -10,7 +10,7 @@ namespace ProgramUtilities
 {
     public class IconTools
     {
-        private class IconToolsAxHost : System.Windows.Forms.AxHost
+        private class IconToolsAxHost : AxHost
         {
             private IconToolsAxHost() : base(string.Empty) { }
 

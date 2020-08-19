@@ -50,6 +50,7 @@ namespace DesignValidationLibrary
             }
             catch
             {
+                //This will throw a message up to the part error list to show there has been an error obtaining the flat pattern 
                 return false;
             }
         }

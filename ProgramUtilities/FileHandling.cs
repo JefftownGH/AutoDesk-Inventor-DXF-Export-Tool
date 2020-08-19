@@ -38,7 +38,6 @@ namespace ProgramUtilities
             catch (Exception)
             {
                 return false;
-                throw;
             }
         }
     }

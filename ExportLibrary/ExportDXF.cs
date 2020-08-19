@@ -17,6 +17,8 @@ namespace ExportLibrary
 {
     public class ExportDXF
     {
+        //This class is starting to perform two mainly deserialise/serialise the JSON file for the layer objects and the DXF export logic.. they probably need to be separated off into separate classes
+
         public string exportString { get; private set; }
 
         private static string jsonRelativeFilePath { get; set; } = "Resources\\DXFLayerItems.json";
@@ -28,6 +30,8 @@ namespace ExportLibrary
 
             set
             {
+                //this is a bit ropey - will be changed in future....
+
                 _jsonFilePath = value;
                 string runningPath = AppDomain.CurrentDomain.BaseDirectory;
                 _jsonFilePath = string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\")));

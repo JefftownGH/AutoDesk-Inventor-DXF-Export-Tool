@@ -11,6 +11,7 @@ namespace ProgramUtilities
     {
         //add logic here so that if the connection fails it does something
         public Application thisApplication { get; private set; } = null;
+
         public MeasureTools measureTools { get; private set; } = null;
 
         public Application CreateInventorConnection()
