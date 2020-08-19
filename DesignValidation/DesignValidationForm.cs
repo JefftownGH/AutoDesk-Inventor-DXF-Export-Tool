@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Inventor;
 using System.Diagnostics;
 using DesignValidationLibrary;
-using MaterialPropertiesLibrary;
 using ProgramUtilities;
 using ApplicationLogic;
 using BrightIdeasSoftware;
@@ -18,7 +17,6 @@ using ExportLibrary;
 
 namespace DesignValidation
 {
-    
     public partial class DesignValidationForm : Form 
     {
         private TopLevel topLevel = new TopLevel();
@@ -54,7 +52,7 @@ namespace DesignValidation
         private void AddSheetMetalListView()
         {
             sheetMetalListView = SheetMetalListView.CreateTreeListView();
-            //sheetMetalListView.ItemChecked
+            //sheetMetalListView.ItemChecked event subscription to be added here
             Controls.Add(sheetMetalListView);
         }
 
@@ -156,6 +154,7 @@ namespace DesignValidation
             }
         }
 
+        //also needs to be rewritten
         private void InspectPartView(Part part)
         {
             errorList.ResetBindings(false);
@@ -189,12 +188,6 @@ namespace DesignValidation
             }
         }
 
-        private void AddMaterial_Click(object sender, EventArgs e)
-        {
-            MaterialProperties materialProperties = new MaterialProperties();
-            materialProperties.Show();
-        }
-
         public void InventorConnectionStatus(bool successfulConnectionEstablished)
         {
             if (!successfulConnectionEstablished)
@@ -210,29 +203,24 @@ namespace DesignValidation
         private void EditDXFExport_Click(object sender, EventArgs e)
         {
             DXFExportSettings dXFExportSettings = new DXFExportSettings();
-
             dXFExportSettings.Show();
         }
 
         private void ExportDXFButton_Click(object sender, EventArgs e)
         {
-            //temporary logic until method for using checkbox to build the sheetmetal part list
+            List<SheetmetalPart> sheetMetalPartList = SheetMetalExportList.BuildSheetMetalExportList(sheetMetalListData, topLevel.AssemblyList);
 
-            List<SheetmetalPart> sheetMetalPartList = new List<SheetmetalPart>();
+            ExportDXFSettings exportDXFSettings = new ExportDXFSettings();
 
-            foreach(Assembly subAssembly in topLevel.AssemblyList)
-            {
-                foreach(SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
-                {
-                    sheetMetalPartList.Add(sheetMetalPart);
-                }
-            }
-
-            ExportDXF exportDXF = ExportDXF.CreateExportDXFObject();
+            ExportDXF exportDXF = new ExportDXF(exportDXFSettings);
 
             exportDXF.ImportJsonFile();
 
             exportDXF.ExportSheetMetalPartsToDXF(sheetMetalPartList);
+
+            DXFExportLog dXFExportLog = new DXFExportLog(exportDXF.exportLog);
+
+            dXFExportLog.Show();
         }
 
         public void UpdateTreeListViewCheckboxes(object sender, ItemCheckedEventArgs e)

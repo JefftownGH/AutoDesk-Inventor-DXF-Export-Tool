@@ -34,5 +34,41 @@ namespace ExportLibrary.Properties {
                 this["AutoCadVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\")]
+        public string FilePathOutput {
+            get {
+                return ((string)(this["FilePathOutput"]));
+            }
+            set {
+                this["FilePathOutput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AppendMaterialThickness {
+            get {
+                return ((bool)(this["AppendMaterialThickness"]));
+            }
+            set {
+                this["AppendMaterialThickness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AppendFoldedStatus {
+            get {
+                return ((bool)(this["AppendFoldedStatus"]));
+            }
+            set {
+                this["AppendFoldedStatus"] = value;
+            }
+        }
     }
 }

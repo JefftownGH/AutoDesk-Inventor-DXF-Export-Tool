@@ -10,7 +10,7 @@ namespace DesignValidation
 {
     public static class SheetMetalListView
     {
-
+        //Creating the object list view
         public static BrightIdeasSoftware.TreeListView CreateTreeListView()
         {
             BrightIdeasSoftware.TreeListView treeListView = new BrightIdeasSoftware.TreeListView();
@@ -26,6 +26,7 @@ namespace DesignValidation
             return treeListView;
         }
 
+        //building the List<TreeViewNode>
         public static List<TreeViewNode> BuildSheetMetalNodeData(List<Assembly> assemblyList) 
         {
             List<TreeViewNode> sheetMetalNodeData = new List<TreeViewNode>();

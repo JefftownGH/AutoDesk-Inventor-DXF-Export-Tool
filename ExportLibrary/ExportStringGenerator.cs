@@ -93,7 +93,7 @@ namespace ExportLibrary
 
         private static string BuildDashedLayers(List<string> dXFLayerItemsDashedLine)
         {
-            StringBuilder dashedLayers = new StringBuilder("layerLineType=37644");
+            StringBuilder dashedLayers = new StringBuilder();
 
             if (dXFLayerItemsDashedLine.Any())
             {

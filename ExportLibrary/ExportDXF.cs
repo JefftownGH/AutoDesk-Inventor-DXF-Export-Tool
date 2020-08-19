@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Inventor;
 using DesignValidationLibrary;
 using ExportLibrary.Properties;
@@ -18,20 +17,37 @@ namespace ExportLibrary
 {
     public class ExportDXF
     {
-        private string exportString { get; set; }
+        public string exportString { get; private set; }
+
         private static string jsonRelativeFilePath { get; set; } = "Resources\\DXFLayerItems.json";
-        public string jsonFilePath { get; private set; }
-        public List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
 
-        //"Constructor method"
-        public static ExportDXF CreateExportDXFObject()
+        private string _jsonFilePath;
+        public string jsonFilePath
         {
-            string runningPath = AppDomain.CurrentDomain.BaseDirectory;
+            get { return _jsonFilePath; }
 
-            return new ExportDXF { jsonFilePath = string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\"))) };
+            set
+            {
+                _jsonFilePath = value;
+                string runningPath = AppDomain.CurrentDomain.BaseDirectory;
+                _jsonFilePath = string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\")));
+            }
         }
 
-        //load/create the DXFLayerObjects then return them back to the calling class
+        public List<DXFLayerItem> dXFLayerItems = new List<DXFLayerItem>();
+
+        public List<string> exportLog = new List<string>();
+
+        public ExportDXFSettings exportDXFSettings { get; set; }
+
+        public ExportDXF() { jsonFilePath = null; }
+
+        public ExportDXF(ExportDXFSettings exportDXFSettings)
+        {
+            jsonFilePath = null;
+            this.exportDXFSettings = exportDXFSettings;
+        }
+
         public void ImportJsonFile()
         {
             if (!FileHandling.CheckIfFilesExists(jsonFilePath))
@@ -70,19 +86,15 @@ namespace ExportLibrary
             FileHandling.SaveStringToFile(JsonSerializer.Serialize(listDXFLayerItems, jsonOptions), jsonFilePath, true);
         }
 
+        //main meat of this class
         public void ExportSheetMetalPartsToDXF(List<SheetmetalPart> sheetmetalPartList)
         {
-            GenerateExportString();
-
-            //a method is used to send a List of PartDocument Inventor Objects to the method
+            exportString = ExportStringGenerator.GenerateExportString(dXFLayerItems);
 
             foreach(SheetmetalPart sheetmetalPart in sheetmetalPartList)
             {
-                //Check to make sure it has a flat pattern
 
-                Random random = new Random();
-
-                string fileName = @"C:\Users\mccu4157\OneDrive Corp\OneDrive - Atkins Ltd\Documents\DXFExportTest\" + sheetmetalPart.Name + random.Next(1,100) + ".DXF";
+                string exportFileName = GenerateExportFileName(sheetmetalPart);
 
                 try
                 {
@@ -90,95 +102,40 @@ namespace ExportLibrary
 
                     DataIO dataIO = sheetMetalCompDef.FlatPattern.DataIO;
 
-                    //add option to save with sheetmetal thickness etc... 
+                    dataIO.WriteDataToFile(exportString, exportFileName);
 
-                    dataIO.WriteDataToFile(exportString, fileName);
+                    exportLog.Add(sheetmetalPart.partDocument.DisplayName + " DXF was successfully exported");
                 }
-                catch
+                catch (Exception e)
                 {
-                    Debug.Write("opps something went wrong");
+                    exportLog.Add(sheetmetalPart.partDocument.DisplayName + " DXF was successfully exported");
+                    exportLog.Add(e.Message + "____" + e.StackTrace);
                     continue;
                 }
             }
         }
 
-        public string GenerateExportString()
+        private string GenerateExportFileName(SheetmetalPart sheetmetalPart)
         {
-            //Test code - very messy refactor ASAP
-            //this will probably be sperated out in a number of methods or a separate static class
+            StringBuilder exportFileName = new StringBuilder();
 
-            List<string> dXFLayerItemsDashedLine = new List<string>();
+            exportFileName.Append(exportDXFSettings.saveLocationFilePath);
+            exportFileName.Append(sheetmetalPart.partDocument.DisplayName);
 
-            List<string> dXFLayerItemsNoLine = new List<string>();
+            if (exportDXFSettings.appendMaterialThickness)
+                exportFileName.Append("_" + sheetmetalPart.thickness);
 
-            StringBuilder exportStringBuilder = new StringBuilder();
+            if (exportDXFSettings.appendFoldedStatus)
+                if (sheetmetalPart.numberOfBends > 0)
+                    exportFileName.Append("_Folded");
+                else
+                    exportFileName.Append("_NotFolded");
 
-            exportStringBuilder.Append("FLAT PATTERN DXF?");
-            exportStringBuilder.Append(Settings.Default["AutoCadVersion"].ToString());
+            exportFileName.Append(".DXF");
 
-            //build the two lists required
-
-            foreach (DXFLayerItem dXFLayerItem in dXFLayerItems)
-            {
-                if (dXFLayerItem.DashedLine)
-                    dXFLayerItemsDashedLine.Add(dXFLayerItem.Name);
-
-                else if (dXFLayerItem.NoLine)
-                    dXFLayerItemsNoLine.Add(dXFLayerItem.Name);
-            }
-
-            if (dXFLayerItemsNoLine.Any() || dXFLayerItemsDashedLine.Any())
-                exportStringBuilder.Append("&");
-
-            //assign names to the no line objects
-
-            if (dXFLayerItemsNoLine.Any())
-            {
-                string lastEntry = dXFLayerItemsNoLine.Last();
-
-                foreach (string dXFLayerItemNoLine in dXFLayerItemsNoLine)
-                {
-                    exportStringBuilder.Append(dXFLayerItemNoLine + "=" + dXFLayerItemNoLine);
-
-                    if (!dXFLayerItemNoLine.Equals(lastEntry))
-                    {
-                        exportStringBuilder.Append("&");
-                    }
-                }
-            }
-
-            if (dXFLayerItemsNoLine.Any())
-            {
-                exportStringBuilder.Append("&InvisibleLayers=");
-
-                string lastEntry = dXFLayerItemsNoLine.Last();
-
-                foreach (string dXFLayerItemNoLine in dXFLayerItemsNoLine)
-                {
-                    exportStringBuilder.Append(dXFLayerItemNoLine);
-
-                    if (!dXFLayerItemNoLine.Equals(lastEntry))
-                    {
-                        exportStringBuilder.Append(";");
-                    }
-                }
-            }
-
-            if(dXFLayerItemsDashedLine.Any())
-            {
-                string lineStyle = "LayerLineType=37644";
-
-                foreach(string dXFLayerItemDashedLine in dXFLayerItemsDashedLine)
-                {
-                    exportStringBuilder.Append("&");
-                    exportStringBuilder.Append(dXFLayerItemDashedLine);
-                    exportStringBuilder.Append(lineStyle);
-                }
-            }
-
-            exportString = exportStringBuilder.ToString();
-
-            return exportStringBuilder.ToString();
+            return exportFileName.ToString();
         }
+
+
     }
 }

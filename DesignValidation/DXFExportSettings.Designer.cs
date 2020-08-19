@@ -44,18 +44,21 @@
             this.DirectoryBrowseButton = new System.Windows.Forms.Button();
             this.FilePathTextBox = new System.Windows.Forms.TextBox();
             this.SaveInLabel = new System.Windows.Forms.Label();
-            this.ExportDXFButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.FileNameGroupBox = new System.Windows.Forms.GroupBox();
+            this.AppendMaterialThicknessCheckbox = new System.Windows.Forms.CheckBox();
+            this.AppendFoldedCheckbox = new System.Windows.Forms.CheckBox();
             this.DXFLayersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDXFLayers)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SavePropertiesGroupBox.SuspendLayout();
+            this.FileNameGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // DXFLayersGroupBox
             // 
             this.DXFLayersGroupBox.Controls.Add(this.dataGridDXFLayers);
-            this.DXFLayersGroupBox.Location = new System.Drawing.Point(12, 41);
+            this.DXFLayersGroupBox.Location = new System.Drawing.Point(22, 12);
             this.DXFLayersGroupBox.Name = "DXFLayersGroupBox";
             this.DXFLayersGroupBox.Size = new System.Drawing.Size(490, 184);
             this.DXFLayersGroupBox.TabIndex = 0;
@@ -122,9 +125,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(527, 41);
+            this.groupBox1.Location = new System.Drawing.Point(24, 202);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 184);
+            this.groupBox1.Size = new System.Drawing.Size(490, 58);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DXF Format";
@@ -132,7 +135,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(94, 69);
+            this.comboBox2.Location = new System.Drawing.Point(341, 19);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(117, 21);
             this.comboBox2.TabIndex = 3;
@@ -140,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 72);
+            this.label2.Location = new System.Drawing.Point(256, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 13);
             this.label2.TabIndex = 2;
@@ -149,7 +152,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(94, 33);
+            this.comboBox1.Location = new System.Drawing.Point(90, 19);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(117, 21);
             this.comboBox1.TabIndex = 1;
@@ -157,7 +160,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 36);
+            this.label1.Location = new System.Drawing.Point(17, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 0;
@@ -168,9 +171,9 @@
             this.SavePropertiesGroupBox.Controls.Add(this.DirectoryBrowseButton);
             this.SavePropertiesGroupBox.Controls.Add(this.FilePathTextBox);
             this.SavePropertiesGroupBox.Controls.Add(this.SaveInLabel);
-            this.SavePropertiesGroupBox.Location = new System.Drawing.Point(13, 243);
+            this.SavePropertiesGroupBox.Location = new System.Drawing.Point(24, 266);
             this.SavePropertiesGroupBox.Name = "SavePropertiesGroupBox";
-            this.SavePropertiesGroupBox.Size = new System.Drawing.Size(488, 280);
+            this.SavePropertiesGroupBox.Size = new System.Drawing.Size(488, 70);
             this.SavePropertiesGroupBox.TabIndex = 2;
             this.SavePropertiesGroupBox.TabStop = false;
             this.SavePropertiesGroupBox.Text = "Save Properties";
@@ -201,19 +204,9 @@
             this.SaveInLabel.TabIndex = 0;
             this.SaveInLabel.Text = "Save In:";
             // 
-            // ExportDXFButton
-            // 
-            this.ExportDXFButton.Location = new System.Drawing.Point(672, 493);
-            this.ExportDXFButton.Name = "ExportDXFButton";
-            this.ExportDXFButton.Size = new System.Drawing.Size(100, 30);
-            this.ExportDXFButton.TabIndex = 3;
-            this.ExportDXFButton.Text = "Export DXF";
-            this.ExportDXFButton.UseVisualStyleBackColor = true;
-            this.ExportDXFButton.Click += new System.EventHandler(this.ExportDXFButton_Click);
-            // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(548, 493);
+            this.SaveButton.Location = new System.Drawing.Point(22, 421);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(100, 30);
             this.SaveButton.TabIndex = 4;
@@ -221,15 +214,46 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // FileNameGroupBox
+            // 
+            this.FileNameGroupBox.Controls.Add(this.AppendFoldedCheckbox);
+            this.FileNameGroupBox.Controls.Add(this.AppendMaterialThicknessCheckbox);
+            this.FileNameGroupBox.Location = new System.Drawing.Point(25, 342);
+            this.FileNameGroupBox.Name = "FileNameGroupBox";
+            this.FileNameGroupBox.Size = new System.Drawing.Size(486, 73);
+            this.FileNameGroupBox.TabIndex = 5;
+            this.FileNameGroupBox.TabStop = false;
+            this.FileNameGroupBox.Text = "File Name Properties";
+            // 
+            // AppendMaterialThicknessCheckbox
+            // 
+            this.AppendMaterialThicknessCheckbox.AutoSize = true;
+            this.AppendMaterialThicknessCheckbox.Location = new System.Drawing.Point(22, 34);
+            this.AppendMaterialThicknessCheckbox.Name = "AppendMaterialThicknessCheckbox";
+            this.AppendMaterialThicknessCheckbox.Size = new System.Drawing.Size(155, 17);
+            this.AppendMaterialThicknessCheckbox.TabIndex = 2;
+            this.AppendMaterialThicknessCheckbox.Text = "Append Material Thickness";
+            this.AppendMaterialThicknessCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // AppendFoldedCheckbox
+            // 
+            this.AppendFoldedCheckbox.AutoSize = true;
+            this.AppendFoldedCheckbox.Location = new System.Drawing.Point(305, 34);
+            this.AppendFoldedCheckbox.Name = "AppendFoldedCheckbox";
+            this.AppendFoldedCheckbox.Size = new System.Drawing.Size(131, 17);
+            this.AppendFoldedCheckbox.TabIndex = 3;
+            this.AppendFoldedCheckbox.Text = "Append Folded Status";
+            this.AppendFoldedCheckbox.UseVisualStyleBackColor = true;
+            // 
             // DXFExportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(534, 461);
+            this.Controls.Add(this.FileNameGroupBox);
             this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.ExportDXFButton);
-            this.Controls.Add(this.SavePropertiesGroupBox);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.SavePropertiesGroupBox);
             this.Controls.Add(this.DXFLayersGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DXFExportSettings";
@@ -240,6 +264,8 @@
             this.groupBox1.PerformLayout();
             this.SavePropertiesGroupBox.ResumeLayout(false);
             this.SavePropertiesGroupBox.PerformLayout();
+            this.FileNameGroupBox.ResumeLayout(false);
+            this.FileNameGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -261,7 +287,9 @@
         private System.Windows.Forms.TextBox FilePathTextBox;
         private System.Windows.Forms.Label SaveInLabel;
         private System.Windows.Forms.Button DirectoryBrowseButton;
-        private System.Windows.Forms.Button ExportDXFButton;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.GroupBox FileNameGroupBox;
+        private System.Windows.Forms.CheckBox AppendFoldedCheckbox;
+        private System.Windows.Forms.CheckBox AppendMaterialThicknessCheckbox;
     }
 }

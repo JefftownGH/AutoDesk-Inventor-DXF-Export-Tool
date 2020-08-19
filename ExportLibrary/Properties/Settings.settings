@@ -5,5 +5,14 @@
     <Setting Name="AutoCadVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">AcadVersion=R12</Value>
     </Setting>
+    <Setting Name="FilePathOutput" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\\</Value>
+    </Setting>
+    <Setting Name="AppendMaterialThickness" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AppendFoldedStatus" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

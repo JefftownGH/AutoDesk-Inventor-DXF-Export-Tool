@@ -1,15 +1,15 @@
 [
   {
     "Name": "TangentLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "OuterProfileLayer",
     "NoLine": false,
-    "DashedLine": true,
-    "SolidLine": false
+    "DashedLine": false,
+    "SolidLine": true
   },
   {
     "Name": "ArcCentresLayer",
@@ -19,27 +19,27 @@
   },
   {
     "Name": "InteriorProfilesLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "BendUpLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "BendDownLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "FeatureProfilesUpLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "FeatureProfilesDownLayer",
@@ -49,9 +49,9 @@
   },
   {
     "Name": "AltRepFrontLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "AltRepBackLayer",

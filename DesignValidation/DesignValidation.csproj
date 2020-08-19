@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildSheetMetalExportList.cs" />
     <Compile Include="DesignValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,11 +99,11 @@
     <Compile Include="DXFExportSettings.Designer.cs">
       <DependentUpon>DXFExportSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="MaterialProperties.cs">
+    <Compile Include="DXFExportLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MaterialProperties.Designer.cs">
-      <DependentUpon>MaterialProperties.cs</DependentUpon>
+    <Compile Include="DXFExportLog.Designer.cs">
+      <DependentUpon>DXFExportLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,8 +116,8 @@
     <EmbeddedResource Include="DXFExportSettings.resx">
       <DependentUpon>DXFExportSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MaterialProperties.resx">
-      <DependentUpon>MaterialProperties.cs</DependentUpon>
+    <EmbeddedResource Include="DXFExportLog.resx">
+      <DependentUpon>DXFExportLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -154,10 +155,6 @@
     <ProjectReference Include="..\ExportLibrary\ExportLibrary.csproj">
       <Project>{9b90d357-f539-4fe2-a7a7-c2779bf36d61}</Project>
       <Name>ExportLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MaterialPropertiesLibrary\MaterialPropertiesLibrary.csproj">
-      <Project>{30d4ced5-23c6-45fc-bd4f-92b1b7282b75}</Project>
-      <Name>MaterialPropertiesLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProgramUtilities\ProgramUtilities.csproj">
       <Project>{5bbb7913-804b-4317-ab70-d2775b07f8d1}</Project>

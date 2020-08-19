@@ -11,7 +11,7 @@ namespace DesignValidationLibrary
 {
     public class FlatPattern
     {
-        //An instance of the flatpattern class is spun up when a new instance for the sheetmetal class
+        //An instance of the flatpattern class is spun up when a new instance for the sheetmetal class created
 
         //this is used in total cut length calculation ie counting edge loops which requires a Face object
         private Face flatPattern { get; set; } 

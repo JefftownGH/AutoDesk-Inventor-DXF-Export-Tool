@@ -7,7 +7,7 @@ namespace DesignValidationLibrary
 {
     public class Assembly 
     {
-        //assembly is a "wrapper" for the list of sheetmetal parts and parts
+        //assembly is simply a "bucket" for the list of sheetmetal parts and parts
 
         public string Name { get; set; }
         public int ParentID { get; set; } 

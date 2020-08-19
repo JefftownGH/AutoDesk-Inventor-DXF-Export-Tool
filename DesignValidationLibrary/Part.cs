@@ -1,7 +1,6 @@
 ﻿using Inventor;
 using System;
 using System.Collections.Generic;
-using MaterialPropertiesLibrary;
 using System.Diagnostics.Contracts;
 
 namespace DesignValidationLibrary
@@ -10,7 +9,9 @@ namespace DesignValidationLibrary
     {
         public string Name { get; private set; }
         public string material { get; set; }
+
         public PartDocument partDocument { get; private set; }
+
         public List<string> errorList { get;} = new List<string>();
 
         public Part(PartDocument partDocument)

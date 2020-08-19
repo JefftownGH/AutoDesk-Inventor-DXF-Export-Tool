@@ -29,20 +29,17 @@
         private void InitializeComponent()
         {
             this.ActionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.EditDXFExport = new System.Windows.Forms.Button();
             this.ExportDXFButton = new System.Windows.Forms.Button();
             this.InspectComponent = new System.Windows.Forms.Button();
             this.Import = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.Setup = new System.Windows.Forms.GroupBox();
-            this.AddMaterial = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ComponentErrors = new System.Windows.Forms.ListBox();
-            this.EditDXFExport = new System.Windows.Forms.Button();
             this.ActionsGroupBox.SuspendLayout();
             this.BottomPanel.SuspendLayout();
-            this.Setup.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +56,16 @@
             this.ActionsGroupBox.TabIndex = 14;
             this.ActionsGroupBox.TabStop = false;
             this.ActionsGroupBox.Text = "Actions";
+            // 
+            // EditDXFExport
+            // 
+            this.EditDXFExport.Location = new System.Drawing.Point(218, 19);
+            this.EditDXFExport.Name = "EditDXFExport";
+            this.EditDXFExport.Size = new System.Drawing.Size(100, 30);
+            this.EditDXFExport.TabIndex = 16;
+            this.EditDXFExport.Text = "Edit DXF Export";
+            this.EditDXFExport.UseVisualStyleBackColor = true;
+            this.EditDXFExport.Click += new System.EventHandler(this.EditDXFExport_Click);
             // 
             // ExportDXFButton
             // 
@@ -92,34 +99,13 @@
             // 
             // BottomPanel
             // 
-            this.BottomPanel.Controls.Add(this.Setup);
             this.BottomPanel.Controls.Add(this.ProgressBar);
             this.BottomPanel.Controls.Add(this.ActionsGroupBox);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 449);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 430);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(1184, 112);
+            this.BottomPanel.Size = new System.Drawing.Size(1184, 106);
             this.BottomPanel.TabIndex = 14;
-            // 
-            // Setup
-            // 
-            this.Setup.Controls.Add(this.AddMaterial);
-            this.Setup.Location = new System.Drawing.Point(474, 15);
-            this.Setup.Name = "Setup";
-            this.Setup.Size = new System.Drawing.Size(121, 60);
-            this.Setup.TabIndex = 16;
-            this.Setup.TabStop = false;
-            this.Setup.Text = "Setup";
-            // 
-            // AddMaterial
-            // 
-            this.AddMaterial.Location = new System.Drawing.Point(6, 19);
-            this.AddMaterial.Name = "AddMaterial";
-            this.AddMaterial.Size = new System.Drawing.Size(100, 30);
-            this.AddMaterial.TabIndex = 14;
-            this.AddMaterial.Text = "Add Material";
-            this.AddMaterial.UseVisualStyleBackColor = true;
-            this.AddMaterial.Click += new System.EventHandler(this.AddMaterial_Click);
             // 
             // ProgressBar
             // 
@@ -134,7 +120,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(885, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(299, 449);
+            this.panel1.Size = new System.Drawing.Size(299, 430);
             this.panel1.TabIndex = 15;
             // 
             // groupBox1
@@ -157,22 +143,12 @@
             this.ComponentErrors.Size = new System.Drawing.Size(219, 264);
             this.ComponentErrors.TabIndex = 14;
             // 
-            // EditDXFExport
-            // 
-            this.EditDXFExport.Location = new System.Drawing.Point(218, 19);
-            this.EditDXFExport.Name = "EditDXFExport";
-            this.EditDXFExport.Size = new System.Drawing.Size(100, 30);
-            this.EditDXFExport.TabIndex = 16;
-            this.EditDXFExport.Text = "Edit DXF Export";
-            this.EditDXFExport.UseVisualStyleBackColor = true;
-            this.EditDXFExport.Click += new System.EventHandler(this.EditDXFExport_Click);
-            // 
             // DesignValidationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(1184, 561);
+            this.ClientSize = new System.Drawing.Size(1184, 536);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BottomPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -182,7 +158,6 @@
             this.Text = "Design Validation";
             this.ActionsGroupBox.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
-            this.Setup.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -194,8 +169,6 @@
         private System.Windows.Forms.Button InspectComponent;
         private System.Windows.Forms.Button Import;
         private System.Windows.Forms.Panel BottomPanel;
-        private System.Windows.Forms.GroupBox Setup;
-        private System.Windows.Forms.Button AddMaterial;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
