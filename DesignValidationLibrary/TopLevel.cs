@@ -8,9 +8,10 @@ namespace DesignValidationLibrary
 {
     public class TopLevel 
     {
-        public string Name { get; set; }
-        public int noOccurrences { get; set; }
+        public int noOccurrences { get; private set; }
+
         public List<Assembly> AssemblyList { get; } = new List<Assembly>();
+
         public List<int> IDlist { get; } = new List<int>();
 
         public delegate void ProgressBarEventHandler(object source, EventArgs args);

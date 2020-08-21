@@ -30,10 +30,8 @@ namespace ExportLibrary
 
             set
             {
-                //this is a bit ropey - will be changed in future....
-
-                _jsonFilePath = value;
                 string runningPath = AppDomain.CurrentDomain.BaseDirectory;
+
                 _jsonFilePath = string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\")));
             }
         }
@@ -90,7 +88,7 @@ namespace ExportLibrary
             FileHandling.SaveStringToFile(JsonSerializer.Serialize(listDXFLayerItems, jsonOptions), jsonFilePath, true);
         }
 
-        //main meat of this class
+        //main meat of this class - should really be broken off into another class
         public void ExportSheetMetalPartsToDXF(List<SheetmetalPart> sheetmetalPartList)
         {
             exportString = ExportStringGenerator.GenerateExportString(dXFLayerItems);

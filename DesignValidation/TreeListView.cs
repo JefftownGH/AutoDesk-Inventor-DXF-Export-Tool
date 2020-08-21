@@ -25,27 +25,6 @@ namespace DesignValidation
             return treeListView;
         }
 
-        public static List<TreeViewNode> BuildTreeViewNodeDataFlat(List<Assembly> assembly)
-        {
-            List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
-
-            foreach (Assembly subAssembly in assembly)
-            {
-                TreeViewNode subAssemblyNode = new TreeViewNode(subAssembly.Name, "-", "-", "-");
-
-                treeViewNodeData.Add(subAssemblyNode);
-
-                foreach (Part part in subAssembly.partList)
-                    subAssemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
-
-                foreach (SheetmetalPart sheetMetalPart in subAssembly.sheetmetalPartList)
-                    subAssemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name,
-                        sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
-            }
-
-            return treeViewNodeData;
-        }
-
         public static List<TreeViewNode> BuildTreeViewNodeDataNested(List<Assembly> assemblyList)
         {
             #region Explanation
@@ -67,23 +46,18 @@ namespace DesignValidation
                     TreeViewNode parentAssembly = null;
 
                     //retrieves the parent TreeViewNode object so a "Child" object can be added to List<TreeViewNode> Children
-
                     ListSearch(treeViewNodeData, ref parentAssembly, assembly.ParentID);
 
                     //parentAssembly will be null if a ParentID cannot be found
-
                     if (parentAssembly == null)
                         continue;
 
                     //Creates a new TreeViewNode object and adds it to parentAssembly.Children
-
                     parentAssembly.Children.Add(AddNewTreeViewNode(assembly));
                 }
-
                 else
                     treeViewNodeData.Add(AddNewTreeViewNode(assembly));
             }
-
             return treeViewNodeData;
         }
 
@@ -99,7 +73,6 @@ namespace DesignValidation
                 //unwinds through stackframes
 
                 #endregion
-
                 if (subTreeViewNode.ID == targetID)
                     parentNode = subTreeViewNode;
 

@@ -9,12 +9,15 @@ namespace DesignValidationLibrary
     {
         //assembly is simply a "bucket" for the list of sheetmetal parts and parts
 
-        public string Name { get; set; }
-        public int ParentID { get; set; } 
-        public int ID { get; set; }
+        public string Name { get; }
+
+        public int ParentID { get;} 
+        public int ID { get; }
+
         public List<Part> partList { get;} = new List<Part>();
         public List<SheetmetalPart> sheetmetalPartList { get; } = new List<SheetmetalPart>();
-        public AssemblyDocument assemblyDocument { get; set; }
+
+        public AssemblyDocument assemblyDocument { get; }
 
         public Assembly(AssemblyDocument assemblyDocument, int ParentID, int ID)
         {

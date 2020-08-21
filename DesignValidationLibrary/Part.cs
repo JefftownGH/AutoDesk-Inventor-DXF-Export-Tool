@@ -7,10 +7,10 @@ namespace DesignValidationLibrary
 {
     public class Part 
     {
-        public string Name { get; private set; }
-        public string material { get; set; }
+        public string Name { get; }
+        public string material { get; }
 
-        public PartDocument partDocument { get; private set; }
+        public PartDocument partDocument { get; }
 
         public List<string> errorList { get;} = new List<string>();
 

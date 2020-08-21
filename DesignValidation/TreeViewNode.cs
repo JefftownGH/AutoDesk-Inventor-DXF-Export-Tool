@@ -13,20 +13,21 @@ namespace DesignValidation
 {
     public class TreeViewNode 
     {
-        public string Name { get; set; }
-        public string Column1 { get; set; }
-        public string Column2 { get; set; }
-        public string Column3 { get; set; }
+        public string Name { get; }
+        public string Column1 { get; }
+        public string Column2 { get; }
+        public string Column3 { get; }
 
-        public int ID { get; set; }
-        public int parentID { get; set; }
+        public int ID { get; }
+        public int parentID { get; }
 
-        public bool assemblyNode { get; set; }
+        public bool assemblyNode { get; }
 
-        public List<TreeViewNode> Children { get; set; }
+        public List<TreeViewNode> Children { get;}
+
+        //no need for getter and setter to be explicitly type like this... why did i do it?
 
         private bool ticked = false;
-
         public bool Ticked
         {
             get { return ticked; }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Inventor;
 using ProgramUtilities;
-using System.Windows.Forms;
 
 namespace DesignValidationLibrary
 {
@@ -13,12 +8,11 @@ namespace DesignValidationLibrary
     {
         //An instance of the flatpattern class is spun up when a new instance for the sheetmetal class created
 
-        //this is used in total cut length calculation ie counting edge loops which requires a Face object
-        private Face flatPattern { get; set; } 
+        private Face flatPattern;
 
-        private SheetMetalComponentDefinition sheetMetalCompDef { get; set; }
+        private SheetMetalComponentDefinition sheetMetalCompDef;
 
-        private InventorConnection inventorConnection { get; set; }
+        private InventorConnection inventorConnection;
 
         public FlatPattern(SheetMetalComponentDefinition sheetMetalCompDef)
         {

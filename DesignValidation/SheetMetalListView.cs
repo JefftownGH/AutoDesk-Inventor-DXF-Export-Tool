@@ -31,6 +31,8 @@ namespace DesignValidation
         {
             List<TreeViewNode> sheetMetalNodeData = new List<TreeViewNode>();
 
+            //pass along the assembly name as well...
+
             foreach (Assembly assembly in assemblyList)
                 foreach (SheetmetalPart sheetMetalPart in assembly.sheetmetalPartList)
                     sheetMetalNodeData.Add(new TreeViewNode(sheetMetalPart.Name, 
