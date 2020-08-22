@@ -21,8 +21,6 @@ namespace DesignValidation
     {
         private TopLevel topLevel = new TopLevel();
 
-        private BindingSource errorList = new BindingSource();
-
         private List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
 
         private List<TreeViewNode> sheetMetalListData = new List<TreeViewNode>();
@@ -31,18 +29,24 @@ namespace DesignValidation
 
         private BrightIdeasSoftware.TreeListView sheetMetalListView;
 
-        public InventorImportProcess inventorImportProcess = new InventorImportProcess();
+        private InventorImportProcess inventorImportProcess = new InventorImportProcess();
 
         public DesignValidationForm()
         {
             InitializeComponent();
-            AddTreeListView();
+            AddTreeListViews();
             AddSheetMetalListView();
+            SubscribeToLoggerEvent();
+            StartUpMessage.Generate();
         }
 
-        private void SubScribeToEvent(TopLevel topLevel) => topLevel.UpdateProgress += OnProgressBarIncrement;
+        private void SubscribeToTopLevelEvent(TopLevel topLevel) => topLevel.UpdateProgress += OnProgressBarIncrement;
 
-        private void AddTreeListView()
+        private void SubscribeToLoggerEvent() => EventLogger.LogEntryAdded += EventLoggerOutput;
+
+        private void EventLoggerOutput(object source, string Input) => LogOutputListBox.Items.Add(Input);
+
+        private void AddTreeListViews()
         {
             treeListView = TreeListView.CreateTreeListView();
             treeListView.ItemChecked += UpdateTreeListViewCheckboxes;
@@ -113,7 +117,7 @@ namespace DesignValidation
             topLevel = inventorImportProcess.GetToplevel();
 
             //subscribes to the event in the TopLevel class to update the progress bar
-            SubScribeToEvent(topLevel);
+            SubscribeToTopLevelEvent(topLevel);
 
             //begins the import process
             inventorImportProcess.ImportANewInventorModel(InventorConnectionStatus, ValidDocumentType, UpdateProgressBar);
@@ -127,49 +131,10 @@ namespace DesignValidation
             FillSheetMetalList();
         }
 
-        //this need to be re-writen so that it no longer takes a button click to inspect list box items in the ListBox
-        private void InspectComponent_Click(object sender, EventArgs e)
-        {
-            foreach(TreeViewNode treeListViewNode in treeListView.SelectedObjects)
-            {
-                string selectedNode = treeListViewNode.Name;
-
-                foreach (Assembly assembly in topLevel.AssemblyList)
-                {
-                    if(selectedNode == assembly.Name)
-                        MessageBox.Show("Please select a component");
-
-                    foreach (Part part in assembly.partList)
-                    {
-                        if(selectedNode == part.Name)
-                            InspectPartView(part);
-                    }
-
-                    foreach (SheetmetalPart sheetmetalPart in assembly.sheetmetalPartList)
-                    {
-                        if (selectedNode == sheetmetalPart.Name)
-                            InspectPartView(sheetmetalPart);
-                    }
-                }
-            }
-        }
-
-        //also needs to be rewritten
-        private void InspectPartView(Part part)
-        {
-            errorList.ResetBindings(false);
-
-            errorList.DataSource = part.errorList;
-
-            ComponentErrors.DataSource = errorList;
-
-            //PictureBoxTestMethod(part);
-        }
-
         //recieves an event from the topLevel class
         public void OnProgressBarIncrement(object source, EventArgs e)
         {
-            //method that increments the progress bar
+            //method that increments the progress bar need to tidy up the event args here...
             UpdateProgressBar(false);
         }
 
@@ -184,7 +149,7 @@ namespace DesignValidation
             if(processComplete)
             {
                 ProgressBar.Value = 0;
-                ProgressBar.Visible = false;
+                ProgressBar.Visible = true;
             }
         }
 

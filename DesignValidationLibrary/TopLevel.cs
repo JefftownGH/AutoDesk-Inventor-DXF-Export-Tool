@@ -28,21 +28,25 @@ namespace DesignValidationLibrary
                 return;
 
             Assembly assembly = NewAssembly(currentAsmDocument, parentID, currentID);
+            EventLogger.CreateLogEntry($"Processing assembly document {assembly.assemblyDocument.DisplayName}");
 
             AssemblyList.Add(assembly);
 
             ComponentOccurrences occurrences = currentAsmDocument.ComponentDefinition.Occurrences;
 
             noOccurrences += occurrences.Count;
+            EventLogger.CreateLogEntry($"Current part count {noOccurrences}");
 
             foreach (ComponentOccurrence occurrence in occurrences)
             {
                 //the UI layer is listening for this Event to increment the progress bar
                 IncrementProgressBar();
+                
 
                 if (DocumentInfo.IsPartDocument(occurrence.DefinitionDocumentType))
                 {
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
+                    EventLogger.CreateLogEntry($"processing part document {partDocument.DisplayName}");
 
                     if (DocumentInfo.IsSheetMetalPart(partDocument.SubType))
                         assembly.sheetmetalPartList.Add(NewSheetMetalPart(partDocument));

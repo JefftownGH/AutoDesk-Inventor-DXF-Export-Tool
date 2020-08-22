@@ -108,6 +108,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SheetMetalListView.cs" />
+    <Compile Include="StartUpMessage.cs" />
     <Compile Include="TreeListView.cs" />
     <Compile Include="TreeViewNode.cs" />
     <EmbeddedResource Include="DesignValidationForm.resx">
@@ -162,9 +163,14 @@
       <Name>ProgramUtilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\DXFExportWizardLogo.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pngkey.com-wizard-png-7816657.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DXFExportWizardLogo_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

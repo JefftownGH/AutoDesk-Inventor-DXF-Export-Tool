@@ -31,150 +31,129 @@
             this.ActionsGroupBox = new System.Windows.Forms.GroupBox();
             this.EditDXFExport = new System.Windows.Forms.Button();
             this.ExportDXFButton = new System.Windows.Forms.Button();
-            this.InspectComponent = new System.Windows.Forms.Button();
             this.Import = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.LogOutputListBox = new System.Windows.Forms.ListBox();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ComponentErrors = new System.Windows.Forms.ListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ActionsGroupBox.SuspendLayout();
             this.BottomPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ActionsGroupBox
             // 
             this.ActionsGroupBox.Controls.Add(this.EditDXFExport);
             this.ActionsGroupBox.Controls.Add(this.ExportDXFButton);
-            this.ActionsGroupBox.Controls.Add(this.InspectComponent);
             this.ActionsGroupBox.Controls.Add(this.Import);
             this.ActionsGroupBox.Location = new System.Drawing.Point(20, 15);
             this.ActionsGroupBox.Name = "ActionsGroupBox";
-            this.ActionsGroupBox.Size = new System.Drawing.Size(439, 60);
+            this.ActionsGroupBox.Size = new System.Drawing.Size(275, 60);
             this.ActionsGroupBox.TabIndex = 14;
             this.ActionsGroupBox.TabStop = false;
             this.ActionsGroupBox.Text = "Actions";
             // 
             // EditDXFExport
             // 
-            this.EditDXFExport.Location = new System.Drawing.Point(218, 19);
+            this.EditDXFExport.Location = new System.Drawing.Point(97, 19);
             this.EditDXFExport.Name = "EditDXFExport";
-            this.EditDXFExport.Size = new System.Drawing.Size(100, 30);
+            this.EditDXFExport.Size = new System.Drawing.Size(80, 30);
             this.EditDXFExport.TabIndex = 16;
-            this.EditDXFExport.Text = "Edit DXF Export";
+            this.EditDXFExport.Text = "Settings";
             this.EditDXFExport.UseVisualStyleBackColor = true;
             this.EditDXFExport.Click += new System.EventHandler(this.EditDXFExport_Click);
             // 
             // ExportDXFButton
             // 
-            this.ExportDXFButton.Location = new System.Drawing.Point(324, 19);
+            this.ExportDXFButton.Location = new System.Drawing.Point(187, 19);
             this.ExportDXFButton.Name = "ExportDXFButton";
-            this.ExportDXFButton.Size = new System.Drawing.Size(100, 30);
+            this.ExportDXFButton.Size = new System.Drawing.Size(80, 30);
             this.ExportDXFButton.TabIndex = 15;
             this.ExportDXFButton.Text = "Export DXF";
             this.ExportDXFButton.UseVisualStyleBackColor = true;
             this.ExportDXFButton.Click += new System.EventHandler(this.ExportDXFButton_Click);
             // 
-            // InspectComponent
-            // 
-            this.InspectComponent.Location = new System.Drawing.Point(112, 19);
-            this.InspectComponent.Name = "InspectComponent";
-            this.InspectComponent.Size = new System.Drawing.Size(100, 30);
-            this.InspectComponent.TabIndex = 13;
-            this.InspectComponent.Text = "Inspect Item";
-            this.InspectComponent.UseVisualStyleBackColor = true;
-            this.InspectComponent.Click += new System.EventHandler(this.InspectComponent_Click);
-            // 
             // Import
             // 
-            this.Import.Location = new System.Drawing.Point(6, 19);
+            this.Import.Location = new System.Drawing.Point(8, 19);
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(100, 30);
+            this.Import.Size = new System.Drawing.Size(80, 30);
             this.Import.TabIndex = 12;
-            this.Import.Text = "Import Model";
+            this.Import.Text = "Import ";
             this.Import.UseVisualStyleBackColor = true;
             this.Import.Click += new System.EventHandler(this.Import_Click);
             // 
             // BottomPanel
             // 
+            this.BottomPanel.Controls.Add(this.LogOutputListBox);
             this.BottomPanel.Controls.Add(this.ProgressBar);
             this.BottomPanel.Controls.Add(this.ActionsGroupBox);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 430);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(1184, 106);
+            this.BottomPanel.Size = new System.Drawing.Size(834, 106);
             this.BottomPanel.TabIndex = 14;
+            // 
+            // LogOutputListBox
+            // 
+            this.LogOutputListBox.BackColor = System.Drawing.SystemColors.InfoText;
+            this.LogOutputListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LogOutputListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogOutputListBox.ForeColor = System.Drawing.Color.Green;
+            this.LogOutputListBox.FormattingEnabled = true;
+            this.LogOutputListBox.ItemHeight = 15;
+            this.LogOutputListBox.Location = new System.Drawing.Point(310, 20);
+            this.LogOutputListBox.Name = "LogOutputListBox";
+            this.LogOutputListBox.Size = new System.Drawing.Size(500, 75);
+            this.LogOutputListBox.TabIndex = 16;
             // 
             // ProgressBar
             // 
             this.ProgressBar.Location = new System.Drawing.Point(20, 81);
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(100, 15);
+            this.ProgressBar.Size = new System.Drawing.Size(275, 16);
             this.ProgressBar.TabIndex = 15;
             // 
-            // panel1
+            // pictureBox1
             // 
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(885, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(299, 430);
-            this.panel1.TabIndex = 15;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ComponentErrors);
-            this.groupBox1.Location = new System.Drawing.Point(37, 76);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(236, 294);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Info";
-            // 
-            // ComponentErrors
-            // 
-            this.ComponentErrors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ComponentErrors.FormattingEnabled = true;
-            this.ComponentErrors.Location = new System.Drawing.Point(6, 19);
-            this.ComponentErrors.Name = "ComponentErrors";
-            this.ComponentErrors.Size = new System.Drawing.Size(219, 264);
-            this.ComponentErrors.TabIndex = 14;
+            this.pictureBox1.Image = global::DesignValidation.Properties.Resources.DXFExportWizardLogo_2;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(140, 75);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // DesignValidationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(1184, 536);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(834, 536);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.BottomPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DesignValidationForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Design Validation";
+            this.Text = "DXF Export Wizard";
             this.ActionsGroupBox.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.GroupBox ActionsGroupBox;
-        private System.Windows.Forms.Button InspectComponent;
         private System.Windows.Forms.Button Import;
         private System.Windows.Forms.Panel BottomPanel;
         private System.Windows.Forms.ProgressBar ProgressBar;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox ComponentErrors;
         private System.Windows.Forms.Button ExportDXFButton;
         private System.Windows.Forms.Button EditDXFExport;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListBox LogOutputListBox;
     }
 }
 

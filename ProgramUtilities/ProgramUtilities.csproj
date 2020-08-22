@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentInfo.cs" />
+    <Compile Include="EventLogger.cs" />
     <Compile Include="IconTools.cs" />
     <Compile Include="InventorConnection.cs" />
     <Compile Include="FileHandling.cs" />

@@ -15,7 +15,7 @@ namespace DesignValidation
         {
             BrightIdeasSoftware.TreeListView treeListView = new BrightIdeasSoftware.TreeListView();
 
-            treeListView.Location = new System.Drawing.Point(350, 100);
+            treeListView.Location = new System.Drawing.Point(310, 100);
             treeListView.Size = new System.Drawing.Size(500, 325);
             treeListView.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
             treeListView.UseAlternatingBackColors = true;

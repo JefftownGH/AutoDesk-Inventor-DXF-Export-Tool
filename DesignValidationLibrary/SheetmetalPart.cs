@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProgramUtilities;
+using System;
 
 namespace DesignValidationLibrary
 {
-    public class SheetmetalPart : Part
+    public class SheetmetalPart : Part 
     {
         public int numberOfBends { get; }
 
@@ -35,17 +36,16 @@ namespace DesignValidationLibrary
         {
             totalCuttingLength = flatPattern.TotalLengthFlatPatternLoops();
 
-            //only here temporarily - for debugging purposes
-            errorList.Add(totalCuttingLength.ToString());
-
             if (totalCuttingLength == 0)
             {
-                errorList.Add("Could not generate flat pattern for component");
-
+                EventLogger.CreateLogEntry($"ERROR: creating a flat pattern for {partDocument.DisplayName}");
                 hasFlatPattern = false;
             }
             else
+            {
+                EventLogger.CreateLogEntry($"SUCCESS: creating a flat pattern for {partDocument.DisplayName}");
                 hasFlatPattern = true;
+            }
         }
     }
 }

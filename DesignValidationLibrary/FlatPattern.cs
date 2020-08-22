@@ -1,6 +1,7 @@
 ﻿
 using Inventor;
 using ProgramUtilities;
+using System;
 
 namespace DesignValidationLibrary
 {
@@ -44,7 +45,7 @@ namespace DesignValidationLibrary
             }
             catch
             {
-                //This will throw a message up to the part error list to show there has been an error obtaining the flat pattern 
+                //errorhandling here won't do much as the error is on the CAD side and the exception message generated is not useful
                 return false;
             }
         }
@@ -59,7 +60,7 @@ namespace DesignValidationLibrary
             foreach (EdgeLoop edgeLoop in flatPattern.EdgeLoops)
                 totalCuttingLength += measureTools.GetLoopLength(edgeLoop);
 
-            return totalCuttingLength;
+            return Math.Round(totalCuttingLength);
         }
     }
 }

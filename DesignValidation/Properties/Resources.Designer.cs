@@ -63,6 +63,26 @@ namespace DesignValidation.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DXFExportWizardLogo {
+            get {
+                object obj = ResourceManager.GetObject("DXFExportWizardLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DXFExportWizardLogo_2 {
+            get {
+                object obj = ResourceManager.GetObject("DXFExportWizardLogo_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngkey_com_wizard_png_7816657 {
             get {
                 object obj = ResourceManager.GetObject("pngkey.com-wizard-png-7816657", resourceCulture);
