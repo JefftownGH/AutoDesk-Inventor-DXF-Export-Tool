@@ -79,15 +79,5 @@ namespace DesignValidation.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngkey_com_wizard_png_7816657 {
-            get {
-                object obj = ResourceManager.GetObject("pngkey.com-wizard-png-7816657", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

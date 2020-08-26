@@ -10,6 +10,10 @@ using ExportLibrary.Properties;
 namespace ExportLibrary
 {
     public class ExportDXFSettings 
+
+        //This class is used to access the Settings.settings file 
+        //when a new instance is spun up it retrieves the values
+        //need to look at this again with fresh eyes --- the Getter/Setter logic seems wrong.... clunky and hacked together
     {
         private string _saveLocationFilePath;
         public string saveLocationFilePath 
@@ -61,6 +65,7 @@ namespace ExportLibrary
 
         public bool filePathStatus { get; private set; }
 
+        public ImportExportDXFLayers importExportDXFLayers { get; } = new ImportExportDXFLayers();
 
         public ExportDXFSettings()
         {

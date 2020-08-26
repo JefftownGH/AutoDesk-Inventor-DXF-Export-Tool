@@ -19,14 +19,12 @@ namespace DesignValidation
  
         ExportDXFSettings exportDXFSettings = new ExportDXFSettings();
 
-        ExportDXF exportDXF = new ExportDXF();
+        ImportExportDXFLayers importExportSettings = new ImportExportDXFLayers();
 
         public DXFExportSettings()
         {
             InitializeComponent();
-            
             CreateDXFLayerObjects();
-
             SetupDataBinding();
         }
 
@@ -39,8 +37,8 @@ namespace DesignValidation
 
         public void CreateDXFLayerObjects()
         {
-            exportDXF.ImportJsonFile();
-            bindingSourceDXFLayer.DataSource = exportDXF.dXFLayerItems;
+            importExportSettings.ImportJsonFile();
+            bindingSourceDXFLayer.DataSource = importExportSettings.dXFLayerItems;
             dataGridDXFLayers.DataSource = bindingSourceDXFLayer;
         }
 
@@ -62,8 +60,7 @@ namespace DesignValidation
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            exportDXF.SerialiseJson(exportDXF.dXFLayerItems);
-
+            importExportSettings.SerialiseJson(importExportSettings.dXFLayerItems);
             MessageBox.Show("Changes have been saved", "Save Settings");
         }
     }

@@ -20,15 +20,10 @@ namespace DesignValidation
     public partial class DesignValidationForm : Form 
     {
         private TopLevel topLevel = new TopLevel();
-
         private List<TreeViewNode> treeViewNodeData = new List<TreeViewNode>();
-
         private List<TreeViewNode> sheetMetalListData = new List<TreeViewNode>();
-
         private BrightIdeasSoftware.TreeListView treeListView;
-
         private BrightIdeasSoftware.TreeListView sheetMetalListView;
-
         private InventorImportProcess inventorImportProcess = new InventorImportProcess();
 
         public DesignValidationForm()
@@ -56,7 +51,6 @@ namespace DesignValidation
         private void AddSheetMetalListView()
         {
             sheetMetalListView = SheetMetalListView.CreateTreeListView();
-            //sheetMetalListView.ItemChecked event subscription to be added here
             Controls.Add(sheetMetalListView);
         }
 
@@ -134,7 +128,6 @@ namespace DesignValidation
         //recieves an event from the topLevel class
         public void OnProgressBarIncrement(object source, EventArgs e)
         {
-            //method that increments the progress bar need to tidy up the event args here...
             UpdateProgressBar(false);
         }
 
@@ -174,17 +167,9 @@ namespace DesignValidation
         private void ExportDXFButton_Click(object sender, EventArgs e)
         {
             List<SheetmetalPart> sheetMetalPartList = SheetMetalExportList.BuildSheetMetalExportList(sheetMetalListData, topLevel.AssemblyList);
-
             ExportDXFSettings exportDXFSettings = new ExportDXFSettings();
-
-            ExportDXF exportDXF = new ExportDXF(exportDXFSettings);
-
-            exportDXF.ImportJsonFile();
-
-            exportDXF.ExportSheetMetalPartsToDXF(sheetMetalPartList);
-
-            DXFExportLog dXFExportLog = new DXFExportLog(exportDXF.exportLog);
-
+            List<string> exportLog = DXFExportProcess.ExportSheetmetalPartsToDXF(sheetMetalPartList, exportDXFSettings);
+            DXFExportLog dXFExportLog = new DXFExportLog(exportLog);
             dXFExportLog.Show();
         }
 

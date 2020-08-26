@@ -75,8 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DXFExportProcess.cs" />
     <Compile Include="DXFLayerItem.cs" />
-    <Compile Include="ExportDXF.cs" />
+    <Compile Include="ImportExportDXFLayers.cs" />
     <Compile Include="ExportDXFSettings.cs" />
     <Compile Include="ExportStringGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

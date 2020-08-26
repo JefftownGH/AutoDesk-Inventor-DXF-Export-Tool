@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace ProgramUtilities
 
 {/// <summary>
-/// Static event logger class that allows the messages to be passed from each classLibrary to the UI layer using an Event
+/// Static event logger class that allows the messages to be passed from each classLibrary to the UI layer using an Event.
 /// </summary>
-/// 
    
     public class EventLogger
     {

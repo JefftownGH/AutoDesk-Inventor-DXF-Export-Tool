@@ -20,6 +20,7 @@ namespace DesignValidation
             EventLogger.CreateLogEntry("3. Select the parts you would like to export to DXF");
             EventLogger.CreateLogEntry("4. Click 'Settings' to change your export preferences");
             EventLogger.CreateLogEntry("5. Click 'Export DXF' to automatically generate and save the DXF files");
+            EventLogger.CreateLogEntry("----------------------------------------------------------------------------------------------------------------------");
         }
     }
 }

@@ -13,9 +13,7 @@ namespace ApplicationLogic
     public class InventorImportProcess
     {
         public InventorConnection inventorConnection { get; } = new InventorConnection();
-
         public Application thisApplication { get; private set; } = null;
-
         public TopLevel topLevel { get; } = new TopLevel();
 
         /// Delegates to allow the UI layer to display outputs/Info while maintaining loose coupling with the application logic
@@ -47,6 +45,7 @@ namespace ApplicationLogic
         public bool DetermineDocumentType(ValidDocumentType validDocumentType, UpdateProgressBar updateProgressBar)
         {
             DocumentTypeEnum currentDocumentType;
+
             //a try/catch block is used for when no document is open and the assignment of a a value to currentDocumentType fails
 
             try
@@ -81,9 +80,6 @@ namespace ApplicationLogic
         }
 
         //used to return an instance of top level so that methods can be "hooked" into the ProgressBarEventHandler
-        public TopLevel GetToplevel()  
-        {
-            return topLevel;
-        }
+        public TopLevel GetToplevel() => topLevel;
     }
 }

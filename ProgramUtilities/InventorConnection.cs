@@ -29,15 +29,11 @@ namespace ProgramUtilities
             }
         }
 
-        public bool InventorReady()
-        {
-            return thisApplication.Ready;
-        }
+        public bool InventorReady() => thisApplication.Ready;
 
         public MeasureTools GetMeasureTools()
         {
             CreateInventorConnection();
-
             return measureTools;
         }
     }

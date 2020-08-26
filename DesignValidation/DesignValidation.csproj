@@ -167,9 +167,6 @@
     <None Include="Resources\DXFExportWizardLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pngkey.com-wizard-png-7816657.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\DXFExportWizardLogo_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
