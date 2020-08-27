@@ -1,5 +1,4 @@
 ﻿using Inventor;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
@@ -10,14 +9,15 @@ namespace DesignValidationLibrary
         //assembly is simply a "bucket" for the list of sheetmetal parts and parts
 
         public string Name { get; }
+        public string ImportStatus { get; }
 
         public int ParentID { get;} 
         public int ID { get; }
 
-        public List<Part> partList { get;} = new List<Part>();
-        public List<SheetmetalPart> sheetmetalPartList { get; } = new List<SheetmetalPart>();
+        public List<Part> PartList { get;} = new List<Part>();
+        public List<SheetmetalPart> SheetmetalPartList { get; } = new List<SheetmetalPart>();
 
-        public AssemblyDocument assemblyDocument { get; }
+        public AssemblyDocument AssemblyDocument { get; }
 
         public Assembly(AssemblyDocument assemblyDocument, int ParentID, int ID)
         {
@@ -28,9 +28,11 @@ namespace DesignValidationLibrary
             //check if code contract is required, more for testing purposes at the moment
             Contract.Requires(assemblyDocument != null,"something went wrong... assemblyDocument is null");
 
-            this.assemblyDocument = assemblyDocument;
+            this.AssemblyDocument = assemblyDocument;
 
             Name = assemblyDocument.DisplayName;
+
+            ImportStatus = "Success";
         }
     }
 }

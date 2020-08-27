@@ -73,6 +73,7 @@ namespace DesignValidation
                 //unwinds through stackframes
 
                 #endregion
+
                 if (subTreeViewNode.ID == targetID)
                     parentNode = subTreeViewNode;
 
@@ -82,14 +83,13 @@ namespace DesignValidation
 
         public static TreeViewNode AddNewTreeViewNode(Assembly assembly)
         {
-            TreeViewNode assemblyNode = new TreeViewNode(assembly.Name, "-", "-", "-", assembly.ID, assembly.ParentID);
+            TreeViewNode assemblyNode = new TreeViewNode(assembly.Name, assembly.ImportStatus, assembly.ID, assembly.ParentID);
 
-            foreach (Part part in assembly.partList)
-                assemblyNode.Children.Add(new TreeViewNode(part.Name, "-", "-", "-"));
+            foreach (Part part in assembly.PartList)
+                assemblyNode.Children.Add(new TreeViewNode(part.Name, part.ImportStatus));
 
-            foreach (SheetmetalPart sheetMetalPart in assembly.sheetmetalPartList)
-                assemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name,
-                    sheetMetalPart.hasFlatPattern.ToString(), sheetMetalPart.numberOfBends.ToString(), "-"));
+            foreach (SheetmetalPart sheetMetalPart in assembly.SheetmetalPartList)
+                assemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.ImportStatus));
 
             return assemblyNode;
         }

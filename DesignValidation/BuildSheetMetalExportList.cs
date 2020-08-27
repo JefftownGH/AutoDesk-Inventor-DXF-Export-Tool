@@ -35,7 +35,7 @@ namespace DesignValidation
             List<SheetmetalPart> sheetMetalPartList = new List<SheetmetalPart>();
 
             foreach (Assembly assembly in assemblyList)
-                foreach (SheetmetalPart sheetMetalPart in assembly.sheetmetalPartList)
+                foreach (SheetmetalPart sheetMetalPart in assembly.SheetmetalPartList)
                     sheetMetalPartList.Add(sheetMetalPart);
 
             return sheetMetalPartList;

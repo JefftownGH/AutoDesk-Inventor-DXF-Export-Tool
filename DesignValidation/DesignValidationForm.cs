@@ -64,12 +64,12 @@ namespace DesignValidation
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
             nameCol.Width = 200;
 
-            var col1 = new OLVColumn("Flat Pattern", "Flat Pattern");
-            col1.AspectGetter = x => (x as TreeViewNode).Column1;
-            col1.Width = 100;
+            var SucessfulImport = new OLVColumn("Import Status", "Import Status");
+            SucessfulImport.AspectGetter = x => (x as TreeViewNode).Column1;
+            SucessfulImport.Width = 100;
 
             treeListView.Columns.Add(nameCol);
-            treeListView.Columns.Add(col1);
+            treeListView.Columns.Add(SucessfulImport);
             treeListView.ExpandAll();
 
             treeListView.Roots = treeViewNodeData; 
@@ -85,15 +85,15 @@ namespace DesignValidation
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
             nameCol.Width = 200;
 
-            var col1 = new OLVColumn("Flat Pattern", "Flat Pattern");
+            var col1 = new OLVColumn("Bend No.", "Bend No.");
             col1.AspectGetter = x => (x as TreeViewNode).Column1;
             col1.Width = 100;
 
-            var col2 = new OLVColumn("Bend No.", "Bend No.");
+            var col2 = new OLVColumn("Material", "Material");
             col2.AspectGetter = x => (x as TreeViewNode).Column2;
             col2.Width = 100;
 
-            var col3 = new OLVColumn("Info", "Column3");
+            var col3 = new OLVColumn("Total Cut Length (cm)", "Total Cut Length (cm)");
             col3.AspectGetter = x => (x as TreeViewNode).Column3;
             col3.Width = 100;
 
@@ -181,7 +181,7 @@ namespace DesignValidation
         //problem with the api
         public void PictureBoxTestMethod(Part part)
         {
-            stdole.IPictureDisp thumbNail = part.partDocument.Thumbnail;
+            stdole.IPictureDisp thumbNail = part.PartDocument.Thumbnail;
 
             Image image = IconTools.GetImage(thumbNail);
 

@@ -23,7 +23,7 @@ namespace ExportLibrary
 
                 try
                 {
-                    SheetMetalComponentDefinition sheetMetalCompDef = (SheetMetalComponentDefinition)sheetmetalPart.partDocument.ComponentDefinition;
+                    SheetMetalComponentDefinition sheetMetalCompDef = (SheetMetalComponentDefinition)sheetmetalPart.PartDocument.ComponentDefinition;
 
                     DataIO dataIO = sheetMetalCompDef.FlatPattern.DataIO;
 
@@ -53,13 +53,13 @@ namespace ExportLibrary
 
             exportFileName.Append(exportDXFSettings.saveLocationFilePath);
 
-            exportFileName.Append(sheetmetalPart.partDocument.DisplayName);
+            exportFileName.Append(sheetmetalPart.PartDocument.DisplayName);
 
             if (exportDXFSettings.appendMaterialThickness)
-                exportFileName.Append("_" + sheetmetalPart.thickness);
+                exportFileName.Append("_" + sheetmetalPart.Thickness);
 
             if (exportDXFSettings.appendFoldedStatus)
-                if (sheetmetalPart.numberOfBends > 0)
+                if (sheetmetalPart.NumberOfBends > 0)
                     exportFileName.Append("_Folded");
 
                 else

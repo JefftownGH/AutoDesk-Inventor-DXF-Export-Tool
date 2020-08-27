@@ -23,9 +23,7 @@ namespace DesignValidation
 
         public bool assemblyNode { get; }
 
-        public List<TreeViewNode> Children { get;}
-
-        //no need for getter and setter to be explicitly type like this... why did i do it?
+        public List<TreeViewNode> Children { get; } = new List<TreeViewNode>();
 
         private bool ticked = false;
         public bool Ticked
@@ -37,26 +35,30 @@ namespace DesignValidation
                 ticked = value;
             }
         }
-
-        public TreeViewNode(string name,string col1, string col2, string col3, int ID, int parentID)
+        //TreeViewList Assembly constructor
+        public TreeViewNode(string name,string col1, int ID, int parentID)
         {
             Name = name;
             Column1 = col1;
-            Column2 = col2;
-            Column3 = col3;
             this.ID = ID;
             this.parentID = parentID;
-            Children = new List<TreeViewNode>();
             assemblyNode = true;
         }
 
+        //TreeViewList Part Constructor
+        public TreeViewNode(string name, string col1)
+        {
+            Name = name;
+            Column1 = col1;
+        }
+
+        //SheetmetalListView Constructor
         public TreeViewNode(string name, string col1, string col2, string col3)
         {
             Name = name;
             Column1 = col1;
             Column2 = col2;
             Column3 = col3;
-            Children = new List<TreeViewNode>();
             assemblyNode = false;
         }
     }

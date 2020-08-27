@@ -1,6 +1,4 @@
 ﻿using Inventor;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
 namespace DesignValidationLibrary
@@ -8,19 +6,20 @@ namespace DesignValidationLibrary
     public class Part 
     {
         public string Name { get; }
-        public string material { get; }
+        public string Material { get; }
 
-        public PartDocument partDocument { get; }
+        public string ImportStatus{ get; set;}
 
-        public List<string> errorList { get;} = new List<string>();
+        public PartDocument PartDocument { get; }
 
         public Part(PartDocument partDocument)
         {
             Contract.Requires(partDocument != null, "something went wrong... assemblyDocument is null");
 
-            this.partDocument = partDocument;
-
+            PartDocument = partDocument;
             Name = partDocument.DisplayName;
+            Material = partDocument.ActiveMaterial.Name;
+            ImportStatus= "Success";
         }
     }
 }

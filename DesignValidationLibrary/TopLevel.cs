@@ -28,7 +28,7 @@ namespace DesignValidationLibrary
                 return;
 
             Assembly assembly = NewAssembly(currentAsmDocument, parentID, currentID);
-            EventLogger.CreateLogEntry($"Processing assembly document {assembly.assemblyDocument.DisplayName}");
+            EventLogger.CreateLogEntry($"Processing assembly document {assembly.AssemblyDocument.DisplayName}");
 
             AssemblyList.Add(assembly);
 
@@ -49,10 +49,10 @@ namespace DesignValidationLibrary
                     EventLogger.CreateLogEntry($"processing part document {partDocument.DisplayName}");
 
                     if (DocumentInfo.IsSheetMetalPart(partDocument.SubType))
-                        assembly.sheetmetalPartList.Add(NewSheetMetalPart(partDocument));
+                        assembly.SheetmetalPartList.Add(NewSheetMetalPart(partDocument));
 
                     else
-                        assembly.partList.Add(NewPart(partDocument));
+                        assembly.PartList.Add(NewPart(partDocument));
                 }
 
                 if (DocumentInfo.IsAssemblyDocument(occurrence.DefinitionDocumentType))

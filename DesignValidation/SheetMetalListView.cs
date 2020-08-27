@@ -10,7 +10,6 @@ namespace DesignValidation
 {
     public static class SheetMetalListView
     {
-        //Creating the object list view
         public static BrightIdeasSoftware.TreeListView CreateTreeListView()
         {
             BrightIdeasSoftware.TreeListView treeListView = new BrightIdeasSoftware.TreeListView();
@@ -26,18 +25,17 @@ namespace DesignValidation
             return treeListView;
         }
 
-        //building the List<TreeViewNode>
         public static List<TreeViewNode> BuildSheetMetalNodeData(List<Assembly> assemblyList) 
         {
             List<TreeViewNode> sheetMetalNodeData = new List<TreeViewNode>();
 
-            //pass along the assembly name as well...
-
             foreach (Assembly assembly in assemblyList)
-                foreach (SheetmetalPart sheetMetalPart in assembly.sheetmetalPartList)
-                    sheetMetalNodeData.Add(new TreeViewNode(sheetMetalPart.Name, 
-                        sheetMetalPart.hasFlatPattern.ToString(),sheetMetalPart.numberOfBends.ToString(),"-"));
-
+                foreach (SheetmetalPart sheetMetalPart in assembly.SheetmetalPartList)
+                {
+                    sheetMetalNodeData.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.NumberOfBends.ToString(),
+                                                            sheetMetalPart.Material, sheetMetalPart.TotalCuttingLength.ToString()));
+                }
+                    
             List<TreeViewNode> distinctSheetMetalNodeDataList = sheetMetalNodeData.GroupBy(x => x.Name).Select(y => y.First()).ToList();
 
             return distinctSheetMetalNodeDataList;
