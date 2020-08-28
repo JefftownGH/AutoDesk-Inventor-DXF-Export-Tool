@@ -1,5 +1,5 @@
 # DXF Export Wizard
-This project is a DXF export tool for AutoDesk Inventor, it automates the slow and tedious task of creating DXF files of sheetmetal parts, a process that is required anytime a CAD model is released for manufacture.
+This project is a DXF export tool for AutoDesk Inventor, it automates the slow and tedious task of creating DXF files of sheetmetal parts, a process that is required anytime a CAD model is released for manufacture, costing etc.
 
 This program is a Standalone .EXE written in C# and uses the Inventor COM (Component Object Model) API. The project currently uses a Windows Forms UI.
 
