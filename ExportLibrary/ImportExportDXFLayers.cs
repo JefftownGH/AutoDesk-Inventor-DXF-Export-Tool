@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using Inventor;
-using DesignValidationLibrary;
-using ExportLibrary.Properties;
 using System.IO;
 using ProgramUtilities;
-
-using Path = System.IO.Path;
-using File = System.IO.File;
 
 namespace ExportLibrary
 {
@@ -22,8 +14,6 @@ namespace ExportLibrary
         {
             get 
             {
-                //every times this property is accessed it retrieves the base directory, no setter as a value cannot be assigned to this property
-
                 string runningPath = AppDomain.CurrentDomain.BaseDirectory;
                 return string.Format("{0}" + jsonRelativeFilePath, Path.GetFullPath(Path.Combine(runningPath, @"..\..\")));
             }

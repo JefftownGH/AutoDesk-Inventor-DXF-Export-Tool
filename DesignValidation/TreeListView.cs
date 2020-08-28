@@ -63,7 +63,7 @@ namespace DesignValidation
 
         public static void ListSearch(List<TreeViewNode> treeViewNodeData, ref TreeViewNode parentNode, int targetID)
         {
-            foreach (TreeViewNode subTreeViewNode in treeViewNodeData.Where(x => x.assemblyNode == true))
+            foreach (TreeViewNode subTreeViewNode in treeViewNodeData.Where(x => x.AssemblyNode == true))
             {
                 #region Explanation
 
@@ -86,10 +86,10 @@ namespace DesignValidation
             TreeViewNode assemblyNode = new TreeViewNode(assembly.Name, assembly.ImportStatus, assembly.ID, assembly.ParentID);
 
             foreach (Part part in assembly.PartList)
-                assemblyNode.Children.Add(new TreeViewNode(part.Name, part.ImportStatus));
+                assemblyNode.Children.Add(new TreeViewNode(part.Name, part.ImportStatus, false));
 
             foreach (SheetmetalPart sheetMetalPart in assembly.SheetmetalPartList)
-                assemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.ImportStatus));
+                assemblyNode.Children.Add(new TreeViewNode(sheetMetalPart.Name, sheetMetalPart.ImportStatus, true));
 
             return assemblyNode;
         }

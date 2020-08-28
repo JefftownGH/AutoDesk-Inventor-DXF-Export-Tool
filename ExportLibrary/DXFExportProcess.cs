@@ -1,9 +1,7 @@
 ﻿using DesignValidationLibrary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Inventor;
 using ProgramUtilities;
 
@@ -15,7 +13,7 @@ namespace ExportLibrary
         {
             List<string> exportLog = new List<string>();
 
-            string exportString = ExportStringGenerator.GenerateExportString(exportDXFSettings.importExportDXFLayers.dXFLayerItems);
+            string exportString = ExportStringGenerator.GenerateExportString(exportDXFSettings.ImportExportDXFLayers.dXFLayerItems);
 
             foreach(SheetmetalPart sheetmetalPart in sheetmetalPartList)
             {
@@ -36,10 +34,10 @@ namespace ExportLibrary
                 catch (Exception e)
                 {
                     exportLog.Add(sheetmetalPart.Name + " DXF export encountered an error");
-                    exportLog.Add(e.Message + "_______" + e.StackTrace);
+                    exportLog.Add(e.Message + "   " + e.StackTrace);
 
                     EventLogger.CreateLogEntry(sheetmetalPart.Name + " DXF export encountered an error");
-                    EventLogger.CreateLogEntry(e.Message + "_______" + e.StackTrace);
+                    EventLogger.CreateLogEntry(e.Message + "   " + e.StackTrace);
 
                     continue;
                 }
@@ -51,14 +49,14 @@ namespace ExportLibrary
         {
             StringBuilder exportFileName = new StringBuilder();
 
-            exportFileName.Append(exportDXFSettings.saveLocationFilePath);
+            exportFileName.Append(exportDXFSettings.SaveLocationFilePath);
 
             exportFileName.Append(sheetmetalPart.PartDocument.DisplayName);
 
-            if (exportDXFSettings.appendMaterialThickness)
+            if (exportDXFSettings.AppendMaterialThickness)
                 exportFileName.Append("_" + sheetmetalPart.Thickness);
 
-            if (exportDXFSettings.appendFoldedStatus)
+            if (exportDXFSettings.AppendFoldedStatus)
                 if (sheetmetalPart.NumberOfBends > 0)
                     exportFileName.Append("_Folded");
 

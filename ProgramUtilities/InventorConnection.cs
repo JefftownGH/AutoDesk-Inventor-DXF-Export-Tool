@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Inventor;
+﻿using Inventor;
 
 namespace ProgramUtilities
 {
     public class InventorConnection
     {
-        public Application thisApplication { get; private set; } = null;
+        public Application ThisApplication { get; private set; } = null;
 
-        public MeasureTools measureTools { get; private set; } = null;
+        public MeasureTools MeasureTools { get; private set; } = null;
 
         public Application CreateInventorConnection()
         {
             try
             {
-                thisApplication = (Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Inventor.Application");
+                ThisApplication = (Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Inventor.Application");
 
-                measureTools = thisApplication.MeasureTools;
+                MeasureTools = ThisApplication.MeasureTools;
 
-                return thisApplication;
+                return ThisApplication;
             }
             catch
             {
@@ -29,12 +24,12 @@ namespace ProgramUtilities
             }
         }
 
-        public bool InventorReady() => thisApplication.Ready;
+        public bool InventorReady() => ThisApplication.Ready;
 
         public MeasureTools GetMeasureTools()
         {
             CreateInventorConnection();
-            return measureTools;
+            return MeasureTools;
         }
     }
 }

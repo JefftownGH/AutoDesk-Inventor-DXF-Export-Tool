@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using ProgramUtilities;
 using ExportLibrary.Properties;
 
@@ -16,7 +11,7 @@ namespace ExportLibrary
         //need to look at this again with fresh eyes --- the Getter/Setter logic seems wrong.... clunky and hacked together
     {
         private string _saveLocationFilePath;
-        public string saveLocationFilePath 
+        public string SaveLocationFilePath 
         {
             get { return _saveLocationFilePath; }
 
@@ -28,15 +23,15 @@ namespace ExportLibrary
                 Settings.Default.Save();
 
                 if (!FilePathCheck())
-                    filePathStatus = false;
+                    FilePathStatus = false;
 
                 else
-                    filePathStatus = true;
+                    FilePathStatus = true;
             }
         }
 
         private bool _appendMaterialThickness;
-        public bool appendMaterialThickness 
+        public bool AppendMaterialThickness 
         {
             get { return _appendMaterialThickness; }
 
@@ -50,7 +45,7 @@ namespace ExportLibrary
         }
 
         private bool _appendFoldedStatus { get; set; }
-        public bool appendFoldedStatus
+        public bool AppendFoldedStatus
         {
             get { return _appendFoldedStatus; }
 
@@ -63,20 +58,20 @@ namespace ExportLibrary
             }
         }
 
-        public bool filePathStatus { get; private set; }
+        public bool FilePathStatus { get; private set; }
 
-        public ImportExportDXFLayers importExportDXFLayers { get; } = new ImportExportDXFLayers();
+        public ImportExportDXFLayers ImportExportDXFLayers { get; } = new ImportExportDXFLayers();
 
         public ExportDXFSettings()
         {
-            saveLocationFilePath = Settings.Default["FilePathOutput"].ToString();
-            appendMaterialThickness = (bool)Settings.Default["AppendMaterialThickness"];
-            appendFoldedStatus = (bool)Settings.Default["AppendFoldedStatus"];
+            SaveLocationFilePath = Settings.Default["FilePathOutput"].ToString();
+            AppendMaterialThickness = (bool)Settings.Default["AppendMaterialThickness"];
+            AppendFoldedStatus = (bool)Settings.Default["AppendFoldedStatus"];
         }
 
         public bool FilePathCheck()
         {
-            if (!FileHandling.CheckIfDirectoryExists(saveLocationFilePath))
+            if (!FileHandling.CheckIfDirectoryExists(SaveLocationFilePath))
             {
                 MessageBox.Show("Cannot find the output directory, please select a valid filepath", "DXF export error");
                 return false;

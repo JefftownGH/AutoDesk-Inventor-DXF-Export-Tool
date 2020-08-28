@@ -57,6 +57,10 @@ namespace DesignValidation
         private void FillTree()
         {
             treeListView.Clear();
+
+            treeListView.OwnerDraw = true;
+            treeListView.SmallImageList = InventorIconImageList;
+
             treeListView.CanExpandGetter = x => (x as TreeViewNode).Children.Count > 0;
             treeListView.ChildrenGetter = x => (x as TreeViewNode).Children;
 
@@ -64,9 +68,28 @@ namespace DesignValidation
             nameCol.AspectGetter = x => (x as TreeViewNode).Name;
             nameCol.Width = 200;
 
+            nameCol.ImageGetter = delegate (object row)
+            {
+                TreeViewNode treeViewNode = (TreeViewNode)row;
+                return treeViewNode.ImageIndex;
+            };
+
             var SucessfulImport = new OLVColumn("Import Status", "Import Status");
             SucessfulImport.AspectGetter = x => (x as TreeViewNode).Column1;
             SucessfulImport.Width = 100;
+
+            SucessfulImport.ImageGetter = delegate (object row)
+            {
+                TreeViewNode treeViewNode = (TreeViewNode)row;
+                int index;
+
+                if (treeViewNode.Column1 == "Success")
+                    index = 3;
+
+                else index = 4;
+
+                return index;
+            };
 
             treeListView.Columns.Add(nameCol);
             treeListView.Columns.Add(SucessfulImport);

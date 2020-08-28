@@ -51,10 +51,10 @@ namespace DesignValidation
 
             if (folderBrowserDialogue.ShowDialog() == DialogResult.OK)
             {
-                exportDXFSettings.saveLocationFilePath = folderBrowserDialogue.SelectedPath + "\\";
+                exportDXFSettings.SaveLocationFilePath = folderBrowserDialogue.SelectedPath + "\\";
 
                 //a limitation of windows forms - does not realise the value has changed if done programmatically
-                FilePathTextBox.Text = exportDXFSettings.saveLocationFilePath;
+                FilePathTextBox.Text = exportDXFSettings.SaveLocationFilePath;
             }
         }
 

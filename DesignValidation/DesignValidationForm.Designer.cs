@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DesignValidationForm));
             this.ActionsGroupBox = new System.Windows.Forms.GroupBox();
             this.EditDXFExport = new System.Windows.Forms.Button();
             this.ExportDXFButton = new System.Windows.Forms.Button();
@@ -36,6 +38,7 @@
             this.LogOutputListBox = new System.Windows.Forms.ListBox();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.InventorIconImageList = new System.Windows.Forms.ImageList(this.components);
             this.ActionsGroupBox.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -124,6 +127,16 @@
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // InventorIconImageList
+            // 
+            this.InventorIconImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("InventorIconImageList.ImageStream")));
+            this.InventorIconImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.InventorIconImageList.Images.SetKeyName(0, "AssemblyIcon.PNG");
+            this.InventorIconImageList.Images.SetKeyName(1, "Part.PNG");
+            this.InventorIconImageList.Images.SetKeyName(2, "SheetmetalIcon.PNG");
+            this.InventorIconImageList.Images.SetKeyName(3, "GreenTick.png");
+            this.InventorIconImageList.Images.SetKeyName(4, "RedCross.png");
+            // 
             // DesignValidationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +167,7 @@
         private System.Windows.Forms.Button EditDXFExport;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListBox LogOutputListBox;
+        private System.Windows.Forms.ImageList InventorIconImageList;
     }
 }
 

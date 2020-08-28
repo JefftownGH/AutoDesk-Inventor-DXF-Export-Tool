@@ -32,11 +32,12 @@ namespace ProgramUtilities
                 {
                     streamWriter.WriteLine(inputString);
                     streamWriter.Close();
-                    return true;
                 }
+                return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                EventLogger.CreateLogEntry(e.Message + "  " + e.StackTrace);
                 return false;
             }
         }
