@@ -40,10 +40,5 @@ namespace DesignValidation
 
             return sheetMetalPartList;
         }
-
-
-
-
-
     }
 }

@@ -8,7 +8,6 @@ namespace DesignValidationLibrary
     public class FlatPattern
     {
         //An instance of the flatpattern class is spun up when a new instance for the sheetmetal class created
-
         private Face flatPattern;
 
         private SheetMetalComponentDefinition sheetMetalCompDef;
@@ -43,9 +42,9 @@ namespace DesignValidationLibrary
                 sheetMetalCompDef.Unfold();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
-                //errorhandling here won't do much as the error is on the CAD side and the exception message generated is not useful
+                EventLogger.CreateLogEntry(e.Message + " " + e.StackTrace);
                 return false;
             }
         }

@@ -7,10 +7,14 @@ namespace ProgramUtilities
     {
         public static bool CheckIfFilesExists(string filePath)
         {
-            if (File.Exists(filePath)) 
+            if (File.Exists(filePath))
                 return true;
 
-            else return false;
+            else
+            {
+                EventLogger.CreateLogEntry("ERROR: File does not exist");
+                return false;
+            }
         }
 
         public static bool CheckIfDirectoryExists(string filePath)
@@ -18,7 +22,11 @@ namespace ProgramUtilities
             if (Directory.Exists(filePath)) 
                 return true;
 
-            else return false;
+            else
+            {
+                EventLogger.CreateLogEntry("ERROR: Directory does not exist");
+                return false;
+            }
         }
 
         public static bool SaveStringToFile(string inputString, string filePath, bool deleteExistingFile)
@@ -39,6 +47,7 @@ namespace ProgramUtilities
             {
                 EventLogger.CreateLogEntry(e.Message + "  " + e.StackTrace);
                 return false;
+                throw e;
             }
         }
     }

@@ -1,9 +1,9 @@
 [
   {
     "Name": "TangentLayer",
-    "NoLine": true,
+    "NoLine": false,
     "DashedLine": false,
-    "SolidLine": false
+    "SolidLine": true
   },
   {
     "Name": "OuterProfileLayer",

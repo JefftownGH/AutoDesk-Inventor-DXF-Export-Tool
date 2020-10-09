@@ -1,4 +1,5 @@
 ﻿using Inventor;
+using System;
 using System.Diagnostics.Contracts;
 
 namespace DesignValidationLibrary
@@ -10,6 +11,7 @@ namespace DesignValidationLibrary
 
         public string ImportStatus{ get; set;}
 
+        //do as inheritance??
         public PartDocument PartDocument { get; }
 
         public Part(PartDocument partDocument)

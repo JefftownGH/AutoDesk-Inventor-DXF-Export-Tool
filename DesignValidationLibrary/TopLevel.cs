@@ -42,7 +42,6 @@ namespace DesignValidationLibrary
                 //the UI layer is listening for this Event to increment the progress bar
                 IncrementProgressBar();
                 
-
                 if (DocumentInfo.IsPartDocument(occurrence.DefinitionDocumentType))
                 {
                     PartDocument partDocument = (PartDocument)occurrence.Definition.Document;
@@ -82,7 +81,6 @@ namespace DesignValidationLibrary
         }
 
         //this will be chagned out with dependency injection once code is running correctly/concrete implementations are only temporary
-
         private static Assembly NewAssembly(AssemblyDocument assemblyDocument, int parentID, int currentID)
         {
             return new Assembly(assemblyDocument, parentID,currentID);

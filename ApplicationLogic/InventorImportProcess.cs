@@ -46,8 +46,6 @@ namespace ApplicationLogic
         {
             DocumentTypeEnum currentDocumentType;
 
-            //a try/catch block is used for when no document is open and the assignment of a a value to currentDocumentType fails
-
             try
             {
                 currentDocumentType = thisApplication.ActiveDocument.DocumentType;
@@ -71,15 +69,15 @@ namespace ApplicationLogic
                     return false;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 validDocumentType(false);
                 updateProgressBar(true);
+                EventLogger.CreateLogEntry(e.Message + " " + e.StackTrace);
                 return false;
             }
         }
 
-        //used to return an instance of top level so that methods can be "hooked" into the ProgressBarEventHandler
         public TopLevel GetToplevel() => topLevel;
     }
 }

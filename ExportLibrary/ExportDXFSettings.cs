@@ -76,8 +76,8 @@ namespace ExportLibrary
                 MessageBox.Show("Cannot find the output directory, please select a valid filepath", "DXF export error");
                 return false;
             }
-            else
-                 return true;
+
+            return true;
         }
     }
 }
