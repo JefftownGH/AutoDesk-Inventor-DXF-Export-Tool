@@ -21,7 +21,10 @@ While an instance of AutoDesk Inventor is running and an Assembly document is op
 
 ![image](https://github.com/pmccullough060/AutoDesk-Inventor-DXF-Export-Tool/blob/master/DesignValidation/Resources/InitialImport.PNG)
 
-#### Export Settings
+#### Settings
 Before generating the DXF files its a good idea to check the setting to avoid frustration. The first thing to check is that the "Save In" directory is correct, Next take a look at the DXF Layers options and make sure anything you don't need in the output is deselected. Lastly there is an option to append the material thickness and folded status to the filename of each DXF. Once you're happy click save, your preferences will be retained even once the application has been restarted.
 
 ![image](https://github.com/pmccullough060/AutoDesk-Inventor-DXF-Export-Tool/blob/master/DesignValidation/Resources/Settings.PNG)
+
+#### Export
+Once you've imported an assembly and reviewed the settings its time to generate the DXF files. Select the Checkbox beside each of the files you wish to export then click the Export DXF button. All Done!
