@@ -4,7 +4,7 @@
 This is a DXF export tool for AutoDesk Inventor, it automates the slow and tedious task of creating DXF files of sheetmetal parts, a process that is required anytime a CAD model is released for manufacture, costing etc.
 
 #### What's a DXF?
- Here's some good general info on the <a href="https://en.wikipedia.org/wiki/AutoCAD_DXF">DXF file format</a> . This application creates a "flat pattern" of AutoDesk Inventor sheetmetal parts and outputs them as a DXF files, this is a useful format for a most costing/manufacturing software.
+ Here's some good general info on the <a href="https://en.wikipedia.org/wiki/AutoCAD_DXF">DXF file format</a> . This application creates a "flat pattern" of AutoDesk Inventor sheetmetal parts and outputs them as DXF files, this is a useful format for a most costing/manufacturing software.
  
 ## Prerequisites
 This is a plug-in for <a href="https://www.autodesk.co.uk/products/inventor/overview?plc=INVPROSA&term=1-YEAR&support=ADVANCED&quantity=1">AutoDesk Inventor</a> , this project isn't much use without it...
