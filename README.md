@@ -16,4 +16,6 @@ This program is a Standalone .EXE written in C# and uses the Inventor COM (Compo
 Although not a highly polished piece of software it does work well, it was created to meet a need and it was met. Similar software can be purchased from other developers <a href="https://apps.autodesk.com/INVNTOR/en/Home/Index">here</a>.
 
 ## Getting Started
-While an instance of AutoDesk Inventor is running and an Assembly document is open, click the Import button on the user form. The program will recursively search every part in the assembly document and will attempt to create a flat pattern of each sheetmetal component. The DXF file can also be customised.
+While an instance of AutoDesk Inventor is running and an Assembly document is open, click the Import button on the user form. The program will recursively search every part in the assembly document and will attempt to create a flat pattern of each sheetmetal component, an import of a printer assembly is shown below, where three sheetmetal components have been identified.
+
+![image](https://github.com/pmccullough060/AutoDesk-Inventor-DXF-Export-Tool/blob/master/DesignValidation/Resources/InitialImport.PNG)
