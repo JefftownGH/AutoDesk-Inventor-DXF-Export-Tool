@@ -10,7 +10,7 @@ This is a DXF export tool for AutoDesk Inventor, it automates the slow and tedio
 This is a plug-in for <a href="https://www.autodesk.co.uk/products/inventor/overview?plc=INVPROSA&term=1-YEAR&support=ADVANCED&quantity=1">AutoDesk Inventor</a> , this project isn't much use without it...
  
 ## About
-This program is a Standalone .EXE written in C# and uses the Inventor COM (Component Object Model) API. The project currently uses a Windows Forms UI.
+This program is a Standalone .EXE written in C# and uses the Inventor COM (Component Object Model) API, the UI was created using Windows Forms.
 
 ## Current Status
 Although not a highly polished piece of software it does work quite well, it was created to meet a need and it was met. Similar software can be purchased from other developers <a href="https://apps.autodesk.com/INVNTOR/en/Home/Index">here</a>.
